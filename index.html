@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SKM Studio is a visionary practice building brands, websites, and digital experiences for ambitious founders.">
+<meta property="og:title" content="SKM Studio — A Visionary Practice">
+<meta property="og:description" content="Brands & products built to outlast the moment.">
+<title>SKM Studio — A Visionary Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --ink: #0A2540;
+    --navy: #0F3D6E;
+    --teal: #14A39A;
+    --cream: #F5F3EC;
+    --paper: #FBFAF5;
+    --mute: #6B7280;
+    --line: #E5E0D5;
+  }
+  body {
+    font-family: 'Onest', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+  .italic-serif { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .rule { height: 1px; background: var(--line); }
+  .index-num {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    color: var(--teal);
+  }
+  .cta-primary {
+    background: var(--ink);
+    color: var(--cream);
+    transition: all 0.25s ease;
+  }
+  .cta-primary:hover { background: var(--navy); transform: translateY(-1px); }
+  .link-arrow { display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.3s ease; }
+  .link-arrow:hover { gap: 0.85rem; }
+  ::selection { background: var(--teal); color: var(--cream); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade { animation: fadeUp 0.9s ease both; }
+  .d1 { animation-delay: .1s } .d2 { animation-delay: .25s } .d3 { animation-delay: .4s }
+
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.035;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- TOP TAPE -->
+<div class="border-b relative z-10" style="border-color: var(--line);">
+  <div class="max-w-6xl mx-auto px-6 py-2.5 flex justify-between items-center eyebrow" style="color: var(--mute);">
+    <span>SKM Studio</span>
+    <span class="hidden sm:inline">A Visionary Practice</span>
+    <span class="flex items-center gap-2">
+      <span class="inline-block w-1.5 h-1.5 rounded-full" style="background: var(--teal);"></span>
+      Open for new work
+    </span>
+  </div>
+</div>
+
+<!-- NAV — replace the placeholder <svg> below with your real logo SVG -->
+<header class="relative z-10">
+  <nav class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2.5">
+      <!-- TODO: paste your real SKM logo SVG here -->
+      <img width="32" height="32" src="skmstudio.png">
+      </img>
+      <span class="serif text-xl tracking-tight">SKM <em class="italic-serif">Studio</em></span>
+    </a>
+    <div class="flex items-center gap-3 md:gap-8 text-sm" style="color: var(--mute);">
+      <a href="#services" class="hidden md:inline hover:text-slate-900 transition">Services</a>
+      <a href="#contact" class="hidden md:inline hover:text-slate-900 transition">Contact</a>
+      <a href="#contact" class="cta-primary px-5 py-2.5 rounded-full text-xs tracking-widest">GET IN TOUCH</a>
+    </div>
+  </nav>
+</header>
+
+<main class="relative z-10">
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32">
+  <div class="eyebrow fade" style="color: var(--teal);">
+    ◇ &nbsp;Visionary brand &amp; digital studio
+  </div>
+  <h1 class="serif fade d1 mt-6 leading-[0.95] tracking-tight" style="font-size: clamp(2.8rem, 9vw, 7.5rem);">
+    Brands &amp; products<br>
+    built to <em class="italic-serif">outlast</em> the<br>
+    <span style="color: var(--navy);">moment.</span>
+    <span class="inline-block ml-1 align-top" style="color: var(--teal); font-size: 0.45em; transform: translateY(0.4em);">↗</span>
+  </h1>
+  <div class="grid md:grid-cols-3 gap-8 mt-12 fade d2">
+    <div class="md:col-span-2 md:col-start-2">
+      <p class="text-lg md:text-xl leading-relaxed" style="color: var(--mute);">
+        SKM Studio partners with ambitious founders to design identities, websites, and digital experiences that command attention — and earn trust over time.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+        <a href="#contact" class="cta-primary px-7 py-3.5 rounded-full text-sm tracking-wide inline-flex items-center gap-2">
+          Get in touch <span>→</span>
+        </a>
+        <a href="#services" class="link-arrow text-sm" style="color: var(--ink);">
+          <span class="underline underline-offset-[6px] decoration-1">See what we do</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule max-w-6xl mx-auto"></div>
+
+<!-- SERVICES — tailor copy to what you actually offer -->
+<section id="services" class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+  <div class="grid md:grid-cols-3 gap-12 mb-14">
+    <div>
+      <div class="eyebrow" style="color: var(--mute);">— What we do</div>
+      <h2 class="serif mt-4 text-4xl md:text-5xl leading-[1.02]">
+        Three disciplines,<br><em class="italic-serif">one studio.</em>
+      </h2>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-x-10 gap-y-14">
+    <article class="border-t pt-6" style="border-color: var(--line);">
+      <div class="flex items-baseline justify-between mb-6">
+        <span class="index-num text-3xl">01</span>
+        <span class="eyebrow" style="color: var(--mute);">Identity</span>
+      </div>
+      <h3 class="serif text-2xl mb-3">Brand <em class="italic-serif">Identity</em></h3>
+      <p style="color: var(--mute);" class="leading-relaxed">
+        Marks, systems, and stories that carry your business for years — not seasons. Logo design, type systems, and brand guidelines.
+      </p>
+    </article>
+
+    <article class="border-t pt-6" style="border-color: var(--line);">
+      <div class="flex items-baseline justify-between mb-6">
+        <span class="index-num text-3xl">02</span>
+        <span class="eyebrow" style="color: var(--mute);">Digital</span>
+      </div>
+      <h3 class="serif text-2xl mb-3">Digital <em class="italic-serif">Design</em></h3>
+      <p style="color: var(--mute);" class="leading-relaxed">
+        Websites and products built to convert, communicate, and compound trust over time. From strategy through ship.
+      </p>
+    </article>
+
+    <article class="border-t pt-6" style="border-color: var(--line);">
+      <div class="flex items-baseline justify-between mb-6">
+        <span class="index-num text-3xl">03</span>
+        <span class="eyebrow" style="color: var(--mute);">Strategy</span>
+      </div>
+      <h3 class="serif text-2xl mb-3"><em class="italic-serif">Strategy</em> &amp; voice</h3>
+      <p style="color: var(--mute);" class="leading-relaxed">
+        The thinking behind the work. Positioning, naming, and messaging that makes every other surface land harder.
+      </p>
+    </article>
+  </div>
+</section>
+
+<div class="rule max-w-6xl mx-auto"></div>
+
+<!-- CONTACT — update the mailto target with your real email before pushing -->
+<section id="contact" class="max-w-6xl mx-auto px-6 py-24 md:py-32 text-center">
+  <div class="eyebrow mb-6" style="color: var(--teal);">◇ &nbsp;Now accepting inquiries</div>
+  <h2 class="serif leading-[1] tracking-tight" style="font-size: clamp(2.5rem, 7vw, 5.5rem);">
+    Have a vision worth<br><em class="italic-serif">building?</em>
+  </h2>
+  <p class="mt-8 text-lg md:text-xl max-w-xl mx-auto" style="color: var(--mute);">
+    Tell us about the future you're trying to make — and we'll tell you whether we're the right studio for the job.
+  </p>
+  <!-- TODO: replace YOUR_EMAIL@example.com with your real address -->
+  <a href="mailto:YOUR_EMAIL@example.com?subject=New%20project%20inquiry" class="cta-primary inline-flex items-center gap-3 mt-10 px-8 py-4 rounded-full text-sm tracking-wide">
+    Start the conversation <span>→</span>
+  </a>
+</section>
+
+</main>
+
+<!-- FOOTER — add social links here once your accounts are live -->
+<footer class="border-t relative z-10" style="border-color: var(--line);">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm" style="color: var(--mute);">
+    <div>
+      <span class="serif text-base" style="color: var(--ink);">SKM <em class="italic-serif">Studio</em></span>
+      <span class="mx-2">—</span>
+      <span>A visionary practice.</span>
+    </div>
+    <div>© <span id="year">2026</span> SKM Studio. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Auto-updates so the footer year never goes stale
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
