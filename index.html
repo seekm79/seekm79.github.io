@@ -3,215 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SKM Studio is a visionary practice building brands, websites, and digital experiences for ambitious founders.">
-<meta property="og:title" content="SKM Studio — A Visionary Practice">
-<meta property="og:description" content="Brands & products built to outlast the moment.">
-<title>SKM Studio — A Visionary Practice</title>
+<meta name="description" content="SKM Studio designs and builds brands, websites and mobile apps. Maker of Dialbook, the privacy-first call-list CRM for sales and debt collection.">
+<meta property="og:title" content="SKM Studio — Design & Software Practice">
+<meta property="og:description" content="Brands, websites and apps built to outlast the moment. Maker of Dialbook.">
+<meta property="og:image" content="https://seekm79.github.io/skmstudio.png">
+<title>SKM Studio — Design & Software Practice</title>
+<link rel="icon" href="skmstudio.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --ink: #0A2540;
-    --navy: #0F3D6E;
-    --teal: #14A39A;
-    --cream: #F5F3EC;
-    --paper: #FBFAF5;
-    --mute: #6B7280;
-    --line: #E5E0D5;
-  }
-  body {
-    font-family: 'Onest', system-ui, sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-  }
-  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
-  .italic-serif { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; }
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .rule { height: 1px; background: var(--line); }
-  .index-num {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    color: var(--teal);
-  }
-  .cta-primary {
-    background: var(--ink);
-    color: var(--cream);
-    transition: all 0.25s ease;
-  }
-  .cta-primary:hover { background: var(--navy); transform: translateY(-1px); }
-  .link-arrow { display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.3s ease; }
-  .link-arrow:hover { gap: 0.85rem; }
-  ::selection { background: var(--teal); color: var(--cream); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade { animation: fadeUp 0.9s ease both; }
-  .d1 { animation-delay: .1s } .d2 { animation-delay: .25s } .d3 { animation-delay: .4s }
-
-  .grain {
-    position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.035;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
+  .hero { position: relative; padding: clamp(56px, 8vw, 110px) 0 clamp(56px, 8vw, 100px); }
+  .hero-grid { display: grid; gap: 32px; margin-top: 44px; } @media (min-width: 860px) { .hero-grid { grid-template-columns: 1fr 2fr; } .hero-grid > :first-child { grid-column: 2; } }
+  .hero .actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero .chips { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .product-panel { padding: clamp(28px, 4vw, 48px); display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 960px) { .product-panel { grid-template-columns: minmax(0,7fr) minmax(0,5fr); } }
+  .product-panel > div { min-width: 0; }
+  .product-id { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .product-id img { width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 14px 30px -12px rgba(0,0,0,.7); }
+  .product-id h3 { font-size: 2.4rem; }
+  .benefits { display: grid; gap: 10px 28px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin: 26px 0 0; padding: 0; list-style: none; font-size: 14.5px; color: rgba(245,243,236,.88); }
+  .benefits li { display: flex; gap: 10px; }
+  .product-phones { display: flex; justify-content: center; align-items: flex-end; gap: 16px; }
+  .product-phones .phone-sm { transform: translateY(24px) rotate(-5deg); }
+  .service { padding: 32px; }
+  .service .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 26px; }
+  .service h3 { font-size: 1.6rem; margin-bottom: 10px; }
+  .service p { color: var(--mute); margin: 0; }
+  .service ul { margin: 18px 0 0; padding: 0; list-style: none; color: var(--mute); font-size: 14px; } .service li { padding: 3px 0; }
+  .steps { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .step { padding: 28px; }
+  .step .index-num { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+  .step h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; } .step p { color: var(--mute); margin: 0; }
+  .contact { text-align: center; position: relative; }
+  .contact h2 { font-size: clamp(2.5rem, 7vw, 5.5rem); }
 </style>
 </head>
 <body>
-
 <div class="grain"></div>
 
-<!-- TOP TAPE -->
-<div class="border-b relative z-10" style="border-color: var(--line);">
-  <div class="max-w-6xl mx-auto px-6 py-2.5 flex justify-between items-center eyebrow" style="color: var(--mute);">
+<div class="topbar">
+  <div class="wrap">
     <span>SKM Studio</span>
-    <span class="hidden sm:inline">A Visionary Practice</span>
-    <span class="flex items-center gap-2">
-      <span class="inline-block w-1.5 h-1.5 rounded-full" style="background: var(--teal);"></span>
-      Open for new work
-    </span>
+    <span class="hide-sm">Design &amp; software practice</span>
+    <span><span class="dot"></span>Open for new work</span>
   </div>
 </div>
 
-<!-- NAV — replace the placeholder <svg> below with your real logo SVG -->
-<header class="relative z-10">
-  <nav class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-    <a href="#" class="flex items-center gap-2.5">
-      <!-- TODO: paste your real SKM logo SVG here -->
-      <img width="32" height="32" src="skmstudio.png">
-      </img>
-      <span class="serif text-xl tracking-tight">SKM <em class="italic-serif">Studio</em></span>
-    </a>
-    <div class="flex items-center gap-3 md:gap-8 text-sm" style="color: var(--mute);">
-      <a href="#services" class="hidden md:inline hover:text-slate-900 transition">Services</a>
-      <a href="#contact" class="hidden md:inline hover:text-slate-900 transition">Contact</a>
-      <a href="#contact" class="cta-primary px-5 py-2.5 rounded-full text-xs tracking-widest">GET IN TOUCH</a>
-    </div>
-  </nav>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="skmstudio.png" width="34" height="34" alt="SKM Studio"><span class="serif">SKM <em>Studio</em></span></a>
+    <div class="links"><a href="#products">Products</a><a href="#services">Services</a><a href="#process">Process</a><a href="products/dialbook/help.html">Help</a></div>
+    <a class="btn btn-teal btn-sm" href="#contact">Get in touch</a>
+  </div>
 </header>
 
-<main class="relative z-10">
+<main>
 
-<!-- HERO -->
-<section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32">
-  <div class="eyebrow fade" style="color: var(--teal);">
-    ◇ &nbsp;Visionary brand &amp; digital studio
-  </div>
-  <h1 class="serif fade d1 mt-6 leading-[0.95] tracking-tight" style="font-size: clamp(2.8rem, 9vw, 7.5rem);">
-    Brands &amp; products<br>
-    built to <em class="italic-serif">outlast</em> the<br>
-    <span style="color: var(--navy);">moment.</span>
-    <span class="inline-block ml-1 align-top" style="color: var(--teal); font-size: 0.45em; transform: translateY(0.4em);">↗</span>
-  </h1>
-  <div class="grid md:grid-cols-3 gap-8 mt-12 fade d2">
-    <div class="md:col-span-2 md:col-start-2">
-      <p class="text-lg md:text-xl leading-relaxed" style="color: var(--mute);">
-        SKM Studio partners with ambitious founders to design identities, websites, and digital experiences that command attention — and earn trust over time.
-      </p>
-      <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-        <a href="#contact" class="cta-primary px-7 py-3.5 rounded-full text-sm tracking-wide inline-flex items-center gap-2">
-          Get in touch <span>→</span>
-        </a>
-        <a href="#services" class="link-arrow text-sm" style="color: var(--ink);">
-          <span class="underline underline-offset-[6px] decoration-1">See what we do</span>
-          <span>→</span>
-        </a>
+<section class="wrap hero">
+  <div class="glow" style="width:620px;height:620px;right:-200px;top:-160px;background:radial-gradient(circle, rgba(20,163,154,.34), transparent 70%);"></div>
+  <div class="glow" style="width:460px;height:460px;left:-220px;bottom:-120px;background:radial-gradient(circle, rgba(212,179,106,.32), transparent 70%);"></div>
+  <div style="position:relative">
+    <div class="eyebrow fade">◇ &nbsp;Brand, web &amp; mobile apps</div>
+    <h1 class="serif display fade d1" style="margin-top:22px">Brands &amp; products<br>built to <em>outlast</em> the<br><span style="color:var(--navy)">moment.</span> <span style="color:var(--teal);font-size:.45em;vertical-align:top;display:inline-block;transform:translateY(.4em)">↗</span></h1>
+    <div class="hero-grid">
+      <div>
+        <p class="lead fade d2">SKM Studio is a small practice that designs identities, builds websites and ships mobile apps for ambitious founders, and for ourselves. The same craft goes into every surface, from the mark to the last settings screen.</p>
+        <div class="actions fade d3">
+          <a class="btn btn-primary" href="#contact">Start a project <span>→</span></a>
+          <a class="btn btn-ghost" href="#products">See Dialbook <span>→</span></a>
+        </div>
+        <div class="chips fade d4">
+          <span class="chip"><span class="tick">✓</span> Design and engineering in one team</span>
+          <span class="chip"><span class="tick">✓</span> iOS, Android and web</span>
+          <span class="chip"><span class="tick">✓</span> Privacy-first by default</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="rule max-w-6xl mx-auto"></div>
-
-<!-- SERVICES — tailor copy to what you actually offer -->
-<section id="services" class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-  <div class="grid md:grid-cols-3 gap-12 mb-14">
-    <div>
-      <div class="eyebrow" style="color: var(--mute);">— What we do</div>
-      <h2 class="serif mt-4 text-4xl md:text-5xl leading-[1.02]">
-        Three disciplines,<br><em class="italic-serif">one studio.</em>
-      </h2>
+<section id="products" class="band">
+  <div class="wrap section">
+    <div class="section-head">
+      <div><div class="eyebrow">— Products</div><h2 class="serif h2" style="margin-top:14px">Software we make<br><em>and stand behind.</em></h2></div>
+      <p class="mute">Our own apps are where we test every idea first. They ship with no accounts, no tracking and plain-language help.</p>
     </div>
+    <div class="glass product-panel">
+      <div>
+        <div class="product-id">
+          <img src="products/dialbook/img/icon.png" alt="Dialbook app icon">
+          <div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h3 class="serif">Dialbook</h3><span class="chip chip-dark">iPhone · iPad · Android</span></div>
+            <div class="mute" style="font-size:14px;margin-top:2px">Call-list CRM for sales follow-up and debt collection</div>
+          </div>
+        </div>
+        <p style="margin-top:26px;font-size:1.1rem;line-height:1.65;color:rgba(245,243,236,.9)">Dialbook is for anyone who works from a list of people to call. Import a spreadsheet, work through it from the dialer, log what happened, and never miss a callback or a promise to pay. Everything stays on the phone: there is no account and no server.</p>
+        <ul class="benefits">
+          <li><span class="tick" style="color:#4FD9CF">✓</span> Sales pipeline and collections in one app</li>
+          <li><span class="tick" style="color:#4FD9CF">✓</span> Promises to pay and a broken-promise queue</li>
+          <li><span class="tick" style="color:#4FD9CF">✓</span> Imports Excel or CSV, even a million rows</li>
+          <li><span class="tick" style="color:#4FD9CF">✓</span> WhatsApp, SMS and email templates</li>
+          <li><span class="tick" style="color:#4FD9CF">✓</span> Encrypted backups you control</li>
+          <li><span class="tick" style="color:#4FD9CF">✓</span> Bring your own AI, with masking</li>
+        </ul>
+        <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">
+          <a class="btn btn-light" href="products/dialbook/">Explore Dialbook <span>→</span></a>
+          <a class="btn btn-outline-light" href="products/dialbook/help.html">Help centre</a>
+          <a class="btn btn-outline-light" href="products/dialbook/privacy.html">Privacy policy</a>
+        </div>
+      </div>
+      <div class="phones">
+        <div class="phone phone-sm"><img src="products/dialbook/img/phone/dialer.webp" alt="Dialbook dialer"></div>
+        <div class="phone"><img src="products/dialbook/img/phone/home.webp" alt="Dialbook Home"></div>
+      </div>
+    </div>
+    <p class="mute" style="margin-top:28px;font-size:14px">More products are on the way. <a href="products/" style="color:#4FD9CF">See all products →</a></p>
   </div>
+</section>
 
-  <div class="grid md:grid-cols-3 gap-x-10 gap-y-14">
-    <article class="border-t pt-6" style="border-color: var(--line);">
-      <div class="flex items-baseline justify-between mb-6">
-        <span class="index-num text-3xl">01</span>
-        <span class="eyebrow" style="color: var(--mute);">Identity</span>
-      </div>
-      <h3 class="serif text-2xl mb-3">Brand <em class="italic-serif">Identity</em></h3>
-      <p style="color: var(--mute);" class="leading-relaxed">
-        Marks, systems, and stories that carry your business for years — not seasons. Logo design, type systems, and brand guidelines.
-      </p>
+<section id="services" class="wrap section">
+  <div class="section-head">
+    <div><div class="eyebrow mute">— What we do</div><h2 class="serif h2" style="margin-top:14px">Three disciplines,<br><em>one studio.</em></h2></div>
+    <p class="lead">We take on a few projects at a time so the people who design your work are the people who build it.</p>
+  </div>
+  <div class="grid grid-3">
+    <article class="card service">
+      <div class="top"><span class="index-num" style="font-size:1.9rem">01</span><span class="eyebrow mute">Identity</span></div>
+      <h3 class="serif">Brand <em>Identity</em></h3>
+      <p>Marks, systems and stories that carry a business for years, not seasons. Logo design, type systems and brand guidelines.</p>
+      <ul><li>Naming and positioning</li><li>Logo and visual system</li><li>Guidelines and templates</li></ul>
     </article>
-
-    <article class="border-t pt-6" style="border-color: var(--line);">
-      <div class="flex items-baseline justify-between mb-6">
-        <span class="index-num text-3xl">02</span>
-        <span class="eyebrow" style="color: var(--mute);">Digital</span>
-      </div>
-      <h3 class="serif text-2xl mb-3">Digital <em class="italic-serif">Design</em></h3>
-      <p style="color: var(--mute);" class="leading-relaxed">
-        Websites and products built to convert, communicate, and compound trust over time. From strategy through ship.
-      </p>
+    <article class="card service">
+      <div class="top"><span class="index-num" style="font-size:1.9rem">02</span><span class="eyebrow mute">Web</span></div>
+      <h3 class="serif">Websites <em>&amp; Digital</em></h3>
+      <p>Fast, well-built sites that convert, communicate and compound trust over time. From strategy through launch.</p>
+      <ul><li>Marketing sites and landing pages</li><li>Design systems</li><li>Performance and SEO basics done right</li></ul>
     </article>
-
-    <article class="border-t pt-6" style="border-color: var(--line);">
-      <div class="flex items-baseline justify-between mb-6">
-        <span class="index-num text-3xl">03</span>
-        <span class="eyebrow" style="color: var(--mute);">Strategy</span>
-      </div>
-      <h3 class="serif text-2xl mb-3"><em class="italic-serif">Strategy</em> &amp; voice</h3>
-      <p style="color: var(--mute);" class="leading-relaxed">
-        The thinking behind the work. Positioning, naming, and messaging that makes every other surface land harder.
-      </p>
+    <article class="card service">
+      <div class="top"><span class="index-num" style="font-size:1.9rem">03</span><span class="eyebrow mute">Mobile</span></div>
+      <h3 class="serif">Mobile <em>Apps</em></h3>
+      <p>iPhone, iPad and Android apps built with Flutter, from first prototype to store review, with privacy and offline use designed in.</p>
+      <ul><li>Product design and prototyping</li><li>Flutter development</li><li>Store listing, policies and launch</li></ul>
     </article>
   </div>
 </section>
 
-<div class="rule max-w-6xl mx-auto"></div>
+<div class="rule wrap"></div>
 
-<!-- CONTACT — update the mailto target with your real email before pushing -->
-<section id="contact" class="max-w-6xl mx-auto px-6 py-24 md:py-32 text-center">
-  <div class="eyebrow mb-6" style="color: var(--teal);">◇ &nbsp;Now accepting inquiries</div>
-  <h2 class="serif leading-[1] tracking-tight" style="font-size: clamp(2.5rem, 7vw, 5.5rem);">
-    Have a vision worth<br><em class="italic-serif">building?</em>
-  </h2>
-  <p class="mt-8 text-lg md:text-xl max-w-xl mx-auto" style="color: var(--mute);">
-    Tell us about the future you're trying to make — and we'll tell you whether we're the right studio for the job.
-  </p>
-  <!-- TODO: replace YOUR_EMAIL@example.com with your real address -->
-  <a href="mailto:kuanmeng.see@gmail.com?subject=New%20project%20inquiry" class="cta-primary inline-flex items-center gap-3 mt-10 px-8 py-4 rounded-full text-sm tracking-wide">
-    Start the conversation <span>→</span>
-  </a>
+<section id="process" class="wrap section">
+  <div class="section-head">
+    <div><div class="eyebrow mute">— How we work</div><h2 class="serif h2" style="margin-top:14px">Small team, clear steps,<br><em>no surprises.</em></h2></div>
+  </div>
+  <div class="steps">
+    <div class="card step"><span class="index-num">i.</span><h3>Discover</h3><p>A short call to understand the goal, the audience and the constraints. You get a written scope and a fixed quote.</p></div>
+    <div class="card step"><span class="index-num">ii.</span><h3>Design</h3><p>Clickable prototypes before any code, so decisions are made on real screens and nothing is built twice.</p></div>
+    <div class="card step"><span class="index-num">iii.</span><h3>Build &amp; launch</h3><p>We ship, write the help pages and policies, handle store review, and stay on for the first weeks after launch.</p></div>
+  </div>
+</section>
+
+<section id="contact" class="wrap section contact">
+  <div class="glow" style="width:520px;height:520px;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle, rgba(20,163,154,.25), transparent 70%);"></div>
+  <div style="position:relative">
+    <div class="eyebrow">◇ &nbsp;Now accepting inquiries</div>
+    <h2 class="serif" style="margin-top:22px">Have a vision worth<br><em>building?</em></h2>
+    <p class="lead" style="max-width:600px;margin:28px auto 0">Tell us about the future you're trying to make. We reply within two working days and tell you honestly whether we're the right studio for it.</p>
+    <a class="btn btn-primary" style="margin-top:36px;padding:18px 34px" href="mailto:kuanmeng.see@gmail.com?subject=New%20project%20inquiry">Start the conversation <span>→</span></a>
+    <p style="margin-top:18px;font-size:14px;color:var(--mute)">or write to <a href="mailto:kuanmeng.see@gmail.com" style="text-decoration:underline;text-underline-offset:4px">kuanmeng.see@gmail.com</a></p>
+  </div>
 </section>
 
 </main>
 
-<!-- FOOTER — add social links here once your accounts are live -->
-<footer class="border-t relative z-10" style="border-color: var(--line);">
-  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm" style="color: var(--mute);">
-    <div>
-      <span class="serif text-base" style="color: var(--ink);">SKM <em class="italic-serif">Studio</em></span>
-      <span class="mx-2">—</span>
-      <span>A visionary practice.</span>
+<footer class="footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a href="#" style="display:flex;align-items:center;gap:10px;color:#fff"><img src="skmstudio.png" width="28" height="28" alt="" style="border-radius:999px"><span class="serif" style="font-size:1.15rem">SKM <em>Studio</em></span></a>
+        <p style="margin-top:14px;max-width:360px">A design and software practice. Brands, websites and mobile apps built to outlast the moment.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Products</div>
+        <ul><li><a href="products/dialbook/">Dialbook</a></li><li><a href="products/dialbook/help.html">Dialbook help centre</a></li><li><a href="products/dialbook/privacy.html">Dialbook privacy policy</a></li><li><a href="products/">All products</a></li></ul>
+      </div>
+      <div>
+        <div class="eyebrow">Studio</div>
+        <ul><li><a href="#services">Services</a></li><li><a href="#process">Process</a></li><li><a href="mailto:kuanmeng.see@gmail.com">Contact</a></li></ul>
+      </div>
     </div>
-    <div>© <span id="year">2026</span> SKM Studio. All rights reserved.</div>
+    <div class="bottom"><div>© <span id="year">2026</span> SKM Studio. All rights reserved.</div><div>Dialbook is a product of SKM Studio.</div></div>
   </div>
 </footer>
-
-<script>
-  // Auto-updates so the footer year never goes stale
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

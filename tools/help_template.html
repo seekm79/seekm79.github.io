@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{NAME}} help centre: every screen explained, with pictures and the exact labels you see in the app.">
+<title>{{NAME}} Help Centre</title>
+<link rel="icon" href="img/icon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  .hero { padding: 64px 0 28px; position: relative; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 14px 0; }
+  .hero p { max-width: 640px; }
+  .search { margin-top: 28px; position: relative; max-width: 640px; }
+  .search input { width: 100%; padding: 18px 18px 18px 52px; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(180deg,#fff,#FBFAF5); font: inherit; font-size: 16px; color: var(--ink); outline: none; box-shadow: var(--shadow-card); }
+  .search input:focus { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft), var(--shadow-card); }
+  .search svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--mute); }
+  .count { color: var(--mute); font-size: 13px; margin-top: 10px; min-height: 20px; }
+  .layout { display: grid; grid-template-columns: 250px 1fr; gap: 48px; padding: 28px 0 96px; align-items: start; }
+  aside { position: sticky; top: 96px; max-height: calc(100vh - 110px); overflow: auto; padding-right: 8px; }
+  .toc-group { margin-bottom: 18px; }
+  .toc-title { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--teal-deep); margin-bottom: 6px; }
+  .toc-group ul { list-style: none; margin: 0; padding: 0; }
+  .toc-group li a { display: block; padding: 5px 0 5px 10px; font-size: 14px; color: var(--ink); border-left: 2px solid transparent; margin-left: -12px; }
+  .toc-group li a:hover { border-left-color: var(--teal); color: var(--navy); }
+  .group h2 { font-size: 2.2rem; margin: 0 0 16px; padding-top: 8px; }
+  .group + .group { margin-top: 56px; }
+  .article { padding: 28px 30px; margin-bottom: 18px; display: grid; gap: 28px; }
+  .article.has-shot { grid-template-columns: minmax(0, 1fr) 236px; align-items: start; }
+  .article.has-shot:has(.shot.kind-ipad) { grid-template-columns: 1fr; }
+  .article h3 { margin: 0 0 10px; font-size: 1.3rem; font-weight: 600; }
+  .article p, .article li { color: var(--body); font-size: 15.5px; }
+  .article p { margin: 0 0 10px; } .article ol, .article ul { margin: 0 0 12px; padding-left: 22px; } .article li { margin: 4px 0; }
+  .article strong { color: var(--ink); font-weight: 600; background: linear-gradient(180deg, transparent 60%, rgba(20,163,154,.18) 60%); padding: 0 2px; border-radius: 3px; }
+  .article em { color: var(--navy); }
+  .article:target { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft), var(--shadow-card); }
+  .article.hidden, .group.hidden { display: none; }
+  .shot { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .shot .phone { width: 210px; }
+  .shot .tablet { max-width: 760px; }
+  .shot .phone, .shot .tablet { position: relative; }
+  .shot-img { position: absolute; inset: 8px; }
+  .shot .tablet .shot-img { inset: 14px; }
+  .shot-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .phone .shot-img img { border-radius: 30px; } .tablet .shot-img img { border-radius: 22px; }
+  .mark, .mark-n { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 999px; background: linear-gradient(135deg, #22BFB4, #0E7F78); color: #fff; font-size: 11.5px; font-weight: 800; box-shadow: 0 2px 6px rgba(0,0,0,.35), 0 0 0 2px #fff; font-family: 'Onest', sans-serif; font-style: normal; }
+  .mark-box { position: absolute; z-index: 3; border: 2px solid #14A39A; border-radius: 7px; box-shadow: 0 0 0 2px rgba(255,255,255,.85), 0 0 0 999px rgba(10,37,64,.0); pointer-events: none; }
+  .mark { position: absolute; left: 0; top: 0; transform: translate(-55%, -55%); }
+  .shot figcaption { font-size: 12.5px; color: var(--mute); text-align: center; line-height: 1.45; }
+  .legend { list-style: none; margin: 0; padding: 0; width: 100%; font-size: 12.5px; color: var(--body); }
+  .legend li { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; line-height: 1.4; }
+  .legend b { font-weight: 600; color: var(--ink); }
+  .legend small { color: var(--mute); font-size: 12px; }
+  .legend .mark-n { width: 18px; height: 18px; font-size: 10px; flex: none; margin-top: 1px; }
+  .support { padding: 36px; margin-top: 48px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+  .support p { margin: 6px 0 0; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 24px; }
+    aside { position: static; max-height: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px 24px; }
+    .article { padding: 22px; } .article.has-shot { grid-template-columns: 1fr; }
+    .shot .phone { width: 220px; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/icon.png" width="30" height="30" alt=""><span class="serif">{{NAME}}</span><span class="crumb">/</span><span style="color:rgba(245,243,236,.7)">Help centre</span></a>
+    <div class="links"><a href="index.html">{{NAME}}</a><a href="privacy.html">Privacy</a><a href="../../">SKM Studio</a></div>
+    <a class="btn btn-teal btn-sm" href="mailto:{{EMAIL}}?subject={{NAME}}%20support">Email support</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="glow" style="width:520px;height:520px;right:-200px;top:-200px;background:radial-gradient(circle, rgba(20,163,154,.28), transparent 70%);"></div>
+    <div class="eyebrow">— Help centre</div>
+    <h1 class="serif">How can we <em>help?</em></h1>
+    <p class="lead">Every article is the same text you find under Help inside the app. Highlighted names are the exact labels on screen, and the numbered markers show where each one is.</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search help, e.g. backup, promise, import…" autocomplete="off">
+    </div>
+    <div class="count" id="count"></div>
+  </section>
+
+  <div class="layout">
+    <aside id="toc">
+      {{TOC}}
+    </aside>
+    <div id="articles">
+      {{BODY}}
+      <div class="card-dark support">
+        <div>
+          <div class="serif" style="font-size:1.9rem">Still stuck?</div>
+          <p class="mute">Write to us with your phone model and what you tapped. We reply within two working days.</p>
+        </div>
+        <a class="btn btn-light" href="mailto:{{EMAIL}}?subject={{NAME}}%20support">Email support</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap bottom">
+    <div>© <span id="year">2026</span> SKM Studio. {{NAME}} is a product of SKM Studio.</div>
+    <div><a href="index.html">{{NAME}}</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="../../">SKM Studio</a></div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const q = document.getElementById('q'), count = document.getElementById('count');
+  const articles = Array.from(document.querySelectorAll('.article'));
+  const groups = Array.from(document.querySelectorAll('.group'));
+  function filter() {
+    const t = q.value.trim().toLowerCase();
+    let shown = 0;
+    articles.forEach(a => { const hit = !t || a.querySelector('.art-text').textContent.toLowerCase().includes(t); a.classList.toggle('hidden', !hit); if (hit) shown++; });
+    groups.forEach(g => g.classList.toggle('hidden', !g.querySelector('.article:not(.hidden)')));
+    document.getElementById('toc').style.display = t ? 'none' : '';
+    count.textContent = t ? (shown + ' article' + (shown === 1 ? '' : 's') + ' match "' + q.value.trim() + '"') : '';
+  }
+  q.addEventListener('input', filter);
+</script>
+</body>
+</html>

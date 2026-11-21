@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Apps made by SKM Studio.">
+<title>Products — SKM Studio</title>
+<link rel="icon" href="../skmstudio.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .hero { padding: 64px 0 36px; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 14px 0; }
+  .product { padding: 30px; display: grid; gap: 24px; grid-template-columns: 84px 1fr; align-items: start; }
+  .product img.icon { width: 84px; height: 84px; border-radius: 22px; box-shadow: 0 16px 32px -14px rgba(10,37,64,.55); }
+  .product h2 { font-size: 2rem; } .product p { color: var(--mute); }
+  .product .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .soon { padding: 30px; border-style: dashed; color: var(--mute); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 180px; }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../skmstudio.png" width="30" height="30" alt=""><span class="serif">SKM <em>Studio</em></span><span class="crumb">/</span><span style="color:rgba(245,243,236,.7)">Products</span></a>
+    <div class="links"><a href="../#services">Services</a><a href="../#process">Process</a><a href="../#contact">Contact</a></div>
+    <a class="btn btn-teal btn-sm" href="../#contact">Get in touch</a>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">— Products</div>
+    <h1 class="serif">Apps we make <em>and stand behind.</em></h1>
+    <p class="lead" style="max-width:600px">Each one ships with no account, no tracking, a help centre with pictures, and a privacy policy written in plain words.</p>
+  </section>
+  <section class="grid grid-2" style="padding-bottom:96px">
+    <article class="card product">
+      <img class="icon" src="dialbook/img/icon.png" alt="Dialbook icon">
+      <div>
+        <h2 class="serif">Dialbook</h2>
+        <p>Call-list CRM for sales follow-up and debt collection. iPhone, iPad and Android.</p>
+        <div class="links"><a class="btn btn-primary btn-sm" href="dialbook/">Open</a><a class="btn btn-ghost btn-sm" href="dialbook/help.html">Help</a><a class="btn btn-ghost btn-sm" href="dialbook/privacy.html">Privacy</a></div>
+      </div>
+    </article>
+    <div class="card static soon">More products are on the way.</div>
+  </section>
+</main>
+<footer class="footer"><div class="wrap bottom"><div>© <span id="year">2026</span> SKM Studio.</div><div><a href="../">SKM Studio</a></div></div></footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

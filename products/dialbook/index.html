@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dialbook is a call-list CRM for sales follow-up and debt collection. Import a spreadsheet, work through it from the dialer, log every call, chase promises to pay. All data stays on your phone.">
+<meta property="og:title" content="Dialbook — Call-list CRM for sales and collections">
+<meta property="og:description" content="Work your call list, log every result, never miss a callback or a promise to pay. No account, no server.">
+<meta property="og:image" content="https://seekm79.github.io/products/dialbook/img/icon.png">
+<title>Dialbook — Call-list CRM for sales and collections</title>
+<link rel="icon" href="img/icon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  .hero { position: relative; padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 6vw, 80px); display: grid; gap: 48px; align-items: center; }
+  @media (min-width: 960px) { .hero { grid-template-columns: minmax(0,7fr) minmax(0,5fr); } }
+  .hero > div { min-width: 0; }
+  .hero-id { display: flex; align-items: center; gap: 16px; }
+  .hero-id img { width: 78px; height: 78px; border-radius: 20px; box-shadow: 0 18px 36px -14px rgba(10,37,64,.55), 0 0 0 1px rgba(10,37,64,.06); }
+  .hero h1 { font-size: clamp(2.5rem, 6.4vw, 5.4rem); margin-top: 26px; }
+  .hero .lead { margin-top: 24px; max-width: 560px; }
+  .hero .actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .hero .chips { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .hero-phones { display: flex; justify-content: center; align-items: flex-end; gap: 18px; }
+  .hero-phones .phone-sm { transform: translateY(26px) rotate(-5deg); }
+  .who { display: grid; gap: 22px; } @media (min-width: 800px) { .who { grid-template-columns: 1fr 1fr; } }
+  .who .card { padding: 34px; }
+  .who h2 { font-size: 2rem; margin: 10px 0 12px; }
+  .feature { padding: 28px; }
+  .feature h3 { font-size: 1.1rem; font-weight: 600; margin: 18px 0 8px; }
+  .feature p { color: var(--mute); font-size: 14.5px; margin: 0; }
+  .screens { display: flex; gap: 30px; overflow-x: auto; padding: 24px 8px 40px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .screens figure { margin: 0; flex: none; scroll-snap-align: center; text-align: center; }
+  .screens .phone { width: 250px; }
+  .screens figcaption { color: rgba(245,243,236,.72); font-size: 13.5px; margin-top: 16px; max-width: 250px; line-height: 1.45; }
+  .ipad-grid { display: grid; gap: 28px; align-items: center; } @media (min-width: 960px) { .ipad-grid { grid-template-columns: 1.6fr 1fr; } }
+  .ipad-thumbs { display: grid; gap: 14px; }
+  .ipad-thumbs .tablet { padding: 8px; border-radius: 18px; } .ipad-thumbs .tablet img { border-radius: 11px; }
+  .wa-grid { display: grid; gap: 40px; align-items: center; } @media (min-width: 960px) { .wa-grid { grid-template-columns: 1fr 1fr; } }
+  .wa-pair { display: flex; gap: 24px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+  .plan { padding: 36px; }
+  .plan ul { list-style: none; margin: 18px 0 0; padding: 0; } .plan li { display: flex; gap: 10px; padding: 7px 0; font-size: 15px; }
+  .plan-pro { background: linear-gradient(160deg, #11365F 0%, #0A2540 55%, #061629 100%); color: #fff; border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: 0 40px 80px -34px rgba(6,22,41,.85), inset 0 1px 0 rgba(255,255,255,.08); position: relative; overflow: hidden; }
+  .plan-pro::after { content: ''; position: absolute; width: 360px; height: 360px; right: -160px; top: -160px; border-radius: 999px; background: radial-gradient(circle, rgba(212,179,106,.35), transparent 70%); filter: blur(30px); }
+  .plan-pro .tick { color: #4FD9CF; } .plan-pro .mute { color: rgba(245,243,236,.7); }
+  .pro-tag { font-size: 10px; letter-spacing: .2em; padding: 5px 10px; border-radius: 999px; background: linear-gradient(135deg, #EAD39A, #B8933F); color: var(--ink); font-weight: 800; }
+  .priv { display: grid; gap: 40px; } @media (min-width: 900px) { .priv { grid-template-columns: 5fr 7fr; } }
+  .priv-cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .priv-cards .card { padding: 22px; font-size: 14.5px; } .priv-cards h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; } .priv-cards p { color: var(--mute); margin: 0; }
+  .support { padding: 40px; display: grid; gap: 28px; align-items: center; } @media (min-width: 800px) { .support { grid-template-columns: 2fr 1fr; } }
+  .support .btns { display: flex; flex-direction: column; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../../"><img src="../../skmstudio.png" width="30" height="30" alt=""><span class="serif">SKM <em>Studio</em></span><span class="crumb">/</span><span style="color:rgba(245,243,236,.85);font-weight:600">Dialbook</span></a>
+    <div class="links"><a href="#features">Features</a><a href="#screens">Screens</a><a href="#ipad">iPad</a><a href="#whatsapp">WhatsApp</a><a href="#pricing">Free &amp; Pro</a><a href="#privacy">Privacy</a></div>
+    <a class="btn btn-teal btn-sm" href="help.html">Help centre</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="wrap hero">
+  <div class="glow" style="width:620px;height:620px;right:-220px;top:-200px;background:radial-gradient(circle, rgba(20,163,154,.32), transparent 70%);"></div>
+  <div class="glow" style="width:420px;height:420px;left:-200px;bottom:-100px;background:radial-gradient(circle, rgba(212,179,106,.3), transparent 70%);"></div>
+  <div style="position:relative">
+    <div class="hero-id fade">
+      <img src="img/icon.png" alt="Dialbook app icon">
+      <div>
+        <div class="eyebrow">Dialbook</div>
+        <div style="color:var(--mute);font-size:14px;margin-top:2px">For iPhone, iPad and Android</div>
+      </div>
+    </div>
+    <h1 class="serif fade d1">Work your call list.<br>Log every result.<br><em style="color:var(--navy)">Keep it on your phone.</em></h1>
+    <p class="lead fade d2">Dialbook is a CRM for people who work from a list of people to call: sales follow-up, debt collection, or both. Import a spreadsheet, dial through it, record what happened, and never miss a callback or a promise to pay.</p>
+    <div class="stores fade d2" style="margin-top:30px">
+      <a class="store" href="https://apps.apple.com/search?term=dialbook" rel="noopener" aria-label="Download on the App Store">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1.1-2.8-4.1zM14 5.1c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>
+        <span><small>Download on the</small><b>App Store</b></span>
+      </a>
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.dialbook.app" rel="noopener" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24"><path fill="#34A853" d="M3.6 2.3 13.9 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m17.3 15.4-3.4-3.4 3.4-3.4 4 2.3c.9.5.9 1.7 0 2.2l-4 2.3z"/><path fill="#4285F4" d="M13.9 12 3.6 2.3c.2-.1.4-.1.6-.1.3 0 .6.1.9.2l12.2 6.2-3.4 3.4z"/><path fill="#EA4335" d="m13.9 12 3.4 3.4-12.2 6.2c-.3.2-.6.3-.9.3-.2 0-.4 0-.6-.2L13.9 12z"/></svg>
+        <span><small>Get it on</small><b>Google Play</b></span>
+      </a>
+    </div>
+    <div class="actions fade d3">
+      <a class="btn btn-primary" href="#features">See what it does <span>→</span></a>
+      <a class="btn btn-ghost" href="help.html">Help centre</a>
+      <a class="btn btn-ghost" href="privacy.html">Privacy policy</a>
+    </div>
+    <div class="chips fade d3">
+      <span class="chip"><span class="tick">✓</span> No account</span>
+      <span class="chip"><span class="tick">✓</span> No server</span>
+      <span class="chip"><span class="tick">✓</span> Works offline</span>
+      <span class="chip"><span class="tick">✓</span> 16 languages</span>
+    </div>
+  </div>
+  <div class="phones fade d2">
+    <div class="phone phone-sm"><img src="img/phone/dialer.webp" alt="Dialbook dialer with call results"></div>
+    <div class="phone"><img src="img/phone/home.webp" alt="Dialbook Home screen"></div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="wrap" style="padding-bottom: clamp(48px, 6vw, 80px)">
+  <div class="who">
+    <div class="card">
+      <div class="eyebrow">Sales</div>
+      <h2 class="serif">Call prospects and <em>move them on.</em></h2>
+      <p style="color:var(--mute);margin:0">Leads move through New, Contacted, Qualified, Proposal, Negotiation and Won or Lost. Calls move them on their own, callbacks come first in the queue, and the win rate is always one tap away.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Collections</div>
+      <h2 class="serif">Chase overdue invoices <em>without losing track.</em></h2>
+      <p style="color:var(--mute);margin:0">Record promises to pay with an amount and a date. When the day passes without payment the account joins the broken-promise queue and comes first in the dialer. Aging buckets show where the money is.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="wrap section" style="padding-top:0">
+  <div class="section-head">
+    <div><div class="eyebrow mute">— Features</div><h2 class="serif h2" style="margin-top:14px">Everything a caller needs,<br><em>nothing a caller doesn't.</em></h2></div>
+  </div>
+  <div class="grid grid-3">
+    <article class="card feature"><div class="icon-tile">☎</div><h3>A dialer that orders the day</h3><p>Callbacks due and broken promises come first, then the most valuable. Tap the number, talk, come back, pick the result, save and next.</p></article>
+    <article class="card feature"><div class="icon-tile">⇪</div><h3>Import Excel or CSV</h3><p>Match the columns and go. Big sheets, even a million rows, import in the background while you keep working. Duplicates are left out.</p></article>
+    <article class="card feature"><div class="icon-tile">✓</div><h3>Promises, payments, aging</h3><p>Promise to pay, partial payment, paid in full. Accounts grouped by how late they are, with a customer statement as a PDF on request.</p></article>
+    <article class="card feature"><div class="icon-tile">✉</div><h3>WhatsApp, SMS and email templates</h3><p>Templates with fill-ins for name, amount and due date, in several languages, with pictures and PDFs attached. WhatsApp or your email app opens with the message ready.</p></article>
+    <article class="card feature"><div class="icon-tile">▦</div><h3>Tasks and alerts</h3><p>Callbacks, appointments, follow-ups and things you are waiting for. Home shows what is late or due today, with a map of the day's visits.</p></article>
+    <article class="card feature"><div class="icon-tile">◔</div><h3>22 reports</h3><p>Sales performance, payments, target pace, collections forecast, recovery by age, deal flow and what works. Share as PDF or CSV, or print.</p></article>
+    <article class="card feature"><div class="icon-tile">✦</div><h3>Bring your own AI</h3><p>Connect OpenAI, Anthropic, Gemini, DeepSeek, or a model on your own computer. Off by default, with a data notice and masking that strips names and numbers before sending.</p></article>
+    <article class="card feature"><div class="icon-tile">⚿</div><h3>Encrypted backups</h3><p>One file, encrypted with your password (AES-256). Save it to Google Drive, email or your computer and restore it on a new phone.</p></article>
+    <article class="card feature"><div class="icon-tile">▣</div><h3>Share a lead by QR code</h3><p>Hand a lead to a teammate by showing a QR code. Nothing goes through a server or the internet; the lead travels inside the code.</p></article>
+  </div>
+</section>
+
+<!-- SCREENS -->
+<section id="screens" class="band">
+  <div class="wrap section">
+    <div style="text-align:center;max-width:680px;margin:0 auto 10px">
+      <div class="eyebrow">— A day in Dialbook</div>
+      <h2 class="serif h2" style="margin-top:14px">Built for a long day<br><em>on the phone.</em></h2>
+      <p class="mute" style="margin-top:18px">Large type, one job per screen, and the next person to call always at the top.</p>
+    </div>
+    <div class="screens">
+      <figure><div class="phone"><img src="img/phone/home.webp" alt="Home" loading="lazy"></div><figcaption>Home: calls done, callbacks due, promises due today, and what needs attention.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/campaigns.webp" alt="Campaigns" loading="lazy"></div><figcaption>Campaigns: each list with how many are left to call today.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/dialer.webp" alt="Dialer" loading="lazy"></div><figcaption>The dialer: tap the number, talk, pick the result, add a note, save and next.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/contact.webp" alt="Contact" loading="lazy"></div><figcaption>A contact: numbers, WhatsApp and email, details, and the full timeline.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/pipeline.webp" alt="Pipeline" loading="lazy"></div><figcaption>Sales pipeline by stage, with what each stage is worth.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/promises.webp" alt="Promises" loading="lazy"></div><figcaption>Promises to pay: due today, coming up, and the ones that were broken.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/tasks.webp" alt="Tasks" loading="lazy"></div><figcaption>Tasks: overdue, today, coming up. Swipe to tick off or move to tomorrow.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/whatsapp.webp" alt="WhatsApp" loading="lazy"></div><figcaption>WhatsApp from a template, filled in for this customer. You press send in WhatsApp.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/report.webp" alt="Report" loading="lazy"></div><figcaption>Reports as printed pages, with charts. Share as PDF or CSV.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/ai_chat.webp" alt="AI chat" loading="lazy"></div><figcaption>Ask your own AI about your work. Here, a local model with names masked.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/import.webp" alt="Import" loading="lazy"></div><figcaption>Import Excel or CSV: match the columns, check the preview, import.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/receive_lead.webp" alt="Receive a lead" loading="lazy"></div><figcaption>Receive a lead: scan the QR code on a teammate's phone.</figcaption></figure>
+      <figure><div class="phone"><img src="img/phone/backup.webp" alt="Backup" loading="lazy"></div><figcaption>Encrypted backup file. Nobody can open it without your password.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- IPAD -->
+<section id="ipad" class="wrap section">
+  <div class="section-head">
+    <div><div class="eyebrow mute">— iPad and tablets</div><h2 class="serif h2" style="margin-top:14px">Two columns,<br><em>one glance.</em></h2></div>
+    <p class="lead">Turn an iPad sideways and the menu sits on the left, lists open their items beside them, and Home shows today's work next to the week's summary.</p>
+  </div>
+  <div class="ipad-grid">
+    <div class="tablet"><img src="img/ipad/home.webp" alt="Dialbook Home on an iPad in landscape"></div>
+    <div class="ipad-thumbs">
+      <div class="tablet"><img src="img/ipad/collections_split.webp" alt="Collections with a campaign open beside the list"></div>
+      <div class="tablet"><img src="img/ipad/sales_split.webp" alt="Sales pipeline with a lead open beside it"></div>
+      <div class="tablet"><img src="img/ipad/reports_split.webp" alt="Reports with a report open beside the list"></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule wrap"></div>
+
+<!-- WHATSAPP SAMPLE -->
+<section id="whatsapp" class="wrap section">
+  <div class="wa-grid">
+    <div>
+      <div class="eyebrow mute">— What your customer receives</div>
+      <h2 class="serif h2" style="margin-top:14px">A message that reads<br><em>like you wrote it.</em></h2>
+      <p class="lead" style="margin-top:18px">Pick a template on the contact, and Dialbook fills in the name, company, amount and due date, adds the brochure or price list you attached, and opens WhatsApp with everything ready. The customer sees a normal message from your number. Nothing passes through Dialbook's servers, because there are none.</p>
+      <ul style="color:var(--body);padding-left:20px;line-height:1.8">
+        <li>Fill-ins: name, company, amount, due date, your name and company.</li>
+        <li>Pictures and PDFs, up to five, sent with the message.</li>
+        <li>A version per language: customers with Malay or Chinese set get that one first.</li>
+        <li>Every send is recorded on the contact under Messages sent.</li>
+      </ul>
+    </div>
+    <div class="wa-pair">
+      <div class="wa">
+        <div class="wa-top"><div class="av">PN</div><div><b>Priya Nair</b><small>Nair Design Studio · online</small></div></div>
+        <div class="wa-body">
+          <div class="wa-day">Today</div>
+          <div class="wa-msg out">Hi Priya, thank you for your time today. As discussed, I will send over the details for Nair Design Studio. Please let me know if you have any questions.
+
+Aisha, SKM Supplies<span class="t">10:42 <span class="ticks">✓✓</span></span></div>
+          <div class="wa-msg out"><div class="wa-file"><div class="pdf">PDF</div><div>Office cleaning – price list 2026.pdf<br><span style="color:#8696A0;font-size:11.5px">2 pages · 310 KB</span></div></div>Hi Priya, here is our product brochure and price list as promised. Happy to answer any questions.<span class="t">10:43 <span class="ticks">✓✓</span></span></div>
+          <div class="wa-msg">Thanks Aisha, got it. Can you quote for 3 offices? Will confirm by Thursday.<span class="t">11:05</span></div>
+        </div>
+      </div>
+      <div class="phone phone-sm" style="margin-top:20px"><img src="img/phone/template_preview.webp" alt="The template editor's preview of how the customer sees the message" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="wrap section" style="padding-top:0">
+  <div class="section-head">
+    <div><div class="eyebrow mute">— Free and Pro</div><h2 class="serif h2" style="margin-top:14px">Start free.<br><em>Upgrade when the list grows.</em></h2></div>
+    <p class="lead">Prices are shown in the app in your local currency. Pro is a yearly or monthly subscription, or a one-time lifetime purchase, through the App Store or Google Play.</p>
+  </div>
+  <div class="grid grid-2">
+    <div class="card static plan">
+      <div class="eyebrow mute">Free</div>
+      <h3 class="serif" style="font-size:2.2rem;margin-top:8px">Dialbook</h3>
+      <ul style="color:var(--mute)">
+        <li><span class="tick">✓</span> Sales and collections workflows</li>
+        <li><span class="tick">✓</span> Dialer, call results, tasks and alerts</li>
+        <li><span class="tick">✓</span> WhatsApp, SMS and email templates</li>
+        <li><span class="tick">✓</span> Summary reports for recent periods</li>
+        <li><span class="tick">✓</span> A few campaigns of your own, with a contact limit each</li>
+      </ul>
+    </div>
+    <div class="plan plan-pro">
+      <div style="display:flex;justify-content:space-between;align-items:center;position:relative"><div class="eyebrow" style="color:#4FD9CF">Pro</div><span class="pro-tag">PRO</span></div>
+      <h3 class="serif" style="font-size:2.2rem;margin-top:8px;position:relative">Dialbook Pro</h3>
+      <ul style="position:relative">
+        <li><span class="tick">✓</span> Unlimited contacts, campaigns and imports</li>
+        <li><span class="tick">✓</span> All 22 reports, any period, PDF and Excel export</li>
+        <li><span class="tick">✓</span> Encrypted backups</li>
+        <li><span class="tick">✓</span> AI assistant, call strategy and message drafts</li>
+        <li><span class="tick">✓</span> Monthly targets and daily pace</li>
+      </ul>
+      <p class="mute" style="font-size:12.5px;margin:22px 0 0;position:relative">Manage or cancel any time in your App Store or Google Play subscription settings.</p>
+    </div>
+  </div>
+</section>
+
+<div class="rule wrap"></div>
+
+<!-- PRIVACY -->
+<section id="privacy" class="wrap section">
+  <div class="priv">
+    <div>
+      <div class="eyebrow mute">— Privacy</div>
+      <h2 class="serif h2" style="margin-top:14px">Your customers are<br><em>your business.</em></h2>
+      <a class="btn btn-primary" style="margin-top:28px" href="privacy.html">Read the privacy policy <span>→</span></a>
+    </div>
+    <div class="priv-cards">
+      <div class="card"><h3>Stored on the phone only</h3><p>Contacts, notes, amounts and passwords never reach us. There is no account and no server, and no advertising or analytics in the app.</p></div>
+      <div class="card"><h3>Two ways data leaves, both yours</h3><p>When you create a backup file, and when you turn on your own AI provider. Both are off until you act.</p></div>
+      <div class="card"><h3>Masking before AI</h3><p>Turn on masking and names, companies, emails and phone numbers are removed before anything is sent to your provider.</p></div>
+      <div class="card"><h3>Erase everything in one tap</h3><p>Settings › Privacy and data removes every list, note and setting from the phone.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="wrap" style="padding-bottom: clamp(64px, 9vw, 120px)">
+  <div class="card-dark support">
+    <div>
+      <div class="eyebrow" style="color:#4FD9CF">Support</div>
+      <h2 class="serif" style="font-size:2.2rem;margin-top:10px">Stuck on something?</h2>
+      <p class="mute" style="margin-top:10px">The help centre covers every screen with pictures, from first setup to restoring a backup on a new phone. For anything else, write to us and we reply within two working days.</p>
+    </div>
+    <div class="btns">
+      <a class="btn btn-light" href="help.html">Open the help centre</a>
+      <a class="btn btn-outline-light" href="mailto:kuanmeng.see@gmail.com?subject=Dialbook%20support">Email support</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap bottom">
+    <div>© <span id="year">2026</span> SKM Studio. Dialbook is a product of SKM Studio.</div>
+    <div><a href="../../">SKM Studio</a> &nbsp;·&nbsp; <a href="../">All products</a> &nbsp;·&nbsp; <a href="help.html">Help</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Terms of use</a></div>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
