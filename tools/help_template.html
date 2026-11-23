@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{LANG}}" dir="{{DIR}}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="{{NAME}} help centre: every screen explained, with pictures and the exact labels you see in the app.">
-<title>{{NAME}} Help Centre</title>
+<meta name="description" content="{{NAME}} · {{T_HELP}}">
+<script>
+  // Open the language the visitor chose last time (kept in this browser only).
+  (function () {
+    try {
+      var pages = {{PAGES_JSON}}, saved = localStorage.getItem('skm-help-lang');
+      if (saved && saved !== '{{LANG}}' && pages[saved]) location.replace(pages[saved] + location.hash);
+    } catch (e) {}
+  })();
+</script>
+<title>{{NAME}} · {{T_HELP}}</title>
+{{ALTERNATES}}
 <link rel="icon" href="img/icon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,17 +25,17 @@
   .hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 14px 0; }
   .hero p { max-width: 640px; }
   .search { margin-top: 28px; position: relative; max-width: 640px; }
-  .search input { width: 100%; padding: 18px 18px 18px 52px; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(180deg,#fff,#FBFAF5); font: inherit; font-size: 16px; color: var(--ink); outline: none; box-shadow: var(--shadow-card); }
+  .search input { width: 100%; padding: 18px 52px; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(180deg,#fff,#FBFAF5); font: inherit; font-size: 16px; color: var(--ink); outline: none; box-shadow: var(--shadow-card); }
   .search input:focus { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft), var(--shadow-card); }
-  .search svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--mute); }
+  .search svg { position: absolute; inset-inline-start: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--mute); }
   .count { color: var(--mute); font-size: 13px; margin-top: 10px; min-height: 20px; }
   .layout { display: grid; grid-template-columns: 250px 1fr; gap: 48px; padding: 28px 0 96px; align-items: start; }
   aside { position: sticky; top: 96px; max-height: calc(100vh - 110px); overflow: auto; padding-right: 8px; }
   .toc-group { margin-bottom: 18px; }
   .toc-title { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--teal-deep); margin-bottom: 6px; }
   .toc-group ul { list-style: none; margin: 0; padding: 0; }
-  .toc-group li a { display: block; padding: 5px 0 5px 10px; font-size: 14px; color: var(--ink); border-left: 2px solid transparent; margin-left: -12px; }
-  .toc-group li a:hover { border-left-color: var(--teal); color: var(--navy); }
+  .toc-group li a { display: block; padding: 5px 10px; font-size: 14px; color: var(--ink); border-inline-start: 2px solid transparent; margin-inline-start: -12px; }
+  .toc-group li a:hover { border-inline-start-color: var(--teal); color: var(--navy); }
   .group h2 { font-size: 2.2rem; margin: 0 0 16px; padding-top: 8px; }
   .group + .group { margin-top: 56px; }
   .article { padding: 28px 30px; margin-bottom: 18px; display: grid; gap: 28px; }
@@ -63,27 +73,35 @@
     .article { padding: 22px; } .article.has-shot { grid-template-columns: 1fr; }
     .shot .phone { width: 220px; }
   }
+  .nav-end { display: flex; align-items: center; gap: 12px; }
+  .lang-pick select { appearance: none; -webkit-appearance: none; background: rgba(255,255,255,.08) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23F5F3EC' stroke-width='1.5'/></svg>") no-repeat right 12px center; color: #fff; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 9px 32px 9px 16px; font: inherit; font-size: 13px; cursor: pointer; max-width: 150px; }
+  [dir=rtl] .lang-pick select { background-position: left 12px center; padding: 9px 16px 9px 32px; }
+  .lang-pick select option { color: #0A2540; background: #fff; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .shots-note { color: var(--mute); font-size: 13px; margin: 10px 0 0; }
+  @media (max-width: 520px) { .nav-end .btn { display: none; } }
 </style>
 </head>
 <body>
 <div class="grain"></div>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/icon.png" width="30" height="30" alt=""><span class="serif">{{NAME}}</span><span class="crumb">/</span><span style="color:rgba(245,243,236,.7)">Help centre</span></a>
-    <div class="links"><a href="index.html">{{NAME}}</a><a href="privacy.html">Privacy</a><a href="../../">SKM Studio</a></div>
-    <a class="btn btn-teal btn-sm" href="mailto:{{EMAIL}}?subject={{NAME}}%20support">Email support</a>
+    <a class="brand" href="index.html"><img src="img/icon.png" width="30" height="30" alt=""><span class="serif">{{NAME}}</span><span class="crumb">/</span><span style="color:rgba(245,243,236,.7)">{{T_HELP}}</span></a>
+    <div class="links"><a href="index.html">{{NAME}}</a><a href="privacy.html">{{T_PRIVACY}}</a><a href="../../">SKM Studio</a></div>
+    <div class="nav-end"><label class="lang-pick"><span class="sr">{{T_LANGUAGE}}</span><select id="lang" aria-label="{{T_LANGUAGE}}">{{LANG_OPTIONS}}</select></label><a class="btn btn-teal btn-sm" href="mailto:{{EMAIL}}?subject={{NAME}}%20support">{{T_EMAIL}}</a></div>
   </div>
 </header>
 
 <main class="wrap">
   <section class="hero">
     <div class="glow" style="width:520px;height:520px;right:-200px;top:-200px;background:radial-gradient(circle, rgba(20,163,154,.28), transparent 70%);"></div>
-    <div class="eyebrow">— Help centre</div>
-    <h1 class="serif">How can we <em>help?</em></h1>
-    <p class="lead">Every article is the same text you find under Help inside the app. Highlighted names are the exact labels on screen, and the numbered markers show where each one is.</p>
+    <div class="eyebrow">— {{T_HELP}}</div>
+    <h1 class="serif">{{T_H1A}} <em>{{T_H1B}}</em></h1>
+    <p class="lead">{{T_INTRO}}</p>
+    {{SHOTS_NOTE}}
     <div class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Search help, e.g. backup, promise, import…" autocomplete="off">
+      <input id="q" type="search" placeholder="{{T_SEARCH}}" aria-label="{{T_SEARCH}}" autocomplete="off">
     </div>
     <div class="count" id="count"></div>
   </section>
@@ -96,10 +114,10 @@
       {{BODY}}
       <div class="card-dark support">
         <div>
-          <div class="serif" style="font-size:1.9rem">Still stuck?</div>
-          <p class="mute">Write to us with your phone model and what you tapped. We reply within two working days.</p>
+          <div class="serif" style="font-size:1.9rem">{{T_STILL}}</div>
+          <p class="mute">{{T_STILL_TEXT}}</p>
         </div>
-        <a class="btn btn-light" href="mailto:{{EMAIL}}?subject={{NAME}}%20support">Email support</a>
+        <a class="btn btn-light" href="mailto:{{EMAIL}}?subject={{NAME}}%20support">{{T_EMAIL}}</a>
       </div>
     </div>
   </div>
@@ -107,13 +125,19 @@
 
 <footer class="footer">
   <div class="wrap bottom">
-    <div>© <span id="year">2026</span> SKM Studio. {{NAME}} is a product of SKM Studio.</div>
-    <div><a href="index.html">{{NAME}}</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="../../">SKM Studio</a></div>
+    <div>© <span id="year">2026</span> SKM Studio. {{T_PRODUCT_OF}}</div>
+    <div><a href="index.html">{{NAME}}</a> &nbsp;·&nbsp; <a href="privacy.html">{{T_PRIVACY}}</a> &nbsp;·&nbsp; <a href="../../">SKM Studio</a></div>
   </div>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  const MATCH = {{T_MATCH_JSON}};
+  document.getElementById('lang').addEventListener('change', function () {
+    var code = this.options[this.selectedIndex].getAttribute('data-lang');
+    try { localStorage.setItem('skm-help-lang', code); } catch (e) {}
+    location.href = this.value + location.hash;
+  });
   const q = document.getElementById('q'), count = document.getElementById('count');
   const articles = Array.from(document.querySelectorAll('.article'));
   const groups = Array.from(document.querySelectorAll('.group'));
@@ -123,7 +147,7 @@
     articles.forEach(a => { const hit = !t || a.querySelector('.art-text').textContent.toLowerCase().includes(t); a.classList.toggle('hidden', !hit); if (hit) shown++; });
     groups.forEach(g => g.classList.toggle('hidden', !g.querySelector('.article:not(.hidden)')));
     document.getElementById('toc').style.display = t ? 'none' : '';
-    count.textContent = t ? (shown + ' article' + (shown === 1 ? '' : 's') + ' match "' + q.value.trim() + '"') : '';
+    count.textContent = t ? MATCH.replace('{n}', shown).replace('{q}', q.value.trim()) : '';
   }
   q.addEventListener('input', filter);
 </script>

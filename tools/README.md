@@ -33,6 +33,15 @@ own help articles and screenshots, so the website always matches the app.
 Without `--phone`/`--ipad` the page is rebuilt from the images already in
 `img/`.
 
+The build writes `help.html` (English) and `help-<lang>.html` for every
+language in `tools/help_ui.json` (16, including right-to-left Arabic). Each
+page uses that language's help articles (`assets/help/<lang>/`), screen labels
+(`lib/l10n/app_<lang>.arb`) and area names, falling back to English for
+anything missing. The screenshots are English, so markers are found through
+the English label and the legend shows the translated one. The header has a
+language selector that links between the pages. To add a language, add its
+entry to `help_ui.json` and make sure the app has its articles and `.arb`.
+
 ## Adding a product
 
 Copy `products/dialbook/` to `products/<slug>/`, edit `product.json`

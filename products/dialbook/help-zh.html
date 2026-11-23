@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dialbook · 帮助中心">
+<script>
+  // Open the language the visitor chose last time (kept in this browser only).
+  (function () {
+    try {
+      var pages = {"en": "help.html", "ms": "help-ms.html", "zh": "help-zh.html", "id": "help-id.html", "ja": "help-ja.html", "ko": "help-ko.html", "de": "help-de.html", "nl": "help-nl.html", "fr": "help-fr.html", "it": "help-it.html", "es": "help-es.html", "pt": "help-pt.html", "hi": "help-hi.html", "bn": "help-bn.html", "ar": "help-ar.html", "ru": "help-ru.html"}, saved = localStorage.getItem('skm-help-lang');
+      if (saved && saved !== 'zh' && pages[saved]) location.replace(pages[saved] + location.hash);
+    } catch (e) {}
+  })();
+</script>
+<title>Dialbook · 帮助中心</title>
+<link rel="alternate" hreflang="en" href="help.html"><link rel="alternate" hreflang="ms" href="help-ms.html"><link rel="alternate" hreflang="zh" href="help-zh.html"><link rel="alternate" hreflang="id" href="help-id.html"><link rel="alternate" hreflang="ja" href="help-ja.html"><link rel="alternate" hreflang="ko" href="help-ko.html"><link rel="alternate" hreflang="de" href="help-de.html"><link rel="alternate" hreflang="nl" href="help-nl.html"><link rel="alternate" hreflang="fr" href="help-fr.html"><link rel="alternate" hreflang="it" href="help-it.html"><link rel="alternate" hreflang="es" href="help-es.html"><link rel="alternate" hreflang="pt" href="help-pt.html"><link rel="alternate" hreflang="hi" href="help-hi.html"><link rel="alternate" hreflang="bn" href="help-bn.html"><link rel="alternate" hreflang="ar" href="help-ar.html"><link rel="alternate" hreflang="ru" href="help-ru.html">
+<link rel="icon" href="img/icon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  .hero { padding: 64px 0 28px; position: relative; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 14px 0; }
+  .hero p { max-width: 640px; }
+  .search { margin-top: 28px; position: relative; max-width: 640px; }
+  .search input { width: 100%; padding: 18px 52px; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(180deg,#fff,#FBFAF5); font: inherit; font-size: 16px; color: var(--ink); outline: none; box-shadow: var(--shadow-card); }
+  .search input:focus { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft), var(--shadow-card); }
+  .search svg { position: absolute; inset-inline-start: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--mute); }
+  .count { color: var(--mute); font-size: 13px; margin-top: 10px; min-height: 20px; }
+  .layout { display: grid; grid-template-columns: 250px 1fr; gap: 48px; padding: 28px 0 96px; align-items: start; }
+  aside { position: sticky; top: 96px; max-height: calc(100vh - 110px); overflow: auto; padding-right: 8px; }
+  .toc-group { margin-bottom: 18px; }
+  .toc-title { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--teal-deep); margin-bottom: 6px; }
+  .toc-group ul { list-style: none; margin: 0; padding: 0; }
+  .toc-group li a { display: block; padding: 5px 10px; font-size: 14px; color: var(--ink); border-inline-start: 2px solid transparent; margin-inline-start: -12px; }
+  .toc-group li a:hover { border-inline-start-color: var(--teal); color: var(--navy); }
+  .group h2 { font-size: 2.2rem; margin: 0 0 16px; padding-top: 8px; }
+  .group + .group { margin-top: 56px; }
+  .article { padding: 28px 30px; margin-bottom: 18px; display: grid; gap: 28px; }
+  .article.has-shot { grid-template-columns: minmax(0, 1fr) 236px; align-items: start; }
+  .article.has-shot:has(.shot.kind-ipad) { grid-template-columns: 1fr; }
+  .article h3 { margin: 0 0 10px; font-size: 1.3rem; font-weight: 600; }
+  .article p, .article li { color: var(--body); font-size: 15.5px; }
+  .article p { margin: 0 0 10px; } .article ol, .article ul { margin: 0 0 12px; padding-left: 22px; } .article li { margin: 4px 0; }
+  .article strong { color: var(--ink); font-weight: 600; background: linear-gradient(180deg, transparent 60%, rgba(20,163,154,.18) 60%); padding: 0 2px; border-radius: 3px; }
+  .article em { color: var(--navy); }
+  .article:target { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft), var(--shadow-card); }
+  .article.hidden, .group.hidden { display: none; }
+  .shot { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .shot .phone { width: 210px; }
+  .shot .tablet { max-width: 760px; }
+  .shot .phone, .shot .tablet { position: relative; }
+  .shot-img { position: absolute; inset: 8px; }
+  .shot .tablet .shot-img { inset: 14px; }
+  .shot-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .phone .shot-img img { border-radius: 30px; } .tablet .shot-img img { border-radius: 22px; }
+  .mark, .mark-n { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 999px; background: linear-gradient(135deg, #22BFB4, #0E7F78); color: #fff; font-size: 11.5px; font-weight: 800; box-shadow: 0 2px 6px rgba(0,0,0,.35), 0 0 0 2px #fff; font-family: 'Onest', sans-serif; font-style: normal; }
+  .mark-box { position: absolute; z-index: 3; border: 2px solid #14A39A; border-radius: 7px; box-shadow: 0 0 0 2px rgba(255,255,255,.85), 0 0 0 999px rgba(10,37,64,.0); pointer-events: none; }
+  .mark { position: absolute; left: 0; top: 0; transform: translate(-55%, -55%); }
+  .shot figcaption { font-size: 12.5px; color: var(--mute); text-align: center; line-height: 1.45; }
+  .legend { list-style: none; margin: 0; padding: 0; width: 100%; font-size: 12.5px; color: var(--body); }
+  .legend li { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; line-height: 1.4; }
+  .legend b { font-weight: 600; color: var(--ink); }
+  .legend small { color: var(--mute); font-size: 12px; }
+  .legend .mark-n { width: 18px; height: 18px; font-size: 10px; flex: none; margin-top: 1px; }
+  .support { padding: 36px; margin-top: 48px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+  .support p { margin: 6px 0 0; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 24px; }
+    aside { position: static; max-height: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px 24px; }
+    .article { padding: 22px; } .article.has-shot { grid-template-columns: 1fr; }
+    .shot .phone { width: 220px; }
+  }
+  .nav-end { display: flex; align-items: center; gap: 12px; }
+  .lang-pick select { appearance: none; -webkit-appearance: none; background: rgba(255,255,255,.08) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23F5F3EC' stroke-width='1.5'/></svg>") no-repeat right 12px center; color: #fff; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 9px 32px 9px 16px; font: inherit; font-size: 13px; cursor: pointer; max-width: 150px; }
+  [dir=rtl] .lang-pick select { background-position: left 12px center; padding: 9px 16px 9px 32px; }
+  .lang-pick select option { color: #0A2540; background: #fff; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .shots-note { color: var(--mute); font-size: 13px; margin: 10px 0 0; }
+  @media (max-width: 520px) { .nav-end .btn { display: none; } }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/icon.png" width="30" height="30" alt=""><span class="serif">Dialbook</span><span class="crumb">/</span><span style="color:rgba(245,243,236,.7)">帮助中心</span></a>
+    <div class="links"><a href="index.html">Dialbook</a><a href="privacy.html">隐私</a><a href="../../">SKM Studio</a></div>
+    <div class="nav-end"><label class="lang-pick"><span class="sr">语言</span><select id="lang" aria-label="语言"><option value="help.html" data-lang="en">English</option><option value="help-ms.html" data-lang="ms">Bahasa Melayu</option><option value="help-zh.html" data-lang="zh" selected>中文（简体）</option><option value="help-id.html" data-lang="id">Bahasa Indonesia</option><option value="help-ja.html" data-lang="ja">日本語</option><option value="help-ko.html" data-lang="ko">한국어</option><option value="help-de.html" data-lang="de">Deutsch</option><option value="help-nl.html" data-lang="nl">Nederlands</option><option value="help-fr.html" data-lang="fr">Français</option><option value="help-it.html" data-lang="it">Italiano</option><option value="help-es.html" data-lang="es">Español</option><option value="help-pt.html" data-lang="pt">Português</option><option value="help-hi.html" data-lang="hi">हिन्दी</option><option value="help-bn.html" data-lang="bn">বাংলা</option><option value="help-ar.html" data-lang="ar">العربية</option><option value="help-ru.html" data-lang="ru">Русский</option></select></label><a class="btn btn-teal btn-sm" href="mailto:kuanmeng.see@gmail.com?subject=Dialbook%20support">发邮件联系支持</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="glow" style="width:520px;height:520px;right:-200px;top:-200px;background:radial-gradient(circle, rgba(20,163,154,.28), transparent 70%);"></div>
+    <div class="eyebrow">— 帮助中心</div>
+    <h1 class="serif">有什么可以 <em>帮您？</em></h1>
+    <p class="lead">每篇文章与应用内“帮助”中的文字相同。高亮的名称是屏幕上的确切标签，编号标记显示它们的位置。</p>
+    <p class="shots-note">截图以英文显示。</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="搜索帮助，例如：备份、承诺、导入…" aria-label="搜索帮助，例如：备份、承诺、导入…" autocomplete="off">
+    </div>
+    <div class="count" id="count"></div>
+  </section>
+
+  <div class="layout">
+    <aside id="toc">
+      <div class="toc-group"><div class="toc-title">新手入门</div><ul><li><a href="#first_setup">新手入门</a></li><li><a href="#work_types">销售、催收或两者都做</a></li><li><a href="#add_contact">手动添加联系人</a></li><li><a href="#edit_contact">编辑联系人</a></li><li><a href="#search">查找联系人</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">名单与潜在客户</div><ul><li><a href="#import_excel">导入 Excel 或 CSV 表格</a></li><li><a href="#campaign_offer">说明名单的用途</a></li><li><a href="#delete_campaign">删除名单</a></li><li><a href="#share_lead">把潜在客户分享给同事</a></li><li><a href="#receive_lead">接收同事分享的潜在客户</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">拨打电话</div><ul><li><a href="#start_dialing">逐个拨打名单</a></li><li><a href="#log_result">记录通话结果</a></li><li><a href="#callbacks">回电</a></li><li><a href="#skip_contact">跳过联系人</a></li><li><a href="#phone_tags">标记号码：正常、无效或请勿拨打</a></li><li><a href="#blocked_numbers">封锁号码名单</a></li><li><a href="#call_log_android">从手机通话记录读取通话时长（Android）</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">任务与提醒</div><ul><li><a href="#tasks">任务</a></li><li><a href="#add_task">添加任务</a></li><li><a href="#alerts">需要留意</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">销售</div><ul><li><a href="#pipeline_stages">销售漏斗阶段</a></li><li><a href="#mark_won_lost">标记成交或未成交</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">催收</div><ul><li><a href="#record_promise">记录承诺付款</a></li><li><a href="#record_payment">记录付款</a></li><li><a href="#broken_promises">未兑现承诺</a></li><li><a href="#aging">按逾期时长查看欠款</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">WhatsApp 与电邮</div><ul><li><a href="#whatsapp_template">用模板发送 WhatsApp</a></li><li><a href="#email_template">用模板发送电邮</a></li><li><a href="#edit_templates">新建或修改讯息模板</a></li><li><a href="#placeholders">讯息中的自动填写项</a></li><li><a href="#ai_templates">让 AI 帮您写模板</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">报表</div><ul><li><a href="#open_report">报表</a></li><li><a href="#report_salesperf">销售表现报表</a></li><li><a href="#report_paymentsperf">收款情况报表（按时间段）</a></li><li><a href="#report_touches">通话、WhatsApp 和电邮报表</a></li><li><a href="#report_targetpace">目标进度报表</a></li><li><a href="#report_forecast">催收预测报表</a></li><li><a href="#report_recovery">按逾期时长的回收情况报表</a></li><li><a href="#report_dealflow">各阶段交易流向报表</a></li><li><a href="#report_whatworks">最有效的做法报表</a></li><li><a href="#report_activity">每日活动报表</a></li><li><a href="#report_results">通话结果报表</a></li><li><a href="#report_campaigns">名单表现报表</a></li><li><a href="#report_besttime">最佳拨打时间报表</a></li><li><a href="#report_weekday">按星期统计通话报表</a></li><li><a href="#report_pipeline">销售漏斗报表</a></li><li><a href="#report_wonlost">成交与未成交报表</a></li><li><a href="#report_attempts">成交前拨打次数报表</a></li><li><a href="#report_nevercalled">从未拨打报表</a></li><li><a href="#report_aging">逾期欠款报表</a></li><li><a href="#report_promises">承诺付款报表</a></li><li><a href="#report_payments">已收付款项报表（列表）</a></li><li><a href="#report_followups">待跟进报表</a></li><li><a href="#report_statement">客户对账单报表</a></li><li><a href="#report_filters">更改报表范围</a></li><li><a href="#share_pdf_csv">分享或打印报表</a></li><li><a href="#customer_statement">客户对账单</a></li><li><a href="#monthly_targets">每月目标</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">AI 助手</div><ul><li><a href="#ai_setup">设置 AI 助手</a></li><li><a href="#ai_privacy_masking">AI 能看到什么</a></li><li><a href="#ai_chat_history">AI 对话与历史记录</a></li><li><a href="#ai_show_hide">显示或隐藏 AI</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">备份与数据</div><ul><li><a href="#backup_file">制作备份</a></li><li><a href="#restore">恢复备份</a></li><li><a href="#automatic_backup">手机自动备份</a></li><li><a href="#new_phone">换新手机</a></li><li><a href="#erase">清除所有数据</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">设置</div><ul><li><a href="#language">语言</a></li><li><a href="#currency">货币</a></li><li><a href="#dark_mode">深色模式</a></li><li><a href="#my_profile">您的姓名和销售内容</a></li><li><a href="#custom_results">自定义通话结果</a></li><li><a href="#tablet_layout">在 iPad 或平板上使用</a></li></ul></div>
+    </aside>
+    <div id="articles">
+      <section class="group" id="g-start"><h2 class="serif">新手入门</h2>
+<article id="first_setup" class="article card static has-shot"><div class="art-text"><h3>新手入门</h3><p>Dialbook 把您的通话名单、通话、承诺付款和付款都保存在这部手机上。不用注册账号，也没有服务器。</p>
+<p><strong>第一次使用</strong></p>
+<ol><li>选择您打电话是为了什么：<strong>销售</strong>、<strong>催收</strong> 或两者都有。</li><li>保持 <strong>先用示例联系人</strong> 开启，可以用几位示例联系人试用应用；关闭则从空白开始。</li><li>点按 <strong>开始</strong>。</li></ol>
+<p><strong>接下来</strong></p>
+<ul><li>从 Excel 或 CSV 导入您的客户：<a href="#import_excel">导入 Excel 或 CSV 表格</a>。</li><li>打开一个名单，点按 <strong>开始拨打</strong>，逐个拨打：<a href="#start_dialing">逐个拨打名单</a>。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/home.webp" alt="新手入门" loading="lazy"><span class="mark-box" style="left:34.1%;top:29.6%;width:31.6%;height:3.6%" title="销售"><span class="mark">1</span></span><span class="mark-box" style="left:64.8%;top:29.6%;width:31.6%;height:3.6%" title="催收"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>销售</b><br><small>选择您打电话是为了什么：销售、催收 或两者都有。</small></span></li><li><span class="mark-n">2</span><span><b>催收</b><br><small>选择您打电话是为了什么：销售、催收 或两者都有。</small></span></li></ol></figure></article>
+<article id="work_types" class="article card static has-shot"><div class="art-text"><h3>销售、催收或两者都做</h3><p>应用只显示您选择的工作类型。只做催收的人不会看到销售标签页。</p>
+<p><strong>更改方法</strong></p>
+<ol><li>前往 <strong>更多</strong> › <strong>我的用途</strong>。</li><li>开启或关闭 <strong>销售</strong> 或 <strong>催收</strong>。</li></ol>
+<p>关闭其中一项后，它的标签页、报表和提醒都会隐藏。它的名单和联系人仍保留在手机上，重新开启后就会回来。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/worktypes.webp" alt="销售、催收或两者都做" loading="lazy"><span class="mark-box" style="left:0.0%;top:12.0%;width:100.0%;height:8.6%" title="销售"><span class="mark">1</span></span><span class="mark-box" style="left:0.0%;top:20.0%;width:100.0%;height:8.6%" title="催收"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>销售</b><br><small>开启或关闭 销售 或 催收。</small></span></li><li><span class="mark-n">2</span><span><b>催收</b><br><small>开启或关闭 销售 或 催收。</small></span></li></ol></figure></article>
+<article id="add_contact" class="article card static has-shot"><div class="art-text"><h3>手动添加联系人</h3><ol><li>打开 <strong>销售</strong> 或 <strong>催收</strong>。</li><li>点按顶部的 <strong>+</strong>，或名单下方的 <strong>添加潜在客户</strong> / <strong>添加账户</strong>。</li><li>至少填写姓名和电话号码，选择名单，然后保存。</li></ol>
+<p><strong>小提示</strong></p>
+<ul><li>名单里已有的号码不能重复添加，免得同一个人被打两次。</li><li>在其他名单中已标记为 <strong>请勿拨打</strong> 或 <strong>无效号码</strong> 的号码，加进来时会自动带上标记：<a href="#blocked_numbers">封锁号码名单</a>。</li><li>联系人很多？直接导入表格更方便：<a href="#import_excel">导入 Excel 或 CSV 表格</a>。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/add_account.webp" alt="手动添加联系人" loading="lazy"></div></div></figure></article>
+<article id="edit_contact" class="article card static has-shot"><div class="art-text"><h3>编辑联系人</h3><ol><li>打开联系人。</li><li>点按右上角的铅笔（<strong>编辑</strong>）。</li><li>修改姓名、号码、电邮、公司或金额，然后保存。</li></ol>
+<p>更改电话号码后，原有标记（<strong>无效号码</strong>、<strong>请勿拨打</strong>）会被清除，除非新号码本身就在封锁名单上。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="编辑联系人" loading="lazy"></div></div></figure></article>
+<article id="search" class="article card static has-shot"><div class="art-text"><h3>查找联系人</h3><ol><li>在 <strong>首页</strong>，点按右上角的圆形放大镜。</li><li>输入姓名、公司、电邮或电话号码的一部分。电话号码不管怎么写都能找到（“012-338 4471”或“0123384471”）。</li></ol>
+<p>在名单里，列表顶部的搜索框只会搜索该名单。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/search.webp" alt="查找联系人" loading="lazy"></div></div></figure></article>
+</section>
+<section class="group" id="g-lists"><h2 class="serif">名单与潜在客户</h2>
+<article id="import_excel" class="article card static has-shot"><div class="art-text"><h3>导入 Excel 或 CSV 表格</h3><ol><li>前往 <strong>更多</strong> › <strong>导入 Excel 或 CSV</strong>（或 <strong>销售</strong> / <strong>催收</strong> 里的同一行）。</li><li>从应用自带的表格开始：点按 <strong>下载 Excel 模板</strong>，在 Excel 或 Google 表格里填好，或发给掌握名单的人。栏目名称已经定好，所以会立刻对应。想先看看导入的样子，点按 <strong>使用示例表格试用</strong>。</li><li>点按 <strong>选择 Excel 或 CSV 文件</strong>，选择 .xlsx 或 .csv 文件。第一行必须是栏目名称。</li><li>对应栏目：至少要有姓名和电话号码。公司、电邮、金额、到期日和语言是可选的。</li><li>选择 <strong>这些联系人用于</strong>，给名单取个名字（<strong>名单名称</strong>），检查预览后导入。</li></ol>
+<p><strong>日期（到期日）</strong></p>
+<ul><li>最保险：真正的 Excel 日期（单元格设为日期格式），或写成 2026-12-31、31 Dec 2026 或 Dec 31, 2026 的文字。这些只可能是同一天。</li><li>只有数字的日期，例如 31/12/2026 或 12/31/2026，可以有两种读法。应用会检查整个栏目，并显示它找到的 <strong>日期格式</strong>：<strong>日/月/年</strong> 或 <strong>月/日/年</strong>。如果表格里看不出是哪一种（每个日子都是 12 或以下），导入前由您选一种。</li><li>整个栏目请用同一种格式。不符合所选顺序的日期会被略过，保存的略过行列表会说明原因。</li><li>年份必须在 2000 到 2100 之间；两位数的年份，例如 26，会读作 2026。</li></ul>
+<p><strong>金额（交易金额、欠款金额）</strong></p>
+<ul><li>纯数字最好：4250 或 4250.00。</li><li>以下写法也能正确读取：4,250.00、RM 4,250、MYR 1,000、$1,250，以及 1.234,56（逗号作小数点）。</li><li>避免负数：-500、500- 或 (500) 会被拒绝，因为账户不可能欠得比零还少。也避免“约 5k”或“待定”这类文字。</li><li>金额不会在货币之间换算；会按设置中设定的货币显示。</li></ul>
+<p><strong>电话号码</strong></p>
+<ul><li>任何写法都可以：012-338 4471、0123384471 或 +60 12-338 4471 是同一个号码。</li><li>第二个号码可以放在单独的栏目（办公室电话、另一个手机）。</li><li>没有电话号码的行，以及重复的号码，会被略过。</li></ul>
+<p><strong>须知</strong></p>
+<ul><li>大表格（甚至一百万行）会在后台导入；底部有进度条，您可以继续工作。取消会移除它已添加的所有内容。</li><li>已标记为 <strong>请勿拨打</strong> 或 <strong>无效号码</strong> 的号码会带着标记导入，摘要会说明有多少个。</li><li>每次导入都会成为一个新名单。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/import.webp" alt="导入 Excel 或 CSV 表格" loading="lazy"><span class="mark-box" style="left:6.4%;top:34.6%;width:87.5%;height:5.9%" title="下载 Excel 模板"><span class="mark">1</span></span><span class="mark-box" style="left:6.4%;top:28.3%;width:87.5%;height:5.9%" title="使用示例表格试用"><span class="mark">2</span></span><span class="mark-box" style="left:6.4%;top:22.1%;width:87.5%;height:5.9%" title="选择 Excel 或 CSV 文件"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>下载 Excel 模板</b><br><small>从应用自带的表格开始：点按 下载 Excel 模板，在 Excel 或 Google 表格里填好，或发给掌握名单的人。栏目名称已经定好，所以会立刻对应。想先看看导入的样子，点按 使用示例表格试用。</small></span></li><li><span class="mark-n">2</span><span><b>使用示例表格试用</b><br><small>从应用自带的表格开始：点按 下载 Excel 模板，在 Excel 或 Google 表格里填好，或发给掌握名单的人。栏目名称已经定好，所以会立刻对应。想先看看导入的样子，点按 使用示例表格试用。</small></span></li><li><span class="mark-n">3</span><span><b>选择 Excel 或 CSV 文件</b><br><small>点按 选择 Excel 或 CSV 文件，选择 .xlsx 或 .csv 文件。第一行必须是栏目名称。</small></span></li></ol></figure></article>
+<article id="campaign_offer" class="article card static has-shot"><div class="art-text"><h3>说明名单的用途</h3><p>一句简短说明，例如“办公室清洁，新客户九折”，能帮您在通话时抓住重点，也能帮 AI 为这个名单写讯息和话术。</p>
+<ol><li>打开名单。</li><li>点按 <strong>这个名单是做什么的</strong>，输入说明。</li></ol></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/campaign_sales.webp" alt="说明名单的用途" loading="lazy"><span class="mark-box" style="left:3.2%;top:40.9%;width:93.9%;height:6.9%" title="这个名单是做什么的"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>这个名单是做什么的</b><br><small>点按 这个名单是做什么的，输入说明。</small></span></li></ol></figure></article>
+<article id="delete_campaign" class="article card static has-shot"><div class="art-text"><h3>删除名单</h3><ol><li>打开名单。</li><li>点按右上角的红色垃圾桶，再点按 <strong>删除名单</strong> 确认。</li></ol>
+<p>名单里的联系人，以及他们的通话、承诺付款、付款和任务，都会从手机上删除。删除后无法恢复，如果以后可能用得上，请先备份：<a href="#backup_file">制作备份</a>。</p>
+<p>只是想暂时放一边？在名单页面关闭<strong>启用</strong>即可：它的任务、回电和拨打会从今天的工作中移除，资料不会被删除。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/campaign.webp" alt="删除名单" loading="lazy"><span class="mark-box" style="left:0.0%;top:17.4%;width:100.0%;height:12.4%" title="启用"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>启用</b><br><small>只是想暂时放一边？在名单页面关闭启用即可：它的任务、回电和拨打会从今天的工作中移除，资料不会被删除。</small></span></li></ol></figure></article>
+<article id="share_lead" class="article card static has-shot"><div class="art-text"><h3>把潜在客户分享给同事</h3><ol><li>打开联系人。</li><li>点按顶部的二维码图标（<strong>分享潜在客户</strong>）。</li><li>让同事用手机扫描二维码。开启 <strong>附上我的最后一条备注</strong> 会一并附上您最近一次的通话备注。</li></ol>
+<p>同事在 <strong>接收潜在客户</strong> 中扫描添加：<a href="#receive_lead">接收同事分享的潜在客户</a>。整个过程不经过任何服务器或网络；潜在客户资料就在二维码里。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/share_lead.webp" alt="把潜在客户分享给同事" loading="lazy"><span class="mark-box" style="left:3.9%;top:83.6%;width:92.3%;height:8.2%" title="附上我的最后一条备注"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>附上我的最后一条备注</b><br><small>让同事用手机扫描二维码。开启 附上我的最后一条备注 会一并附上您最近一次的通话备注。</small></span></li></ol></figure></article>
+<article id="receive_lead" class="article card static has-shot"><div class="art-text"><h3>接收同事分享的潜在客户</h3><ol><li>前往 <strong>更多</strong> › <strong>接收潜在客户</strong>（<strong>销售</strong> / <strong>催收</strong> 里也有）。</li><li>相机会打开。对准同事手机上的二维码（同事打开该联系人，点 <strong>分享潜在客户</strong>）。</li><li>检查潜在客户资料，选择 <strong>加入名单</strong>，然后点按 <strong>添加潜在客户</strong>。</li></ol>
+<p>如果这个号码已在您的名单中，添加前会先提醒您。新加入的潜在客户会附上同事的备注，并安排今天回电。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/receive_lead.webp" alt="接收同事分享的潜在客户" loading="lazy"><span class="mark-box" style="left:39.5%;top:38.1%;width:17.5%;height:2.9%" title="分享潜在客户"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>分享潜在客户</b><br><small>相机会打开。对准同事手机上的二维码（同事打开该联系人，点 分享潜在客户）。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-calling"><h2 class="serif">拨打电话</h2>
+<article id="start_dialing" class="article card static has-shot"><div class="art-text"><h3>逐个拨打名单</h3><ol><li>打开 <strong>销售</strong> 或 <strong>催收</strong>，点按一个名单。</li><li>点按绿色的 <strong>开始拨打</strong> 按钮。</li><li>点按大号的电话号码，手机的拨号程序就会打开。开始通话。</li><li>回到 Dialbook，选择 <strong>本次通话结果</strong>，需要的话加上备注，然后点按 <strong>保存并下一位</strong>。</li></ol>
+<p>排序时，到期的回电和未兑现承诺排在最前面，其次是金额最高的。<strong>跳过</strong> 可跳过且不作记录。标记为 <strong>请勿拨打</strong> 或 <strong>无效号码</strong> 的号码绝不会被拨打。</p>
+<p>想先处理一下这位客户（任务、WhatsApp）？改点按<strong>保存</strong>：通话会被记录，客户留在屏幕上，直到你点按<strong>下一步</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer.webp" alt="逐个拨打名单" loading="lazy"><span class="mark-box" style="left:47.5%;top:74.5%;width:45.9%;height:5.9%" title="保存并下一位"><span class="mark">1</span></span><span class="mark-box" style="left:6.8%;top:74.5%;width:18.9%;height:5.9%" title="跳过"><span class="mark">2</span></span><span class="mark-box" style="left:26.6%;top:74.5%;width:20.0%;height:5.9%" title="保存"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>保存并下一位</b><br><small>回到 Dialbook，选择 本次通话结果，需要的话加上备注，然后点按 保存并下一位。</small></span></li><li><span class="mark-n">2</span><span><b>跳过</b><br><small>排序时，到期的回电和未兑现承诺排在最前面，其次是金额最高的。跳过 可跳过且不作记录。标记为 请勿拨打 或 无效号码 的号码绝不会被拨打。</small></span></li><li><span class="mark-n">3</span><span><b>保存</b><br><small>想先处理一下这位客户（任务、WhatsApp）？改点按保存：通话会被记录，客户留在屏幕上，直到你点按下一步。</small></span></li></ol></figure></article>
+<article id="log_result" class="article card static has-shot"><div class="art-text"><h3>记录通话结果</h3><p>通话结束后，在 <strong>本次通话结果</strong> 下选择一个结果：</p>
+<ul><li><strong>回电</strong>：选择日期，系统会建立回电任务：<a href="#callbacks">回电</a>。</li><li><strong>承诺付款</strong>：输入对方承诺的金额和日期：<a href="#record_promise">记录承诺付款</a>。</li><li><strong>部分付款</strong> / <strong>全额付清</strong>：记录这笔付款：<a href="#record_payment">记录付款</a>。</li><li><strong>号码错误</strong>：在所有地方把该号码标记为 <strong>无效号码</strong>。</li><li>自定义结果：<a href="#custom_results">自定义通话结果</a>。</li></ul>
+<p>在备注栏写下谈话内容，然后点按 <strong>保存并下一位</strong>。结果、备注和时间会存入该联系人的 <strong>通话记录</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer.webp" alt="记录通话结果" loading="lazy"><span class="mark-box" style="left:6.8%;top:61.2%;width:20.9%;height:4.5%" title="回电"><span class="mark">1</span></span><span class="mark-box" style="left:6.8%;top:56.5%;width:30.0%;height:4.5%" title="承诺付款"><span class="mark">2</span></span><span class="mark-box" style="left:60.9%;top:56.5%;width:31.1%;height:4.5%" title="部分付款"><span class="mark">3</span></span><span class="mark-box" style="left:37.3%;top:56.5%;width:23.2%;height:4.5%" title="全额付清"><span class="mark">4</span></span><span class="mark-box" style="left:47.5%;top:74.5%;width:45.9%;height:5.9%" title="保存并下一位"><span class="mark">5</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>回电</b><br><small>回电：选择日期，系统会建立回电任务：回电。</small></span></li><li><span class="mark-n">2</span><span><b>承诺付款</b><br><small>承诺付款：输入对方承诺的金额和日期：记录承诺付款。</small></span></li><li><span class="mark-n">3</span><span><b>部分付款</b><br><small>部分付款 / 全额付清：记录这笔付款：记录付款。</small></span></li><li><span class="mark-n">4</span><span><b>全额付清</b><br><small>部分付款 / 全额付清：记录这笔付款：记录付款。</small></span></li><li><span class="mark-n">5</span><span><b>保存并下一位</b><br><small>在备注栏写下谈话内容，然后点按 保存并下一位。结果、备注和时间会存入该联系人的 通话记录。</small></span></li></ol></figure></article>
+<article id="callbacks" class="article card static has-shot"><div class="art-text"><h3>回电</h3><p>记录 <strong>回电</strong> 时，您会选好再打的日子。到了那天，这位联系人会排在通话队列最前面，显示在 <strong>首页</strong> 的 <strong>待跟进</strong> 里，同时出现一个 <strong>回电</strong> 任务。</p>
+<ul><li>想改日期或加时间：打开 <strong>所有任务</strong>，点按该任务。</li><li>把任务勾选完成，回电也会一并取消。</li><li>下次通话记录了其他结果，回电同样会取消。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/tasks.webp" alt="回电" loading="lazy"></div></div></figure></article>
+<article id="skip_contact" class="article card static has-shot"><div class="art-text"><h3>跳过联系人</h3><p>拨号时，点按 <strong>跳过</strong> 可直接跳到下一位联系人，不作任何记录。这位联系人会留在队列中，下次再出现。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer.webp" alt="跳过联系人" loading="lazy"><span class="mark-box" style="left:6.8%;top:74.5%;width:18.9%;height:5.9%" title="跳过"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>跳过</b><br><small>拨号时，点按 跳过 可直接跳到下一位联系人，不作任何记录。这位联系人会留在队列中，下次再出现。</small></span></li></ol></figure></article>
+<article id="phone_tags" class="article card static has-shot"><div class="art-text"><h3>标记号码：正常、无效或请勿拨打</h3><ol><li>打开联系人，点按电话号码。</li><li>选择 <strong>正常</strong>、<strong>无效号码</strong> 或 <strong>请勿拨打</strong>。</li></ol>
+<p>拨号时，拨打按钮下方的 <strong>标记此号码</strong> 也能做同样的事。</p>
+<ul><li>已标记的号码绝不会被拨打；如果还有第二个号码，就改打那个号码。</li><li>没有可拨号码的联系人会退出通话队列，也不再计入“待拨打”。</li><li><strong>请勿拨打</strong> 仍可发 WhatsApp 或电邮，但会先提醒您。</li><li>标记会套用到所有名单中的这个号码：<a href="#blocked_numbers">封锁号码名单</a>。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="标记号码：正常、无效或请勿拨打" loading="lazy"></div></div></figure></article>
+<article id="blocked_numbers" class="article card static has-shot"><div class="art-text"><h3>封锁号码名单</h3><p>所有标记为 <strong>无效号码</strong> 或 <strong>请勿拨打</strong> 的号码，都会放进全应用共用的一份名单。号码按最后 9 位数字比对，所以“012-338 4471”和“+60 12-338 4471”算同一个号码。</p>
+<ul><li>在一个名单里标记号码，所有名单都会跟着标记。</li><li>导入的联系人、新联系人和别人分享的潜在客户加进来时会自动带上标记；导入摘要会显示有多少个。</li><li>改回 <strong>正常</strong> 就会在所有地方清除标记。</li></ul>
+<p><strong>标记号码的方法</strong></p>
+<ol><li>打开联系人，点按电话号码。</li><li>选择 <strong>请勿拨打</strong> 或 <strong>无效号码</strong>（或选 <strong>正常</strong> 清除标记）。</li></ol>
+<p>延伸阅读：<a href="#phone_tags">标记号码：正常、无效或请勿拨打</a>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="封锁号码名单" loading="lazy"></div></div></figure></article>
+<article id="call_log_android" class="article card static has-shot"><div class="art-text"><h3>从手机通话记录读取通话时长（Android）</h3><p>在 Android 上，应用可以从手机通话记录读取每通电话的时长，并附到已记录的通话上。</p>
+<ol><li>前往 <strong>更多</strong> › <strong>通话记录</strong>。</li><li>开启 <strong>自动附上通话时间和时长</strong>，并允许所需权限。</li></ol>
+<p>iPhone 不允许应用读取通话记录，所以此功能仅限 Android。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/calllog.webp" alt="从手机通话记录读取通话时长（Android）" loading="lazy"><span class="mark-box" style="left:3.0%;top:12.9%;width:94.1%;height:6.5%" title="自动附上通话时间和时长"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>自动附上通话时间和时长</b><br><small>开启 自动附上通话时间和时长，并允许所需权限。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-tasks"><h2 class="serif">任务与提醒</h2>
+<article id="tasks" class="article card static has-shot"><div class="art-text"><h3>任务</h3><p>任务就是要做的事：<strong>回电</strong>、<strong>约见</strong>、<strong>WhatsApp</strong>、<strong>电邮</strong>、<strong>查资料</strong>、<strong>等待资料</strong> 或 <strong>其他</strong>。</p>
+<ul><li>在 <strong>任务</strong> 查看全部：<strong>逾期</strong>、<strong>今天到期</strong> 和 <strong>稍后</strong>，或 <strong>已完成</strong>。从 <strong>首页</strong> › <strong>所有任务</strong> 打开。</li><li>点按圆圈，或把任务向右滑动，即可标记完成。向左滑动可改到<strong>明天</strong>。</li><li>点按任务，在一个页面里处理全部：<strong>立即拨打</strong>、<strong>发送 WhatsApp</strong>或<strong>发电邮</strong>，点一下就能改日期，添加<strong>更新记录</strong>，最后点按<strong>标记为完成</strong>。所有修改都会立即保存。</li><li>给该联系人发送 WhatsApp 或电邮后，对应的未完成任务会自动勾选完成。</li></ul>
+<p>添加任务：<a href="#add_task">添加任务</a>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/tasks.webp" alt="任务" loading="lazy"><span class="mark-box" style="left:3.0%;top:4.3%;width:97.0%;height:4.9%" title="任务"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:13.6%;width:46.6%;height:8.4%" title="逾期"><span class="mark">2</span></span><span class="mark-box" style="left:3.0%;top:22.4%;width:46.6%;height:8.4%" title="稍后"><span class="mark">3</span></span><span class="mark-box" style="left:50.5%;top:22.4%;width:46.6%;height:8.4%" title="已完成"><span class="mark">4</span></span><span class="mark-box" style="left:6.8%;top:97.9%;width:8.6%;height:2.1%" title="标记为完成"><span class="mark">5</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>任务</b><br><small>在 任务 查看全部：逾期、今天到期 和 稍后，或 已完成。从 首页 › 所有任务 打开。</small></span></li><li><span class="mark-n">2</span><span><b>逾期</b><br><small>在 任务 查看全部：逾期、今天到期 和 稍后，或 已完成。从 首页 › 所有任务 打开。</small></span></li><li><span class="mark-n">3</span><span><b>稍后</b><br><small>在 任务 查看全部：逾期、今天到期 和 稍后，或 已完成。从 首页 › 所有任务 打开。</small></span></li><li><span class="mark-n">4</span><span><b>已完成</b><br><small>在 任务 查看全部：逾期、今天到期 和 稍后，或 已完成。从 首页 › 所有任务 打开。</small></span></li><li><span class="mark-n">5</span><span><b>标记为完成</b><br><small>点按任务，在一个页面里处理全部：立即拨打、发送 WhatsApp或发电邮，点一下就能改日期，添加更新记录，最后点按标记为完成。所有修改都会立即保存。</small></span></li></ol></figure></article>
+<article id="add_task" class="article card static has-shot"><div class="art-text"><h3>添加任务</h3><ul><li>从联系人添加：在 <strong>任务</strong> 一栏，点按 <strong>添加任务</strong>。</li><li>拨号时添加：点按备注下方的 <strong>添加任务</strong>。</li><li>单独添加：在 <strong>任务</strong> 页面点按 <strong>+</strong>。</li></ul>
+<p>选择 <strong>类型</strong>，写下要做的事（或在等什么），选好日期（<strong>今天</strong>、<strong>明天</strong> 或 <strong>选择日期</strong>），需要的话加上时间，然后点按 <strong>保存</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/add_task.webp" alt="添加任务" loading="lazy"><span class="mark-box" style="left:3.0%;top:59.0%;width:94.1%;height:2.2%" title="类型"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:82.1%;width:17.3%;height:4.6%" title="今天"><span class="mark">2</span></span><span class="mark-box" style="left:20.7%;top:82.1%;width:23.2%;height:4.5%" title="明天"><span class="mark">3</span></span><span class="mark-box" style="left:44.3%;top:82.1%;width:23.2%;height:4.5%" title="选择日期"><span class="mark">4</span></span><span class="mark-box" style="left:3.0%;top:92.8%;width:94.1%;height:5.9%" title="保存"><span class="mark">5</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>类型</b><br><small>选择 类型，写下要做的事（或在等什么），选好日期（今天、明天 或 选择日期），需要的话加上时间，然后点按 保存。</small></span></li><li><span class="mark-n">2</span><span><b>今天</b><br><small>选择 类型，写下要做的事（或在等什么），选好日期（今天、明天 或 选择日期），需要的话加上时间，然后点按 保存。</small></span></li><li><span class="mark-n">3</span><span><b>明天</b><br><small>选择 类型，写下要做的事（或在等什么），选好日期（今天、明天 或 选择日期），需要的话加上时间，然后点按 保存。</small></span></li><li><span class="mark-n">4</span><span><b>选择日期</b><br><small>选择 类型，写下要做的事（或在等什么），选好日期（今天、明天 或 选择日期），需要的话加上时间，然后点按 保存。</small></span></li><li><span class="mark-n">5</span><span><b>保存</b><br><small>选择 类型，写下要做的事（或在等什么），选好日期（今天、明天 或 选择日期），需要的话加上时间，然后点按 保存。</small></span></li></ol></figure></article>
+<article id="alerts" class="article card static has-shot"><div class="art-text"><h3>需要留意</h3><p><strong>首页</strong> 上的 <strong>需要留意</strong> 方框显示已逾期或今天要处理的事：逾期任务、今天到期的任务、今天到期的承诺付款，以及未兑现承诺的账户。点按任一行即可打开对应名单。</p>
+<p><strong>首页</strong> 上的红色数字是今天到期或已逾期的事项数量。全部处理完后，数字就会消失。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/home.webp" alt="需要留意" loading="lazy"><span class="mark-box" style="left:0.0%;top:76.4%;width:100.0%;height:18.3%" title="需要留意"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>需要留意</b><br><small>首页 上的 需要留意 方框显示已逾期或今天要处理的事：逾期任务、今天到期的任务、今天到期的承诺付款，以及未兑现承诺的账户。点按任一行即可打开对应名单。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-sales"><h2 class="serif">销售</h2>
+<article id="pipeline_stages" class="article card static has-shot"><div class="art-text"><h3>销售漏斗阶段</h3><p>销售潜在客户会依次经过：新客户、已联系、合格、方案、洽谈，最后是成交或未成交。</p>
+<ul><li>通话会自动推进阶段：第一次接通会把“新客户”变成“已联系”；记录 <strong>有兴趣</strong> 会变成“合格”。</li><li>想自己设定阶段，打开联系人并点按 <strong>阶段</strong>。</li><li>在 <strong>销售</strong> › <strong>销售漏斗</strong> 查看所有阶段；交易在每个阶段停留多久，可在“各阶段交易流向”报表中查看：<em>各阶段交易流向</em>。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/pipeline.webp" alt="销售漏斗阶段" loading="lazy"><span class="mark-box" style="left:3.0%;top:4.3%;width:97.0%;height:4.9%" title="销售"><span class="mark">1</span></span><span class="mark-box" style="left:49.5%;top:10.1%;width:47.0%;height:3.6%" title="销售漏斗"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>销售</b><br><small>在 销售 › 销售漏斗 查看所有阶段；交易在每个阶段停留多久，可在“各阶段交易流向”报表中查看：各阶段交易流向。</small></span></li><li><span class="mark-n">2</span><span><b>销售漏斗</b><br><small>在 销售 › 销售漏斗 查看所有阶段；交易在每个阶段停留多久，可在“各阶段交易流向”报表中查看：各阶段交易流向。</small></span></li></ol></figure></article>
+<article id="mark_won_lost" class="article card static has-shot"><div class="art-text"><h3>标记成交或未成交</h3><ul><li>通话后，选择 <strong>成交</strong> 或 <strong>没兴趣</strong>。</li><li>或者打开联系人，点按 <strong>阶段</strong>，选择“成交”或“未成交”。</li></ul>
+<p>成交和未成交的交易都算已结束：它们会离开通话队列，并计入成交率和“销售表现”报表：<em>销售表现</em>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/pipeline.webp" alt="标记成交或未成交" loading="lazy"><span class="mark-box" style="left:55.7%;top:19.5%;width:18.2%;height:4.5%" title="成交"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>成交</b><br><small>通话后，选择 成交 或 没兴趣。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-collections"><h2 class="serif">催收</h2>
+<article id="record_promise" class="article card static has-shot"><div class="art-text"><h3>记录承诺付款</h3><ol><li>通话后，选择 <strong>承诺付款</strong>。</li><li>检查 <strong>承诺金额</strong> 和 <strong>承诺付款日期</strong>，然后保存。</li></ol>
+<p>承诺会显示在联系人的 <strong>承诺付款</strong> 下、<strong>催收</strong> › <strong>承诺</strong> 里，并在到期当天显示在 <strong>首页</strong> 上。如果过了日期还没付款，就会变成未兑现承诺：<a href="#broken_promises">未兑现承诺</a>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer_promise.webp" alt="记录承诺付款" loading="lazy"><span class="mark-box" style="left:6.8%;top:4.3%;width:30.2%;height:3.7%" title="承诺付款"><span class="mark">1</span></span><span class="mark-box" style="left:10.5%;top:18.5%;width:79.3%;height:6.8%" title="承诺金额"><span class="mark">2</span></span><span class="mark-box" style="left:6.8%;top:13.1%;width:86.6%;height:5.6%" title="承诺付款日期"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>承诺付款</b><br><small>通话后，选择 承诺付款。</small></span></li><li><span class="mark-n">2</span><span><b>承诺金额</b><br><small>检查 承诺金额 和 承诺付款日期，然后保存。</small></span></li><li><span class="mark-n">3</span><span><b>承诺付款日期</b><br><small>检查 承诺金额 和 承诺付款日期，然后保存。</small></span></li></ol></figure></article>
+<article id="record_payment" class="article card static has-shot"><div class="art-text"><h3>记录付款</h3><ul><li>通话时：选择 <strong>部分付款</strong>（填写 <strong>已付金额</strong>）或 <strong>全额付清</strong>。</li><li>随时记录：打开联系人，点按 <strong>记录付款</strong>。</li></ul>
+<p>欠款金额会随之减少，符合的承诺付款会标记为已兑现，这笔付款也会显示在 <strong>已收付款</strong> 和报表中。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="记录付款" loading="lazy"><span class="mark-box" style="left:50.5%;top:41.5%;width:23.0%;height:8.6%" title="记录付款"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>记录付款</b><br><small>随时记录：打开联系人，点按 记录付款。</small></span></li></ol></figure></article>
+<article id="broken_promises" class="article card static has-shot"><div class="art-text"><h3>未兑现承诺</h3><p>承诺付款日期过了还没付款，就算未兑现。这些账户会排在通话队列最前面，显示在 <strong>首页</strong> 的 <strong>需要留意</strong> 里，并在列表中加上标记。</p>
+<p>跟进方法：点按 <strong>需要留意</strong> 里的未兑现承诺那一行，然后逐个处理；或打开“催收预测”，看看哪些承诺比较可能兑现：<em>催收预测</em>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/promises.webp" alt="未兑现承诺" loading="lazy"></div></div></figure></article>
+<article id="aging" class="article card static has-shot"><div class="art-text"><h3>按逾期时长查看欠款</h3><p>账户按付款逾期多久分组：未到期、1–30 天、31–60 天，以及 60 天以上。</p>
+<ul><li><strong>首页</strong> 显示各组总额；点按某个长条，就能看到里面有哪些人。</li><li><strong>催收</strong> › <strong>账户</strong> 按逾期时长列出账户。</li><li>“按逾期时长的回收情况”报表显示每组收回了多少，帮您把力气花在最有回报的地方：<em>按逾期时长的回收情况</em>。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/accounts.webp" alt="按逾期时长查看欠款" loading="lazy"><span class="mark-box" style="left:34.1%;top:10.1%;width:31.6%;height:3.6%" title="账户"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>账户</b><br><small>催收 › 账户 按逾期时长列出账户。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-messages"><h2 class="serif">WhatsApp 与电邮</h2>
+<article id="whatsapp_template" class="article card static has-shot"><div class="art-text"><h3>用模板发送 WhatsApp</h3><ol><li>打开联系人（或在拨号时使用 WhatsApp）。</li><li>点按 <strong>WhatsApp</strong>，选择模板，检查内容后发送。</li></ol>
+<p>WhatsApp 会打开并已输入好讯息；您在那里点发送即可。这次发送会记录在联系人的 <strong>已发送的 WhatsApp 和电邮</strong> 下。</p>
+<p>新建或修改模板：<a href="#edit_templates">新建或修改讯息模板</a>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/whatsapp.webp" alt="用模板发送 WhatsApp" loading="lazy"><span class="mark-box" style="left:0.0%;top:88.7%;width:100.0%;height:3.0%" title="WhatsApp"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>WhatsApp</b><br><small>点按 WhatsApp，选择模板，检查内容后发送。</small></span></li></ol></figure></article>
+<article id="email_template" class="article card static has-shot"><div class="art-text"><h3>用模板发送电邮</h3><ol><li>打开联系人，点按 <strong>电邮</strong>。</li><li>选择模板，检查主题和内容，再选择您的电邮应用。</li></ol>
+<p>电邮应用会打开并自动填好内容；您在那里点发送即可。这次发送会记录在 <strong>已发送的 WhatsApp 和电邮</strong> 下。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/email.webp" alt="用模板发送电邮" loading="lazy"><span class="mark-box" style="left:0.0%;top:13.4%;width:100.0%;height:3.6%" title="电邮"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>电邮</b><br><small>打开联系人，点按 电邮。</small></span></li></ol></figure></article>
+<article id="edit_templates" class="article card static has-shot"><div class="art-text"><h3>新建或修改讯息模板</h3><ol><li>前往 <strong>更多</strong> › <strong>讯息模板</strong>。</li><li>选择 WhatsApp 或电邮，点按 <strong>+</strong> 新建模板，或点按现有模板进行修改。</li><li>填写名称和内容。点按名称标签可插入自动填写项：<a href="#placeholders">讯息中的自动填写项</a>。</li></ol>
+<ul><li><strong>使用 AI 创建</strong> 会根据简短描述写出草稿（需先设置 AI 服务商）。</li><li><strong>制作其他语言版本</strong> 会复制一份其他语言的版本；设定了该语言的客户会优先收到这一版。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/template.webp" alt="新建或修改讯息模板" loading="lazy"></div></div></figure></article>
+<article id="placeholders" class="article card static has-shot"><div class="art-text"><h3>讯息中的自动填写项</h3><p>发送时，自动填写项会换成每位联系人的资料：</p>
+<ul><li><strong>姓名</strong>：联系人的姓名</li><li><strong>公司</strong>：对方的公司</li><li><strong>金额</strong>：交易金额或欠款金额</li><li><strong>到期日</strong>：到期日</li><li><strong>我的姓名</strong> / <strong>我的公司</strong>：您和您的公司（在 <strong>AI 助手</strong> › <strong>关于您</strong> 中设置）</li></ul>
+<p>如果编辑器不认得某个自动填写项，会提醒您。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/template.webp" alt="讯息中的自动填写项" loading="lazy"><span class="mark-box" style="left:0.0%;top:4.3%;width:100.0%;height:15.8%" title="姓名"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>姓名</b><br><small>姓名：联系人的姓名</small></span></li></ol></figure></article>
+<article id="ai_templates" class="article card static has-shot"><div class="art-text"><h3>让 AI 帮您写模板</h3><ol><li>在 <strong>讯息模板</strong> 中，点按 <strong>使用 AI 创建</strong>。</li><li>在 <strong>用途是什么？</strong> 下简单描述（例如“礼貌提醒，发票逾期 30 天”），选择语言，然后点按 <strong>撰写草稿</strong>。</li><li>检查草稿后保存。</li></ol>
+<p>只有您的描述和您销售的产品或服务会发送给 AI 服务商，客户资料绝不会发送。需要先设置 AI 服务商：<a href="#ai_setup">设置 AI 助手</a>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/templates.webp" alt="让 AI 帮您写模板" loading="lazy"></div></div></figure></article>
+</section>
+<section class="group" id="g-reports"><h2 class="serif">报表</h2>
+<article id="open_report" class="article card static has-shot"><div class="art-text"><h3>报表</h3><p>点按 <strong>报表</strong> 并选择一个。每份报表都像一张打印出来的页面，需要时配有图表。免费版有十份报表；其余的，以及超过 30 天的时间范围，属于 Dialbook Pro。</p>
+<p><strong>按时间段的汇总</strong>（Pro）：<a href="#report_salesperf">销售表现报表</a>、<a href="#report_paymentsperf">收款情况报表（按时间段）</a>、<a href="#report_touches">通话、WhatsApp 和电邮报表</a>。</p>
+<p><strong>通话与活动</strong>：<a href="#report_activity">每日活动报表</a>（免费）、<a href="#report_results">通话结果报表</a>（免费）、<a href="#report_campaigns">名单表现报表</a>（免费）、<a href="#report_besttime">最佳拨打时间报表</a>（Pro）、<a href="#report_weekday">按星期统计通话报表</a>（Pro）、<a href="#report_whatworks">最有效的做法报表</a>（Pro）、<a href="#report_targetpace">目标进度报表</a>（Pro）。</p>
+<p><strong>销售</strong>：<a href="#report_pipeline">销售漏斗报表</a>（免费）、<a href="#report_wonlost">成交与未成交报表</a>（免费）、<a href="#report_attempts">成交前拨打次数报表</a>（Pro）、<a href="#report_nevercalled">从未拨打报表</a>（免费）、<a href="#report_dealflow">各阶段交易流向报表</a>（Pro）。</p>
+<p><strong>催收</strong>：<a href="#report_aging">逾期欠款报表</a>（免费）、<a href="#report_promises">承诺付款报表</a>（免费）、<a href="#report_payments">已收付款项报表（列表）</a>（免费）、<a href="#report_forecast">催收预测报表</a>（Pro）、<a href="#report_recovery">按逾期时长的回收情况报表</a>（Pro）。</p>
+<p><strong>客户</strong>：<a href="#report_followups">待跟进报表</a>（免费）、<a href="#report_statement">客户对账单报表</a>（免费）。</p>
+<ul><li>更改时间范围和分组：<a href="#report_filters">更改报表范围</a>。分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/reports.webp" alt="报表" loading="lazy"><span class="mark-box" style="left:59.3%;top:94.0%;width:21.4%;height:6.0%" title="报表"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>报表</b><br><small>点按 报表 并选择一个。每份报表都像一张打印出来的页面，需要时配有图表。免费版有十份报表；其余的，以及超过 30 天的时间范围，属于 Dialbook Pro。</small></span></li></ol></figure></article>
+<article id="report_salesperf" class="article card static has-shot"><div class="art-text"><h3>销售表现报表</h3><p><strong>属于 Dialbook Pro。</strong> 销售成绩单：一段时间内做了多少销售工作，带来了什么结果。</p>
+<p><strong>用途</strong></p>
+<p>看努力（通话、接通的人数）有没有变成成果（成交的交易、成交金额），以及这段时间比上一段更好还是更差。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：成交金额、成交交易数、成交率、新潜在客户，以及与上一段时间的变化。</li><li>按天、按周或按月显示成交金额的图表。</li><li>按时间段列出通话、接通、成交、成交金额、未成交、成交率和新潜在客户的表格。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>按周分组可以看出趋势；通话多但没有成交，问题在话术；通话少，问题在投入。</li><li>成交率是成交数占已结案交易（成交加未成交）的比例。通话稳定但成交率下降，说明潜在客户在销售漏斗后段流失：请看 <em>各阶段交易流向</em>。</li><li>新潜在客户显示漏斗顶端有没有补充。如果没有，请在漏斗见底之前导入或添加联系人。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用 <strong>分组方式</strong> 把数字按 <strong>日</strong>、<strong>周</strong> 或 <strong>月</strong> 汇总。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>销售表现</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_salesperf.webp" alt="销售表现报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="分组方式"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li><li><span class="mark-n">2</span><span><b>分组方式</b><br><small>用 分组方式 把数字按 日、周 或 月 汇总。</small></span></li></ol></figure></article>
+<article id="report_paymentsperf" class="article card static has-shot"><div class="art-text"><h3>收款情况报表（按时间段）</h3><p><strong>属于 Dialbook Pro。</strong> 催收成绩单：一段时间内收到的款项和做出的承诺。</p>
+<p><strong>用途</strong></p>
+<p>看收了多少款、来自多少客户，以及承诺的数量是否达到所需的进度，并与上一段时间比较。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：已收款、付款笔数、日均收款、做出的承诺，以及与上一段时间的变化。</li><li>按天、按周或按月显示已收款项的图表。</li><li>按时间段列出付款笔数、已收款、付款客户数、做出的承诺和承诺金额的表格。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>按周分组：承诺多但已收款少的那一周，之后要追款。请看 <em>承诺付款</em>。</li><li>日均收款乘以本月剩余工作日，就是本月的快速预测；可对照 <em>目标进度</em>。</li><li>付款笔数多但客户很少，说明总是同一批人在付款：名单上的其他人需要打电话。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用 <strong>分组方式</strong> 把数字按 <strong>日</strong>、<strong>周</strong> 或 <strong>月</strong> 汇总。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>收款情况</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_paymentsperf.webp" alt="收款情况报表（按时间段）" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="分组方式"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li><li><span class="mark-n">2</span><span><b>分组方式</b><br><small>用 分组方式 把数字按 日、周 或 月 汇总。</small></span></li></ol></figure></article>
+<article id="report_touches" class="article card static has-shot"><div class="art-text"><h3>通话、WhatsApp 和电邮报表</h3><p><strong>属于 Dialbook Pro。</strong> 您联系客户的所有方式，以及实际接通了多少人。</p>
+<p><strong>用途</strong></p>
+<p>如实衡量工作量：如果一半的跟进是通过 WhatsApp 或电邮完成的，只算通话会低估工作；没人接的电话也不算联系上。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：通话、接通的人数、WhatsApp、电邮，以及与上一段时间的变化。</li><li>按天、按周或按月显示通话、WhatsApp 和电邮的图表。</li><li>按时间段列出通话、接通、接通率、WhatsApp、电邮和总数的表格。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>接通率是通话中接通真人的比例。低于一半左右时，试试其他时段：<em>最佳拨打时间</em>。</li><li>如果讯息增加而通话减少，请确认讯息之后有没有结果：<em>最有效的做法</em>。</li><li>多人共用一份名单时，可以用它来设定每日或每周的活动目标。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用 <strong>分组方式</strong> 把数字按 <strong>日</strong>、<strong>周</strong> 或 <strong>月</strong> 汇总。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>通话、WhatsApp 和电邮</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_touches.webp" alt="通话、WhatsApp 和电邮报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="分组方式"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li><li><span class="mark-n">2</span><span><b>分组方式</b><br><small>用 分组方式 把数字按 日、周 或 月 汇总。</small></span></li></ol></figure></article>
+<article id="report_targetpace" class="article card static has-shot"><div class="art-text"><h3>目标进度报表</h3><p><strong>属于 Dialbook Pro。</strong> 您离本月目标还有多远，以及剩下的每一天要完成多少。</p>
+<p><strong>用途</strong></p>
+<p>把月目标换算成每天的数字，赶在还来得及调整时看到。需要先设定目标：<a href="#monthly_targets">每月目标</a>。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>本月剩余天数。</li><li>每种工作类型（销售、催收）一行，列出目标、目前完成、完成比例、每天所需，以及照这个进度月底会到哪里（“照此进度可达”）。</li><li>目标与目前已完成数额对比的图表。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>“每天所需”是每天早上要记住的数字。如果它一直上升，这个月就落后了。</li><li>离月底还有一周，“照此进度可达”却低于目标，就要改变今天的做法，而不是下周。</li><li>如果销售和催收都做，请同时设定成交金额和已收款项的目标。</li></ul>
+<p>它始终涵盖当月。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>目标进度</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_targetpace.webp" alt="目标进度报表" loading="lazy"></div></div></figure></article>
+<article id="report_forecast" class="article card static has-shot"><div class="art-text"><h3>催收预测报表</h3><p><strong>属于 Dialbook Pro。</strong> 尚未到来的承诺付款，按每位客户兑现承诺的记录加权计算。</p>
+<p><strong>用途</strong></p>
+<p>了解未来几周真正可能收到多少现金，而不是所有承诺的总和。违背过三次承诺的客户，比每次都兑现的客户算得少。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：未来 7 天的承诺、未来 30 天的承诺，以及可能收到的金额。</li><li>按周显示承诺金额与可能金额的图表。</li><li>每笔待兑现承诺一行：到期日、联系人、承诺金额、该客户兑现承诺的频率，以及可能金额。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>先追“兑现承诺”比例低的大额承诺；它们对可能金额的影响最大。</li><li>没有记录的客户，使用所有人承诺的整体兑现率。</li><li>把可能金额与 <em>目标进度</em> 中的目标比较；差额就是新承诺要补上的部分。</li></ul>
+<p>它从今天起往后看；不受时间范围影响。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>催收预测</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_forecast.webp" alt="催收预测报表" loading="lazy"></div></div></figure></article>
+<article id="report_recovery" class="article card static has-shot"><div class="art-text"><h3>按逾期时长的回收情况报表</h3><p><strong>属于 Dialbook Pro。</strong> 期初的欠款中收回了多少，按逾期时间长短分组。</p>
+<p><strong>用途</strong></p>
+<p>看追款在哪里最有效。逾期不到 30 天的账户通常回收得好；60 天以上的回收率，可以告诉您旧账值不值得打电话，还是该用别的方式处理。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：整体回收率和已收金额。</li><li>按逾期时长显示回收率的图表：未到期、1 至 30 天、31 至 60 天、60 天以上。</li><li>每组列出账户数、期初欠款、期间已收款和回收比例的表格。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>如果 31 至 60 天这一组的回收率远高于 60 天以上，说明要早点打电话：关键期是第二个月。</li><li>“未到期”回收率低是正常的；1 至 30 天回收率低就不正常，说明提醒没有发出去。请看 <a href="#whatsapp_template">用模板发送 WhatsApp</a>。</li><li>用 <strong>上月</strong> 可以得到干净的逐月比较。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>按逾期时长的回收情况</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_recovery.webp" alt="按逾期时长的回收情况报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_dealflow" class="article card static has-shot"><div class="art-text"><h3>各阶段交易流向报表</h3><p><strong>属于 Dialbook Pro。</strong> 交易如何在销售漏斗中移动：进入每个阶段、停留多久，以及有多少卡住了。</p>
+<p><strong>用途</strong></p>
+<p>找出交易变慢或失败的阶段。漏斗总数看不出来，流向才看得出来。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：期间内成交和未成交的交易数。</li><li>进入各阶段的交易图表。</li><li>每个阶段一行：目前未结、期间进入、已推进、在该阶段的平均天数，以及卡住 14 天或以上的数量。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>进入多、推进少的阶段就是瓶颈。通常是“方案”：报价发出去后没有跟进。</li><li>“卡住 14 天以上”就是一份通话名单。打开 <strong>销售</strong> › <strong>销售漏斗</strong>，点按该阶段，逐个处理。</li><li>各阶段平均天数加起来，就是您真正的销售周期。预测时可以用。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>各阶段交易流向</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_dealflow.webp" alt="各阶段交易流向报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_whatworks" class="article card static has-shot"><div class="art-text"><h3>最有效的做法报表</h3><p><strong>属于 Dialbook Pro。</strong> 哪种渠道、哪个讯息模板，在 7 天内带来了结果。</p>
+<p><strong>用途</strong></p>
+<p>不再靠猜来决定发哪种讯息。结果指的是：讯息发出后 7 天内收到付款、有承诺付款、销售漏斗向前推进，或有一通结果良好的通话。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：期间内的通话、WhatsApp 和电邮。</li><li>各渠道结果比例的图表。</li><li>每个已发送模板一行的表格：渠道、模板、发送次数、7 天内的结果数和比例。手动输入的讯息合并显示为一行。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>发送少于 5 次的模板样本太少，无法判断；多发几次再决定。</li><li>如果某个提醒的比例低，就改改措辞，或把发票以 PDF 附上：<a href="#edit_templates">新建或修改讯息模板</a>。</li><li>同一目的下比较 WhatsApp 和电邮，优先用效果更好的。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>最有效的做法</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_whatworks.webp" alt="最有效的做法报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_activity" class="article card static has-shot"><div class="art-text"><h3>每日活动报表</h3><p><strong>免费版已包含。</strong> 期间内的每一通电话，每通一行，附上结果和备注。</p>
+<p><strong>用途</strong></p>
+<p>这是记录本。用它检查一天的工作、把名单交给同事，或回答“上周我们跟这位客户说了什么”。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：通话数、接通的人数，以及不同联系人的数量。</li><li>列出日期、时间、联系人、名单和结果的表格，备注在下方。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>选“今天”做下班前检查，或选 <strong>上月</strong>，把整个月的记录导出为 CSV。</li><li>时间范围很长时，屏幕上只显示前面几行；以 CSV 分享即可得到所有行。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>每日活动</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_activity.webp" alt="每日活动报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_results" class="article card static has-shot"><div class="art-text"><h3>通话结果报表</h3><p><strong>免费版已包含。</strong> 每种结果各有多少通电话。</p>
+<p><strong>用途</strong></p>
+<p>看清工作的结构：多少是无人接听，多少是回电，多少最后变成承诺、付款或成交。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：通话数和接通的人数。</li><li>每种结果通话数的图表。</li><li>列出每种结果、数量及占所有通话比例的表格。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>“无人接听”占比很大，说明打电话的时间比说什么更重要：<em>最佳拨打时间</em>。</li><li>回电多而承诺少，说明第二通电话没有谈成。换个方式准备第二通电话，或请 AI 给这位联系人出个策略。</li><li>您自己设定的结果也会计入，以您取的名称显示：<a href="#custom_results">自定义通话结果</a>。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>通话结果</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_results.webp" alt="通话结果报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_campaigns" class="article card static has-shot"><div class="art-text"><h3>名单表现报表</h3><p><strong>免费版已包含。</strong> 所有名单并排比较：联系人、已拨打、接通、转化，以及今天还剩多少。</p>
+<p><strong>用途</strong></p>
+<p>比较各个名单。展会名单和续约名单的表现不同；这里会告诉您下一个小时该先做哪一个。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>每个名单转化情况的图表。</li><li>每个名单一行的表格：联系人、已拨打、接通、成交或已付款、转化率，以及今天还要拨打的数量。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>转化率是成交或已付款数占已拨打联系人的比例。转化率低但接通率高，说明问题出在方案或名单，不是打电话。</li><li>“今天剩余”就是待拨队列；队列大、转化好的名单，就是今天该花时间的地方。</li><li>已完成的名单可以关掉，让它们不再出现在今天的工作中：<a href="#delete_campaign">删除名单</a>。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>名单表现</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_campaigns.webp" alt="名单表现报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_besttime" class="article card static has-shot"><div class="art-text"><h3>最佳拨打时间报表</h3><p><strong>属于 Dialbook Pro。</strong> 按一天中每个小时统计的接通率。</p>
+<p><strong>用途</strong></p>
+<p>找出大家愿意接电话的时段，让电话打在点子上。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部显示最佳时段。</li><li>每小时接通率的图表。</li><li>每小时一行的表格：通话、接通和接通率。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>把最重要的电话（未兑现承诺、谈判）放在最佳时段；最差的时段用来发 WhatsApp 和电邮。</li><li>通话很少的时段还不可靠；几周后数字才会稳定。</li><li>接通指有真人接听，不管对方说了什么。无人接听和号码错误不算。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>最佳拨打时间</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_besttime.webp" alt="最佳拨打时间报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_weekday" class="article card static has-shot"><div class="art-text"><h3>按星期统计通话报表</h3><p><strong>属于 Dialbook Pro。</strong> 一周中每一天的通话数和接通率。</p>
+<p><strong>用途</strong></p>
+<p>安排一周的工作：哪几天适合打电话，哪几天适合做文书、拜访或发讯息。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>每个星期几接通率的图表。</li><li>每天一行的表格：通话、接通和接通率。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>星期五通常接通的人较少；星期一能接通，但较难成交。把促成交易的电话放在周中。</li><li>搭配 <em>最佳拨打时间</em> 一起看，就能知道最佳的日子和时段。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>按星期统计通话</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_weekday.webp" alt="按星期统计通话报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_pipeline" class="article card static has-shot"><div class="art-text"><h3>销售漏斗报表</h3><p><strong>免费版已包含。</strong> 此刻每个阶段的潜在客户数和金额。</p>
+<p><strong>用途</strong></p>
+<p>目前进行中事项的快照：新客户、已联系、合格、方案和洽谈中，各有多少交易、多少金额。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部显示成交金额。</li><li>每个阶段金额的图表。</li><li>每个阶段一行的表格：潜在客户数和金额。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>“洽谈”中的金额接近成交；“新客户”中的金额只是愿望。预测时要分别加权。</li><li>漏斗里“新客户”很多、“合格”很少，说明第一通电话没有打：<em>从未拨打</em>。</li><li>在 <strong>销售</strong> › <strong>销售漏斗</strong> 点按某个阶段来处理；各阶段的说明见 <a href="#pipeline_stages">销售漏斗阶段</a>。</li></ul>
+<p>它显示的是今天的情况；不受时间范围影响。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>销售漏斗</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_pipeline.webp" alt="销售漏斗报表" loading="lazy"></div></div></figure></article>
+<article id="report_wonlost" class="article card static has-shot"><div class="art-text"><h3>成交与未成交报表</h3><p><strong>免费版已包含。</strong> 期间内已结案的交易，附上每笔的最后一条备注。</p>
+<p><strong>用途</strong></p>
+<p>回顾成交了什么、为什么。最后一条备注通常就是原因：价格、时机、竞争对手。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：成交交易数、成交金额和未成交交易数。</li><li>每笔交易一行的表格：联系人、结果、金额、日期和最后一条备注。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>每月一起读一次未成交的备注；同一个原因出现三次，是产品或定价的问题，不是销售的问题。</li><li>没有备注的成交交易，等于错过了学习的机会；标记成交时请加一条备注：<a href="#mark_won_lost">标记成交或未成交</a>。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>成交与未成交</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_wonlost.webp" alt="成交与未成交报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_attempts" class="article card static has-shot"><div class="art-text"><h3>成交前拨打次数报表</h3><p><strong>属于 Dialbook Pro。</strong> 成交一笔交易或收回一个账户的款项，一共打了几通电话。</p>
+<p><strong>用途</strong></p>
+<p>知道什么时候该继续打，什么时候该放手。如果大多数成交发生在第二或第三通电话，打一通就放弃，就是把钱留在桌上。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：交易数，以及每笔交易平均的通话数。</li><li>按拨打次数显示交易数的图表。</li><li>列出通话次数、交易数和占比的表格。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>如果第四通电话之后就不再成交，打了五通都没人接的联系人可以标记起来，不再跟进：<a href="#phone_tags">标记号码：正常、无效或请勿拨打</a>。</li><li>平均次数上升，说明潜在客户越来越难谈，或第一通电话比较弱。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>成交前拨打次数</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_attempts.webp" alt="成交前拨打次数报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_nevercalled" class="article card static has-shot"><div class="art-text"><h3>从未拨打报表</h3><p><strong>免费版已包含。</strong> 还没有人打过电话的未结联系人。</p>
+<p><strong>用途</strong></p>
+<p>找出被漏掉的潜在客户和账户：导入后被遗忘的，或同事添加后没人跟进的。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部显示联系人数量。</li><li>列出联系人、名单和金额的表格。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>在 CSV 里按金额排序，先打名单最前面的。</li><li>如果整个名单都在这里，打开它并点按 <strong>开始拨打</strong>：<a href="#start_dialing">逐个拨打名单</a>。</li></ul>
+<p>它显示的是今天的情况；不受时间范围影响。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>从未拨打</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_nevercalled.webp" alt="从未拨打报表" loading="lazy"></div></div></figure></article>
+<article id="report_aging" class="article card static has-shot"><div class="art-text"><h3>逾期欠款报表</h3><p><strong>免费版已包含。</strong> 每位客户欠了多少，逾期多久。</p>
+<p><strong>用途</strong></p>
+<p>经典的账龄清单：谁欠多少，分为未到期、逾期 1 至 30 天、31 至 60 天和 60 天以上。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部显示账户数量。</li><li>每个逾期组欠款金额的图表。</li><li>每位客户一行的表格：欠款、逾期天数和所属组别。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>在 31 至 60 天的账户变成 60 天以上之前追款；追款在哪里最有效，请看 <em>按逾期时长的回收情况</em>。</li><li>可以分享为 PDF 做每周检讨，或分享为 CSV 给会计。</li><li>同样的分组也显示在 <strong>首页</strong>；在那里点按某个长条就能打给该组：<a href="#aging">按逾期时长查看欠款</a>。</li></ul>
+<p>它显示的是今天的情况；不受时间范围影响。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>逾期欠款</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_aging.webp" alt="逾期欠款报表" loading="lazy"></div></div></figure></article>
+<article id="report_promises" class="article card static has-shot"><div class="art-text"><h3>承诺付款报表</h3><p><strong>免费版已包含。</strong> 期间内到期的承诺：待兑现、已兑现或未兑现。</p>
+<p><strong>用途</strong></p>
+<p>让客户言出必行。付款在到期日前到账，承诺就算已兑现；到期日过了还没付款，就算未兑现。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：已结清承诺中已兑现的比例、待兑现和未兑现。</li><li>按状态显示承诺的图表。</li><li>每个承诺一行的表格：联系人、金额、承诺日期、到期日、状态，以及该客户做过多少次承诺。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>未兑现的承诺会排在拨号队列最前面；报表会告诉您预计有多少：<a href="#broken_promises">未兑现承诺</a>。</li><li>一位客户有好几个待兑现的承诺，说明他在不断叠加；请他今天先付一部分，而不是再给一个新日期。</li><li>兑现率不到一半，说明太容易接受承诺了。请对方说明日期、金额和付款方式。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>承诺付款</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_promises.webp" alt="承诺付款报表" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_payments" class="article card static has-shot"><div class="art-text"><h3>已收付款项报表（列表）</h3><p><strong>免费版已包含。</strong> 期间内的每一笔付款，按日期和客户列出。</p>
+<p><strong>用途</strong></p>
+<p>现金记录：收到什么、谁付的、哪一天。用来与银行对账，或回答客户的“我已经付了”。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：已收款、付款笔数和客户数。</li><li>按天显示已收款项的图表。</li><li>每笔付款一行的表格：日期、联系人和金额。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>月底以 CSV 分享给会计。</li><li>想看单一客户的完整记录，请用 <em>客户对账单</em>。</li><li>想按周或按月查看总额并与上一段时间比较，请用 <em>收款情况</em>。</li></ul>
+<p>在顶部选择 <strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>（较长的时间范围属于 Dialbook Pro）。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>已收付款项</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_payments.webp" alt="已收付款项报表（列表）" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>在顶部选择 期间：今天、7 天或 30 天、本月、上月 或 所有时间（较长的时间范围属于 Dialbook Pro）。</small></span></li></ol></figure></article>
+<article id="report_followups" class="article card static has-shot"><div class="art-text"><h3>待跟进报表</h3><p><strong>免费版已包含。</strong> 已逾期、今天到期，以及未来 7 天内到期的回电和承诺。</p>
+<p><strong>用途</strong></p>
+<p>一页看完接下来这一周。凡是您答应客户要做的事，或客户答应要做的事，只要有日期，都在这里。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部数字：已逾期、今天到期、未来 7 天内到期。</li><li>每一项一行的表格：联系人、类型（回电或承诺）、到期日、时间，以及承诺的金额。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>星期一打印出来，或分享给替您负责名单的同事。</li><li>逾期的回电是一天中最先要打的电话；逾期的承诺就是未兑现的承诺：<a href="#broken_promises">未兑现承诺</a>。</li><li>同样的项目也显示在 <strong>首页</strong> 的 <strong>需要留意</strong> 里：<a href="#alerts">需要留意</a>。</li></ul>
+<p>它从今天起往后看；不受时间范围影响。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>待跟进</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_followups.webp" alt="待跟进报表" loading="lazy"></div></div></figure></article>
+<article id="report_statement" class="article card static has-shot"><div class="art-text"><h3>客户对账单报表</h3><p><strong>属于 Dialbook Pro。</strong> 一位客户的通话、承诺和付款，做成可分享的对账单。</p>
+<p><strong>用途</strong></p>
+<p>给客户一份清楚的账目，说明谈好了什么、付了什么；或在拜访前向同事交代情况。</p>
+<p><strong>显示什么</strong></p>
+<ul><li>顶部显示从这位客户收到的款项。</li><li>按日期顺序排列的表格：通话及其结果、承诺及到期日和状态，以及付款。</li></ul>
+<p><strong>怎么用</strong></p>
+<ul><li>从联系人处用 <strong>客户对账单</strong> 打开，选择 PDF，再通过 WhatsApp 或电邮发送：<a href="#customer_statement">客户对账单</a>。</li><li>在 <strong>报表</strong> 里，点按 <strong>选择联系人</strong> 来选择客户。</li></ul>
+<p>它显示整个历史；不受时间范围影响。 用右上角的按钮分享或打印：<a href="#share_pdf_csv">分享或打印报表</a>。</p>
+<p>打开：<strong>报表</strong> › <strong>客户对账单</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_statement.webp" alt="客户对账单报表" loading="lazy"></div></div></figure></article>
+<article id="report_filters" class="article card static has-shot"><div class="art-text"><h3>更改报表范围</h3><p>在报表顶部：</p>
+<ul><li><strong>期间</strong>：今天、7 天或 30 天、<strong>本月</strong>、<strong>上月</strong> 或 <strong>所有时间</strong>。</li><li><strong>分组方式</strong>：<strong>日</strong>、<strong>周</strong> 或 <strong>月</strong>，适用于汇总类报表。</li><li><strong>范围：</strong>：全部、只看销售或只看催收（两者都做时才有）。</li></ul>
+<p>数字、图表和表格都会跟着更新。从 AI 回答打开的报表，会沿用该回答所用的设定。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report.webp" alt="更改报表范围" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期间"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="分组方式"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期间</b><br><small>期间：今天、7 天或 30 天、本月、上月 或 所有时间。</small></span></li><li><span class="mark-n">2</span><span><b>分组方式</b><br><small>分组方式：日、周 或 月，适用于汇总类报表。</small></span></li></ol></figure></article>
+<article id="share_pdf_csv" class="article card static has-shot"><div class="art-text"><h3>分享或打印报表</h3><ol><li>打开报表。</li><li>点按右上角的分享按钮。</li><li>选择 <strong>分享为 PDF</strong>、<strong>分享为 CSV (Excel)</strong> 或 <strong>打印</strong>。</li></ol>
+<p>即使屏幕上只显示长报表的前面部分，CSV 也包含所有行，可以用 Excel 打开。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report.webp" alt="分享或打印报表" loading="lazy"></div></div></figure></article>
+<article id="customer_statement" class="article card static has-shot"><div class="art-text"><h3>客户对账单</h3><ol><li>打开联系人。</li><li>点按 <strong>客户对账单</strong>（<strong>以 PDF 形式分享通话、承诺付款和付款记录</strong>）。</li><li>通过 WhatsApp 或电邮分享 PDF。</li></ol></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="客户对账单" loading="lazy"><span class="mark-box" style="left:0.0%;top:89.1%;width:100.0%;height:8.4%" title="客户对账单"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>客户对账单</b><br><small>点按 客户对账单（以 PDF 形式分享通话、承诺付款和付款记录）。</small></span></li></ol></figure></article>
+<article id="monthly_targets" class="article card static has-shot"><div class="art-text"><h3>每月目标</h3><ol><li>前往 <strong>更多</strong> › <strong>每月目标</strong>。</li><li>填写 <strong>每月成交额目标</strong> 和/或 <strong>每月催收金额目标</strong>。</li></ol>
+<p>之后，“目标进度”报表会显示您已完成多少、每天还需要多少，以及照现在的速度月底能达到哪里：<em>目标进度</em>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/targets.webp" alt="每月目标" loading="lazy"><span class="mark-box" style="left:3.0%;top:6.0%;width:94.1%;height:8.3%" title="每月成交额目标"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:13.6%;width:94.1%;height:8.3%" title="每月催收金额目标"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>每月成交额目标</b><br><small>填写 每月成交额目标 和/或 每月催收金额目标。</small></span></li><li><span class="mark-n">2</span><span><b>每月催收金额目标</b><br><small>填写 每月成交额目标 和/或 每月催收金额目标。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-ai"><h2 class="serif">AI 助手</h2>
+<article id="ai_setup" class="article card static has-shot"><div class="art-text"><h3>设置 AI 助手</h3><ol><li>前往 <strong>更多</strong> › <strong>AI 助手</strong>。</li><li>选择 <strong>服务商</strong>（OpenAI、Anthropic、Gemini、DeepSeek 等，或您自己电脑上的模型），在 <strong>API key（仅存储在此手机上）</strong> 一栏填入密钥，再选择模型。</li><li>阅读数据说明，然后点按 <strong>开启</strong>。</li></ol>
+<p>密钥只保存在这部手机上。在您开启之前，什么都不会发送。隐私说明：<a href="#ai_privacy_masking">AI 能看到什么</a>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="设置 AI 助手" loading="lazy"></div></div></figure></article>
+<article id="ai_privacy_masking" class="article card static has-shot"><div class="art-text"><h3>AI 能看到什么</h3><p>AI 助手只在这部手机上查找需要的资料，只有查到的结果会发送给您的 AI 服务商，绝不会发送整个数据库。</p>
+<p>在 <strong>AI 助手</strong> 里开启 <strong>发送前去除姓名和电话号码</strong> 后，姓名、公司、电邮和电话号码都会在发送前去除。AI 只会以编号认识联系人，而应用在对话中仍会显示真实姓名。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="AI 能看到什么" loading="lazy"><span class="mark-box" style="left:0.0%;top:97.5%;width:100.0%;height:2.5%" title="发送前去除姓名和电话号码"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>发送前去除姓名和电话号码</b><br><small>在 AI 助手 里开启 发送前去除姓名和电话号码 后，姓名、公司、电邮和电话号码都会在发送前去除。AI 只会以编号认识联系人，而应用在对话中仍会显示真实姓名。</small></span></li></ol></figure></article>
+<article id="ai_chat_history" class="article card static has-shot"><div class="art-text"><h3>AI 对话与历史记录</h3><ul><li><strong>新对话</strong>（右上角的铅笔）开始新对话；当前对话会保留。</li><li><strong>删除对话</strong>（顶部的红色垃圾桶）会在确认后删除当前对话。</li><li><strong>历史对话</strong>（时钟图标）列出以前的对话：点按即可查看或接着聊，向左滑动可删除。</li><li>为了让每次提问都省钱，每个问题只发送对话的最近部分，每个对话最多 20 个问题。换新话题时，请开始新对话。</li><li>回答上方的“已查询：…”说明用了您的哪些数据。标有“未核对”的回答没有查询数据就给出了数字：请再问一次。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai_chat.webp" alt="AI 对话与历史记录" loading="lazy"></div></div></figure></article>
+<article id="ai_show_hide" class="article card static has-shot"><div class="art-text"><h3>显示或隐藏 AI</h3><p>前往 <strong>更多</strong> › <strong>AI 助手</strong>，开启或关闭 <strong>在应用中显示 AI</strong>。关闭后，<strong>首页</strong> 上的 <strong>就工作问 AI</strong> 和联系人页面上的 AI 按钮都会隐藏；您的设置和对话会保留。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="显示或隐藏 AI" loading="lazy"><span class="mark-box" style="left:0.0%;top:4.3%;width:100.0%;height:12.4%" title="在应用中显示 AI"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>在应用中显示 AI</b><br><small>前往 更多 › AI 助手，开启或关闭 在应用中显示 AI。关闭后，首页 上的 就工作问 AI 和联系人页面上的 AI 按钮都会隐藏；您的设置和对话会保留。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-data"><h2 class="serif">备份与数据</h2>
+<article id="backup_file" class="article card static has-shot"><div class="art-text"><h3>制作备份</h3><ol><li>前往 <strong>更多</strong> › <strong>备份与恢复</strong>。</li><li>设置 <strong>备份密码</strong>（请妥善保管：没有密码就打不开备份）。</li><li>点按 <strong>创建备份并分享</strong>，把文件保存到 Google Drive、电邮或您的电脑。</li></ol>
+<p>备份文件已加密。<strong>提醒我备份</strong> 可设置 <strong>首页</strong> 多久提醒您一次。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="制作备份" loading="lazy"><span class="mark-box" style="left:3.0%;top:46.9%;width:94.1%;height:8.8%" title="备份密码"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:71.5%;width:94.1%;height:5.9%" title="创建备份并分享"><span class="mark">2</span></span><span class="mark-box" style="left:3.0%;top:56.7%;width:94.1%;height:7.2%" title="提醒我备份"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>备份密码</b><br><small>设置 备份密码（请妥善保管：没有密码就打不开备份）。</small></span></li><li><span class="mark-n">2</span><span><b>创建备份并分享</b><br><small>点按 创建备份并分享，把文件保存到 Google Drive、电邮或您的电脑。</small></span></li><li><span class="mark-n">3</span><span><b>提醒我备份</b><br><small>备份文件已加密。提醒我备份 可设置 首页 多久提醒您一次。</small></span></li></ol></figure></article>
+<article id="restore" class="article card static has-shot"><div class="art-text"><h3>恢复备份</h3><ol><li>前往 <strong>更多</strong> › <strong>备份与恢复</strong>。</li><li>点按 <strong>从备份文件恢复</strong>，选择文件并输入密码。</li><li>点按 <strong>替换并恢复</strong> 确认。</li></ol>
+<p>这部手机上的所有数据都会被备份内容取代。如果密码错误或文件损坏，什么都不会改变。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="恢复备份" loading="lazy"><span class="mark-box" style="left:3.0%;top:77.8%;width:94.1%;height:5.9%" title="从备份文件恢复"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>从备份文件恢复</b><br><small>点按 从备份文件恢复，选择文件并输入密码。</small></span></li></ol></figure></article>
+<article id="automatic_backup" class="article card static has-shot"><div class="art-text"><h3>手机自动备份</h3><p>手机自带的备份（iPhone 用 iCloud，Android 用 Google）和备份文件是两回事。在 Android 上，数据库太大时不会被备份，因为 Google 的上限是 25 MB，所以为了保险，请另外制作备份文件：<a href="#backup_file">制作备份</a>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="手机自动备份" loading="lazy"></div></div></figure></article>
+<article id="new_phone" class="article card static has-shot"><div class="art-text"><h3>换新手机</h3><ol><li>在旧手机上制作备份文件：<a href="#backup_file">制作备份</a>。</li><li>在新手机上安装 Dialbook 并完成设置。</li><li>在新手机上恢复该文件：<a href="#restore">恢复备份</a>。</li></ol>
+<p>在 Android 上，如果用手机自带的换机功能通过数据线或 Wi-Fi 搬移应用，数据也会一起转过去。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="换新手机" loading="lazy"></div></div></figure></article>
+<article id="erase" class="article card static has-shot"><div class="art-text"><h3>清除所有数据</h3><p>前往 <strong>更多</strong> › <strong>隐私与数据</strong> › <strong>清除手机上的所有数据</strong>。所有名单、联系人、通话、任务和设置都会从这部手机上删除。如果以后可能用得上，请先备份。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/privacy.webp" alt="清除所有数据" loading="lazy"><span class="mark-box" style="left:3.0%;top:21.9%;width:94.1%;height:5.9%" title="清除手机上的所有数据"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>清除手机上的所有数据</b><br><small>前往 更多 › 隐私与数据 › 清除手机上的所有数据。所有名单、联系人、通话、任务和设置都会从这部手机上删除。如果以后可能用得上，请先备份。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-settings"><h2 class="serif">设置</h2>
+<article id="language" class="article card static has-shot"><div class="art-text"><h3>语言</h3><p>前往 <strong>更多</strong> › <strong>语言</strong>。选 <strong>跟随手机</strong> 就会使用手机的语言。日期、数字和 AI 的回答都会跟着所选语言。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/language.webp" alt="语言" loading="lazy"><span class="mark-box" style="left:0.0%;top:5.5%;width:100.0%;height:6.5%" title="跟随手机"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>跟随手机</b><br><small>前往 更多 › 语言。选 跟随手机 就会使用手机的语言。日期、数字和 AI 的回答都会跟着所选语言。</small></span></li></ol></figure></article>
+<article id="currency" class="article card static has-shot"><div class="art-text"><h3>货币</h3><p>前往 <strong>更多</strong> › <strong>货币</strong>。这只会改变金额的显示方式，不会换算金额。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/currency.webp" alt="货币" loading="lazy"></div></div></figure></article>
+<article id="dark_mode" class="article card static has-shot"><div class="art-text"><h3>深色模式</h3><p>前往 <strong>更多</strong> › <strong>外观</strong>，选择 <strong>跟随手机</strong>、<strong>浅色</strong> 或 <strong>深色</strong>。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/appearance.webp" alt="深色模式" loading="lazy"><span class="mark-box" style="left:3.0%;top:7.2%;width:30.5%;height:21.7%" title="跟随手机"><span class="mark">1</span></span><span class="mark-box" style="left:34.8%;top:7.2%;width:30.5%;height:21.7%" title="浅色"><span class="mark">2</span></span><span class="mark-box" style="left:66.6%;top:7.2%;width:30.5%;height:21.7%" title="深色"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>跟随手机</b><br><small>前往 更多 › 外观，选择 跟随手机、浅色 或 深色。</small></span></li><li><span class="mark-n">2</span><span><b>浅色</b><br><small>前往 更多 › 外观，选择 跟随手机、浅色 或 深色。</small></span></li><li><span class="mark-n">3</span><span><b>深色</b><br><small>前往 更多 › 外观，选择 跟随手机、浅色 或 深色。</small></span></li></ol></figure></article>
+<article id="my_profile" class="article card static has-shot"><div class="art-text"><h3>您的姓名和销售内容</h3><p>前往 <strong>更多</strong> › <strong>AI 助手</strong> › <strong>关于您</strong>，填写 <strong>您的姓名</strong>、<strong>公司</strong> 和 <strong>我销售的产品或服务</strong>。讯息中的 <strong>我的姓名</strong> 和 <strong>我的公司</strong> 会用到这些资料，AI 写话术时也会参考您销售的内容。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="您的姓名和销售内容" loading="lazy"><span class="mark-box" style="left:6.8%;top:79.6%;width:87.5%;height:8.9%" title="我销售的产品或服务"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>我销售的产品或服务</b><br><small>前往 更多 › AI 助手 › 关于您，填写 您的姓名、公司 和 我销售的产品或服务。讯息中的 我的姓名 和 我的公司 会用到这些资料，AI 写话术时也会参考您销售的内容。</small></span></li></ol></figure></article>
+<article id="custom_results" class="article card static has-shot"><div class="art-text"><h3>自定义通话结果</h3><ol><li>前往 <strong>更多</strong> › <strong>通话结果</strong>。</li><li>点按 <strong>添加自定义结果</strong>，输入名称（例如“已发报价”），并选择 <strong>计为</strong>，让报表正确统计。</li></ol>
+<p>修改结果名称或计入类别后，以往的通话也会一起更新。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/outcomes.webp" alt="自定义通话结果" loading="lazy"><span class="mark-box" style="left:0.0%;top:44.1%;width:100.0%;height:5.2%" title="添加自定义结果"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:64.0%;width:94.1%;height:12.3%" title="计为"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>添加自定义结果</b><br><small>点按 添加自定义结果，输入名称（例如“已发报价”），并选择 计为，让报表正确统计。</small></span></li><li><span class="mark-n">2</span><span><b>计为</b><br><small>点按 添加自定义结果，输入名称（例如“已发报价”），并选择 计为，让报表正确统计。</small></span></li></ol></figure></article>
+<article id="tablet_layout" class="article card static has-shot"><div class="art-text"><h3>在 iPad 或平板上使用</h3><ul><li>菜单在左侧。点按菜单顶部的箭头可以展开显示文字，或收起成只有图标，腾出更多空间。</li><li>列表的内容会在旁边打开：点按名单或客户，详情就显示在右侧。</li><li>把平板横过来，首页、联系人页面和拨号界面会分成两栏显示。</li></ul></div><figure class="shot kind-ipad" dir="ltr"><div class="tablet"><div class="shot-img"><img src="img/ipad/home.webp" alt="在 iPad 或平板上使用" loading="lazy"></div></div></figure></article>
+</section>
+      <div class="card-dark support">
+        <div>
+          <div class="serif" style="font-size:1.9rem">还是没解决？</div>
+          <p class="mute">请把您的手机型号和操作步骤发给我们。我们会在两个工作日内回复。</p>
+        </div>
+        <a class="btn btn-light" href="mailto:kuanmeng.see@gmail.com?subject=Dialbook%20support">发邮件联系支持</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap bottom">
+    <div>© <span id="year">2026</span> SKM Studio. Dialbook 是 SKM Studio 的产品。</div>
+    <div><a href="index.html">Dialbook</a> &nbsp;·&nbsp; <a href="privacy.html">隐私</a> &nbsp;·&nbsp; <a href="../../">SKM Studio</a></div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const MATCH = "“{q}”共 {n} 条结果";
+  document.getElementById('lang').addEventListener('change', function () {
+    var code = this.options[this.selectedIndex].getAttribute('data-lang');
+    try { localStorage.setItem('skm-help-lang', code); } catch (e) {}
+    location.href = this.value + location.hash;
+  });
+  const q = document.getElementById('q'), count = document.getElementById('count');
+  const articles = Array.from(document.querySelectorAll('.article'));
+  const groups = Array.from(document.querySelectorAll('.group'));
+  function filter() {
+    const t = q.value.trim().toLowerCase();
+    let shown = 0;
+    articles.forEach(a => { const hit = !t || a.querySelector('.art-text').textContent.toLowerCase().includes(t); a.classList.toggle('hidden', !hit); if (hit) shown++; });
+    groups.forEach(g => g.classList.toggle('hidden', !g.querySelector('.article:not(.hidden)')));
+    document.getElementById('toc').style.display = t ? 'none' : '';
+    count.textContent = t ? MATCH.replace('{n}', shown).replace('{q}', q.value.trim()) : '';
+  }
+  q.addEventListener('input', filter);
+</script>
+</body>
+</html>

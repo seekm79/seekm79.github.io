@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dialbook · ヘルプセンター">
+<script>
+  // Open the language the visitor chose last time (kept in this browser only).
+  (function () {
+    try {
+      var pages = {"en": "help.html", "ms": "help-ms.html", "zh": "help-zh.html", "id": "help-id.html", "ja": "help-ja.html", "ko": "help-ko.html", "de": "help-de.html", "nl": "help-nl.html", "fr": "help-fr.html", "it": "help-it.html", "es": "help-es.html", "pt": "help-pt.html", "hi": "help-hi.html", "bn": "help-bn.html", "ar": "help-ar.html", "ru": "help-ru.html"}, saved = localStorage.getItem('skm-help-lang');
+      if (saved && saved !== 'ja' && pages[saved]) location.replace(pages[saved] + location.hash);
+    } catch (e) {}
+  })();
+</script>
+<title>Dialbook · ヘルプセンター</title>
+<link rel="alternate" hreflang="en" href="help.html"><link rel="alternate" hreflang="ms" href="help-ms.html"><link rel="alternate" hreflang="zh" href="help-zh.html"><link rel="alternate" hreflang="id" href="help-id.html"><link rel="alternate" hreflang="ja" href="help-ja.html"><link rel="alternate" hreflang="ko" href="help-ko.html"><link rel="alternate" hreflang="de" href="help-de.html"><link rel="alternate" hreflang="nl" href="help-nl.html"><link rel="alternate" hreflang="fr" href="help-fr.html"><link rel="alternate" hreflang="it" href="help-it.html"><link rel="alternate" hreflang="es" href="help-es.html"><link rel="alternate" hreflang="pt" href="help-pt.html"><link rel="alternate" hreflang="hi" href="help-hi.html"><link rel="alternate" hreflang="bn" href="help-bn.html"><link rel="alternate" hreflang="ar" href="help-ar.html"><link rel="alternate" hreflang="ru" href="help-ru.html">
+<link rel="icon" href="img/icon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  .hero { padding: 64px 0 28px; position: relative; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 14px 0; }
+  .hero p { max-width: 640px; }
+  .search { margin-top: 28px; position: relative; max-width: 640px; }
+  .search input { width: 100%; padding: 18px 52px; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(180deg,#fff,#FBFAF5); font: inherit; font-size: 16px; color: var(--ink); outline: none; box-shadow: var(--shadow-card); }
+  .search input:focus { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft), var(--shadow-card); }
+  .search svg { position: absolute; inset-inline-start: 18px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--mute); }
+  .count { color: var(--mute); font-size: 13px; margin-top: 10px; min-height: 20px; }
+  .layout { display: grid; grid-template-columns: 250px 1fr; gap: 48px; padding: 28px 0 96px; align-items: start; }
+  aside { position: sticky; top: 96px; max-height: calc(100vh - 110px); overflow: auto; padding-right: 8px; }
+  .toc-group { margin-bottom: 18px; }
+  .toc-title { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--teal-deep); margin-bottom: 6px; }
+  .toc-group ul { list-style: none; margin: 0; padding: 0; }
+  .toc-group li a { display: block; padding: 5px 10px; font-size: 14px; color: var(--ink); border-inline-start: 2px solid transparent; margin-inline-start: -12px; }
+  .toc-group li a:hover { border-inline-start-color: var(--teal); color: var(--navy); }
+  .group h2 { font-size: 2.2rem; margin: 0 0 16px; padding-top: 8px; }
+  .group + .group { margin-top: 56px; }
+  .article { padding: 28px 30px; margin-bottom: 18px; display: grid; gap: 28px; }
+  .article.has-shot { grid-template-columns: minmax(0, 1fr) 236px; align-items: start; }
+  .article.has-shot:has(.shot.kind-ipad) { grid-template-columns: 1fr; }
+  .article h3 { margin: 0 0 10px; font-size: 1.3rem; font-weight: 600; }
+  .article p, .article li { color: var(--body); font-size: 15.5px; }
+  .article p { margin: 0 0 10px; } .article ol, .article ul { margin: 0 0 12px; padding-left: 22px; } .article li { margin: 4px 0; }
+  .article strong { color: var(--ink); font-weight: 600; background: linear-gradient(180deg, transparent 60%, rgba(20,163,154,.18) 60%); padding: 0 2px; border-radius: 3px; }
+  .article em { color: var(--navy); }
+  .article:target { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft), var(--shadow-card); }
+  .article.hidden, .group.hidden { display: none; }
+  .shot { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .shot .phone { width: 210px; }
+  .shot .tablet { max-width: 760px; }
+  .shot .phone, .shot .tablet { position: relative; }
+  .shot-img { position: absolute; inset: 8px; }
+  .shot .tablet .shot-img { inset: 14px; }
+  .shot-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .phone .shot-img img { border-radius: 30px; } .tablet .shot-img img { border-radius: 22px; }
+  .mark, .mark-n { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 999px; background: linear-gradient(135deg, #22BFB4, #0E7F78); color: #fff; font-size: 11.5px; font-weight: 800; box-shadow: 0 2px 6px rgba(0,0,0,.35), 0 0 0 2px #fff; font-family: 'Onest', sans-serif; font-style: normal; }
+  .mark-box { position: absolute; z-index: 3; border: 2px solid #14A39A; border-radius: 7px; box-shadow: 0 0 0 2px rgba(255,255,255,.85), 0 0 0 999px rgba(10,37,64,.0); pointer-events: none; }
+  .mark { position: absolute; left: 0; top: 0; transform: translate(-55%, -55%); }
+  .shot figcaption { font-size: 12.5px; color: var(--mute); text-align: center; line-height: 1.45; }
+  .legend { list-style: none; margin: 0; padding: 0; width: 100%; font-size: 12.5px; color: var(--body); }
+  .legend li { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; line-height: 1.4; }
+  .legend b { font-weight: 600; color: var(--ink); }
+  .legend small { color: var(--mute); font-size: 12px; }
+  .legend .mark-n { width: 18px; height: 18px; font-size: 10px; flex: none; margin-top: 1px; }
+  .support { padding: 36px; margin-top: 48px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+  .support p { margin: 6px 0 0; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 24px; }
+    aside { position: static; max-height: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px 24px; }
+    .article { padding: 22px; } .article.has-shot { grid-template-columns: 1fr; }
+    .shot .phone { width: 220px; }
+  }
+  .nav-end { display: flex; align-items: center; gap: 12px; }
+  .lang-pick select { appearance: none; -webkit-appearance: none; background: rgba(255,255,255,.08) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23F5F3EC' stroke-width='1.5'/></svg>") no-repeat right 12px center; color: #fff; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 9px 32px 9px 16px; font: inherit; font-size: 13px; cursor: pointer; max-width: 150px; }
+  [dir=rtl] .lang-pick select { background-position: left 12px center; padding: 9px 16px 9px 32px; }
+  .lang-pick select option { color: #0A2540; background: #fff; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .shots-note { color: var(--mute); font-size: 13px; margin: 10px 0 0; }
+  @media (max-width: 520px) { .nav-end .btn { display: none; } }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/icon.png" width="30" height="30" alt=""><span class="serif">Dialbook</span><span class="crumb">/</span><span style="color:rgba(245,243,236,.7)">ヘルプセンター</span></a>
+    <div class="links"><a href="index.html">Dialbook</a><a href="privacy.html">プライバシー</a><a href="../../">SKM Studio</a></div>
+    <div class="nav-end"><label class="lang-pick"><span class="sr">言語</span><select id="lang" aria-label="言語"><option value="help.html" data-lang="en">English</option><option value="help-ms.html" data-lang="ms">Bahasa Melayu</option><option value="help-zh.html" data-lang="zh">中文（简体）</option><option value="help-id.html" data-lang="id">Bahasa Indonesia</option><option value="help-ja.html" data-lang="ja" selected>日本語</option><option value="help-ko.html" data-lang="ko">한국어</option><option value="help-de.html" data-lang="de">Deutsch</option><option value="help-nl.html" data-lang="nl">Nederlands</option><option value="help-fr.html" data-lang="fr">Français</option><option value="help-it.html" data-lang="it">Italiano</option><option value="help-es.html" data-lang="es">Español</option><option value="help-pt.html" data-lang="pt">Português</option><option value="help-hi.html" data-lang="hi">हिन्दी</option><option value="help-bn.html" data-lang="bn">বাংলা</option><option value="help-ar.html" data-lang="ar">العربية</option><option value="help-ru.html" data-lang="ru">Русский</option></select></label><a class="btn btn-teal btn-sm" href="mailto:kuanmeng.see@gmail.com?subject=Dialbook%20support">サポートにメール</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="glow" style="width:520px;height:520px;right:-200px;top:-200px;background:radial-gradient(circle, rgba(20,163,154,.28), transparent 70%);"></div>
+    <div class="eyebrow">— ヘルプセンター</div>
+    <h1 class="serif">お困りの <em>ことは？</em></h1>
+    <p class="lead">各記事はアプリ内の「ヘルプ」と同じ内容です。強調された名前は画面上の表記そのままで、番号の印はその場所を示します。</p>
+    <p class="shots-note">スクリーンショットは英語表示です。</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="ヘルプを検索（例：バックアップ、約束、インポート）…" aria-label="ヘルプを検索（例：バックアップ、約束、インポート）…" autocomplete="off">
+    </div>
+    <div class="count" id="count"></div>
+  </section>
+
+  <div class="layout">
+    <aside id="toc">
+      <div class="toc-group"><div class="toc-title">はじめに</div><ul><li><a href="#first_setup">はじめに</a></li><li><a href="#work_types">営業、債権回収、またはその両方</a></li><li><a href="#add_contact">連絡先を手動で追加する</a></li><li><a href="#edit_contact">連絡先を編集する</a></li><li><a href="#search">連絡先を探す</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">キャンペーンとリード</div><ul><li><a href="#import_excel">ExcelやCSVの表を取り込む</a></li><li><a href="#campaign_offer">キャンペーンの内容を書いておく</a></li><li><a href="#delete_campaign">キャンペーンを削除する</a></li><li><a href="#share_lead">チームメンバーにリードを共有する</a></li><li><a href="#receive_lead">チームメンバーからリードを受け取る</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">発信</div><ul><li><a href="#start_dialing">キャンペーンに順に電話をかける</a></li><li><a href="#log_result">通話の結果を記録する</a></li><li><a href="#callbacks">折り返し</a></li><li><a href="#skip_contact">連絡先をスキップする</a></li><li><a href="#phone_tags">番号に印をつける:OK・無効・発信禁止</a></li><li><a href="#blocked_numbers">発信しない番号のリスト</a></li><li><a href="#call_log_android">端末の通話履歴から通話時間を取得する(Android)</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">タスクと通知</div><ul><li><a href="#tasks">タスク</a></li><li><a href="#add_task">タスクを追加する</a></li><li><a href="#alerts">要確認</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">営業</div><ul><li><a href="#pipeline_stages">パイプラインのステージ</a></li><li><a href="#mark_won_lost">商談を受注・失注にする</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">債権回収</div><ul><li><a href="#record_promise">支払約束を記録する</a></li><li><a href="#record_payment">入金を記録する</a></li><li><a href="#broken_promises">約束不履行</a></li><li><a href="#aging">延滞期間別の未払い額</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">WhatsAppとメール</div><ul><li><a href="#whatsapp_template">テンプレートからWhatsAppを送る</a></li><li><a href="#email_template">テンプレートからメールを送る</a></li><li><a href="#edit_templates">メッセージテンプレートを作成・変更する</a></li><li><a href="#placeholders">メッセージの差し込み項目</a></li><li><a href="#ai_templates">AIにテンプレートを書いてもらう</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">レポート</div><ul><li><a href="#open_report">レポート</a></li><li><a href="#report_salesperf">営業実績レポート</a></li><li><a href="#report_paymentsperf">入金実績レポート(期間別)</a></li><li><a href="#report_touches">通話・WhatsApp・メールレポート</a></li><li><a href="#report_targetpace">目標の達成ペースレポート</a></li><li><a href="#report_forecast">回収の見込みレポート</a></li><li><a href="#report_recovery">延滞期間別の回収状況レポート</a></li><li><a href="#report_dealflow">ステージ別の商談の流れレポート</a></li><li><a href="#report_whatworks">効果の高い方法レポート</a></li><li><a href="#report_activity">日別の活動レポート</a></li><li><a href="#report_results">通話結果レポート</a></li><li><a href="#report_campaigns">キャンペーン別の成果レポート</a></li><li><a href="#report_besttime">発信に適した時間帯レポート</a></li><li><a href="#report_weekday">曜日別の発信レポート</a></li><li><a href="#report_pipeline">営業パイプラインレポート</a></li><li><a href="#report_wonlost">受注・失注した商談レポート</a></li><li><a href="#report_attempts">受注までの発信回数レポート</a></li><li><a href="#report_nevercalled">未発信レポート</a></li><li><a href="#report_aging">延滞期間別の未払い額レポート</a></li><li><a href="#report_promises">支払約束レポート</a></li><li><a href="#report_payments">入金履歴レポート</a></li><li><a href="#report_followups">対応が必要な予定レポート</a></li><li><a href="#report_statement">顧客別明細レポート</a></li><li><a href="#report_filters">レポートの対象を変える</a></li><li><a href="#share_pdf_csv">レポートを共有・印刷する</a></li><li><a href="#customer_statement">顧客別明細</a></li><li><a href="#monthly_targets">月間目標</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">AIアシスタント</div><ul><li><a href="#ai_setup">AIアシスタントを設定する</a></li><li><a href="#ai_privacy_masking">AIに渡る情報</a></li><li><a href="#ai_chat_history">AIとのチャットと履歴</a></li><li><a href="#ai_show_hide">AIを表示する/隠す</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">バックアップとデータ</div><ul><li><a href="#backup_file">バックアップを作成する</a></li><li><a href="#restore">バックアップを復元する</a></li><li><a href="#automatic_backup">端末の自動バックアップ</a></li><li><a href="#new_phone">新しい端末に移行する</a></li><li><a href="#erase">すべてのデータを消去する</a></li></ul></div>
+<div class="toc-group"><div class="toc-title">設定</div><ul><li><a href="#language">言語</a></li><li><a href="#currency">通貨</a></li><li><a href="#dark_mode">ダークモード</a></li><li><a href="#my_profile">あなたの名前と販売している商品</a></li><li><a href="#custom_results">独自の通話結果</a></li><li><a href="#tablet_layout">iPadやタブレットで使う</a></li></ul></div>
+    </aside>
+    <div id="articles">
+      <section class="group" id="g-start"><h2 class="serif">はじめに</h2>
+<article id="first_setup" class="article card static has-shot"><div class="art-text"><h3>はじめに</h3><p>Dialbookは、発信リスト、通話、支払約束、入金をこの端末に保存します。アカウントもサーバーもありません。</p>
+<p><strong>最初に</strong></p>
+<ol><li>電話を何に使うかを選びます:<strong>営業</strong>、<strong>債権回収</strong>、またはその両方。</li><li>サンプルの連絡先でアプリを試すなら<strong>サンプルの連絡先で始める</strong>をオンのままに、空の状態から始めるならオフにします。</li><li><strong>始める</strong>をタップします。</li></ol>
+<p><strong>次に</strong></p>
+<ul><li>ExcelやCSVから顧客を取り込みます:<a href="#import_excel">ExcelやCSVの表を取り込む</a></li><li>キャンペーンを開いて<strong>発信を開始</strong>をタップし、順に電話をかけます:<a href="#start_dialing">キャンペーンに順に電話をかける</a></li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/home.webp" alt="はじめに" loading="lazy"><span class="mark-box" style="left:34.1%;top:29.6%;width:31.6%;height:3.6%" title="営業"><span class="mark">1</span></span><span class="mark-box" style="left:64.8%;top:29.6%;width:31.6%;height:3.6%" title="債権回収"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>営業</b><br><small>電話を何に使うかを選びます:営業、債権回収、またはその両方。</small></span></li><li><span class="mark-n">2</span><span><b>債権回収</b><br><small>電話を何に使うかを選びます:営業、債権回収、またはその両方。</small></span></li></ol></figure></article>
+<article id="work_types" class="article card static has-shot"><div class="art-text"><h3>営業、債権回収、またはその両方</h3><p>アプリには、選んだ業務だけが表示されます。回収だけをする人には、営業のタブは表示されません。</p>
+<p><strong>変更するには</strong></p>
+<ol><li><strong>その他</strong> › <strong>アプリの用途</strong>を開きます。</li><li><strong>営業</strong>または<strong>債権回収</strong>をオンまたはオフにします。</li></ol>
+<p>オフにすると、その業務のタブ、レポート、通知が非表示になります。キャンペーンや連絡先は端末に残り、もう一度オンにすると元どおり表示されます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/worktypes.webp" alt="営業、債権回収、またはその両方" loading="lazy"><span class="mark-box" style="left:0.0%;top:12.0%;width:100.0%;height:8.6%" title="営業"><span class="mark">1</span></span><span class="mark-box" style="left:0.0%;top:20.0%;width:100.0%;height:8.6%" title="債権回収"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>営業</b><br><small>営業または債権回収をオンまたはオフにします。</small></span></li><li><span class="mark-n">2</span><span><b>債権回収</b><br><small>営業または債権回収をオンまたはオフにします。</small></span></li></ol></figure></article>
+<article id="add_contact" class="article card static has-shot"><div class="art-text"><h3>連絡先を手動で追加する</h3><ol><li><strong>営業</strong>または<strong>回収</strong>を開きます。</li><li>上部の<strong>+</strong>か、キャンペーン一覧の下にある<strong>リードを追加</strong> / <strong>債権を追加</strong>をタップします。</li><li>少なくとも名前と電話番号を入力し、キャンペーンを選んで保存します。</li></ol>
+<p><strong>補足</strong></p>
+<ul><li>同じキャンペーンにすでにある番号は追加できません。同じ相手に二重に電話するのを防ぐためです。</li><li>別のキャンペーンで<strong>発信禁止</strong>や<strong>無効な番号</strong>にした番号は、最初からその印がついた状態で追加されます:<a href="#blocked_numbers">発信しない番号のリスト</a></li><li>まとめて追加したいときは、表を取り込むほうが簡単です:<a href="#import_excel">ExcelやCSVの表を取り込む</a></li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/add_account.webp" alt="連絡先を手動で追加する" loading="lazy"></div></div></figure></article>
+<article id="edit_contact" class="article card static has-shot"><div class="art-text"><h3>連絡先を編集する</h3><ol><li>連絡先を開きます。</li><li>右上の鉛筆(<strong>編集</strong>)をタップします。</li><li>名前、電話番号、メール、会社、金額を変更して保存します。</li></ol>
+<p>電話番号を変更すると、その番号の印(<strong>無効な番号</strong>、<strong>発信禁止</strong>)は解除されます。ただし、新しい番号が発信しない番号のリストにある場合は除きます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="連絡先を編集する" loading="lazy"></div></div></figure></article>
+<article id="search" class="article card static has-shot"><div class="art-text"><h3>連絡先を探す</h3><ol><li><strong>ホーム</strong>で、右上の丸い虫めがねをタップします。</li><li>名前、会社、メール、電話番号の一部を入力します。電話番号は書き方が違っても見つかります(「012-338 4471」でも「0123384471」でも)。</li></ol>
+<p>キャンペーンの中では、一覧の上にある検索欄でそのキャンペーン内だけを検索できます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/search.webp" alt="連絡先を探す" loading="lazy"></div></div></figure></article>
+</section>
+<section class="group" id="g-lists"><h2 class="serif">キャンペーンとリード</h2>
+<article id="import_excel" class="article card static has-shot"><div class="art-text"><h3>ExcelやCSVの表を取り込む</h3><ol><li><strong>その他</strong> › <strong>ExcelまたはCSVを取り込む</strong>を開きます(<strong>営業</strong> / <strong>回収</strong>にも同じ項目があります)。</li><li>アプリ専用の表から始めます。<strong>Excel テンプレートをダウンロード</strong>をタップし、ExcelかGoogleスプレッドシートで入力するか、リストを持っている人に送ります。列名があらかじめ入っているので、対応づけはすぐ終わります。先に取り込みの様子を見たいときは、<strong>サンプルのシートで試す</strong>をタップします。</li><li><strong>ExcelまたはCSVファイルを選ぶ</strong>をタップし、.xlsxまたは.csvファイルを選びます。1行目に列名が必要です。</li><li>列を対応づけます。名前と電話番号は必須です。会社、メール、金額、期日、言語は任意です。</li><li><strong>これらの連絡先の用途</strong>を選び、リストに名前をつけ(<strong>リスト名</strong>)、プレビューを確認して取り込みます。</li></ol>
+<p><strong>日付(期日)</strong></p>
+<ul><li>最も確実なのは、本物のExcelの日付(セルの書式が日付)か、2026-12-31、31 Dec 2026、Dec 31, 2026のような文字です。これらは1つの日にしか読めません。</li><li>31/12/2026や12/31/2026のような数字だけの日付は、2通りに読めます。アプリは列全体を調べ、見つけた<strong>日付の形式</strong>(<strong>日/月/年</strong>または<strong>月/日/年</strong>)を表示します。どちらかわからない場合(すべての日が12以下)は、取り込む前に選んでください。</li><li>列全体で同じ形式にそろえてください。選んだ順序に合わない日付は取り込まれず、保存されるスキップした行の一覧に理由が書かれます。</li><li>年は2000~2100の範囲にしてください。26のような2桁の年は2026と読まれます。</li></ul>
+<p><strong>金額(商談の金額、未払い額)</strong></p>
+<ul><li>4250や4250.00のような、ふつうの数字が最適です。</li><li>4,250.00、RM 4,250、MYR 1,000、$1,250、1.234,56(カンマが小数点)も正しく読まれます。</li><li>マイナスは避けてください。-500、500-、(500)は、債権が0円より少なくなることはないため、受け付けられません。「約5k」や「未定」のような文字も避けてください。</li><li>金額は通貨間で換算されません。設定で選んだ通貨で表示されます。</li></ul>
+<p><strong>電話番号</strong></p>
+<ul><li>どの書き方でも使えます。012-338 4471、0123384471、+60 12-338 4471は同じ番号です。</li><li>2つ目の番号は別の列に入れられます(会社の電話、別の携帯など)。</li><li>電話番号のない行と、重複した番号は取り込まれません。</li></ul>
+<p><strong>補足</strong></p>
+<ul><li>大きな表(100万行でも)はバックグラウンドで取り込まれます。下部のバーに進み具合が表示され、そのまま別の作業ができます。キャンセルすると、追加した分がすべて削除されます。</li><li>すでに<strong>発信禁止</strong>や<strong>無効な番号</strong>にした番号は、その印がついた状態で取り込まれ、件数が概要に表示されます。</li><li>取り込みごとに新しいキャンペーンが作られます。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/import.webp" alt="ExcelやCSVの表を取り込む" loading="lazy"><span class="mark-box" style="left:6.4%;top:34.6%;width:87.5%;height:5.9%" title="Excel テンプレートをダウンロード"><span class="mark">1</span></span><span class="mark-box" style="left:6.4%;top:28.3%;width:87.5%;height:5.9%" title="サンプルのシートで試す"><span class="mark">2</span></span><span class="mark-box" style="left:6.4%;top:22.1%;width:87.5%;height:5.9%" title="ExcelまたはCSVファイルを選ぶ"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>Excel テンプレートをダウンロード</b><br><small>アプリ専用の表から始めます。Excel…</small></span></li><li><span class="mark-n">2</span><span><b>サンプルのシートで試す</b><br><small>アプリ専用の表から始めます。Excel…</small></span></li><li><span class="mark-n">3</span><span><b>ExcelまたはCSVファイルを選ぶ</b><br><small>ExcelまたはCSVファイルを選ぶをタップし、.xlsxまたは.csvファイルを選びます。1行目に列名が必要です。</small></span></li></ol></figure></article>
+<article id="campaign_offer" class="article card static has-shot"><div class="art-text"><h3>キャンペーンの内容を書いておく</h3><p>「オフィス清掃、新規のお客様は10%オフ」のような短い一文があると、通話中の確認に役立ちます。AIがそのキャンペーン向けのメッセージやトークを作るときにも使われます。</p>
+<ol><li>キャンペーンを開きます。</li><li><strong>このキャンペーンの内容</strong>をタップして入力します。</li></ol></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/campaign_sales.webp" alt="キャンペーンの内容を書いておく" loading="lazy"><span class="mark-box" style="left:3.2%;top:40.9%;width:93.9%;height:6.9%" title="このキャンペーンの内容"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>このキャンペーンの内容</b><br><small>このキャンペーンの内容をタップして入力します。</small></span></li></ol></figure></article>
+<article id="delete_campaign" class="article card static has-shot"><div class="art-text"><h3>キャンペーンを削除する</h3><ol><li>キャンペーンを開きます。</li><li>右上の赤いゴミ箱をタップし、<strong>キャンペーンを削除</strong>で確定します。</li></ol>
+<p>そのキャンペーンの連絡先と、その通話・支払約束・入金・タスクが端末から削除されます。元に戻せないので、あとで必要になりそうなら先にバックアップを作成してください:<a href="#backup_file">バックアップを作成する</a></p>
+<p>一時的に外したいだけなら、キャンペーンの画面で<strong>有効</strong>をオフにしてください。タスク・折り返し・発信が今日の作業から外れ、データは削除されません。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/campaign.webp" alt="キャンペーンを削除する" loading="lazy"><span class="mark-box" style="left:0.0%;top:17.4%;width:100.0%;height:12.4%" title="有効"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>有効</b><br><small>一時的に外したいだけなら、キャンペーンの画面で有効をオフにしてください。タスク・折り返し・発信が今日の作業から外れ、データは削除されません。</small></span></li></ol></figure></article>
+<article id="share_lead" class="article card static has-shot"><div class="art-text"><h3>チームメンバーにリードを共有する</h3><ol><li>連絡先を開きます。</li><li>上部のQRアイコン(<strong>リードを共有</strong>)をタップします。</li><li>相手にスマホでQRコードをスキャンしてもらいます。<strong>最新のメモを含める</strong>をオンにすると、最後の通話メモも一緒に渡せます。</li></ol>
+<p>相手は<strong>リードを受け取る</strong>でスキャンします:<a href="#receive_lead">チームメンバーからリードを受け取る</a>。サーバーやインターネットは一切経由しません。リードの情報はQRコードの中に入っています。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/share_lead.webp" alt="チームメンバーにリードを共有する" loading="lazy"><span class="mark-box" style="left:3.9%;top:83.6%;width:92.3%;height:8.2%" title="最新のメモを含める"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>最新のメモを含める</b><br><small>相手にスマホでQRコードをスキャンしてもらいます。最新のメモを含めるをオンにすると、最後の通話メモも一緒に渡せます。</small></span></li></ol></figure></article>
+<article id="receive_lead" class="article card static has-shot"><div class="art-text"><h3>チームメンバーからリードを受け取る</h3><ol><li><strong>その他</strong> › <strong>リードを受け取る</strong>を開きます(<strong>営業</strong> / <strong>回収</strong>にもあります)。</li><li>カメラが開きます。相手のスマホに表示されたQRコードにカメラを向けます(相手は連絡先を開いて<strong>リードを共有</strong>をタップします)。</li><li>リードの内容を確認し、<strong>追加先のキャンペーン</strong>を選んで<strong>リードを追加</strong>をタップします。</li></ol>
+<p>すでにリストにある番号なら、追加する前にお知らせします。追加したリードには、相手のメモつきで今日の折り返しが設定されます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/receive_lead.webp" alt="チームメンバーからリードを受け取る" loading="lazy"><span class="mark-box" style="left:39.5%;top:38.1%;width:17.5%;height:2.9%" title="リードを共有"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>リードを共有</b><br><small>カメラが開きます。相手のスマホに表示されたQRコードにカメラを向けます(相手は連絡先を開いてリードを共有をタップします)。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-calling"><h2 class="serif">発信</h2>
+<article id="start_dialing" class="article card static has-shot"><div class="art-text"><h3>キャンペーンに順に電話をかける</h3><ol><li><strong>営業</strong>または<strong>回収</strong>を開き、キャンペーンをタップします。</li><li>緑色の<strong>発信を開始</strong>ボタンをタップします。</li><li>大きく表示された電話番号をタップすると、端末の電話アプリが開きます。そのまま通話します。</li><li>アプリに戻り、<strong>この通話の結果</strong>を選び、必要ならメモを書いて、<strong>保存して次へ</strong>をタップします。</li></ol>
+<p>順番は、期日が来た折り返しと約束不履行が先で、その後は金額の大きい順です。<strong>スキップ</strong>で記録せずに次へ進めます。<strong>発信禁止</strong>や<strong>無効な番号</strong>の番号には発信しません。</p>
+<p>先にこのお客様の対応(タスク、WhatsApp)をしたいときは、<strong>保存</strong>をタップします。通話が記録され、<strong>次へ</strong>をタップするまで画面に残ります。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer.webp" alt="キャンペーンに順に電話をかける" loading="lazy"><span class="mark-box" style="left:47.5%;top:74.5%;width:45.9%;height:5.9%" title="保存して次へ"><span class="mark">1</span></span><span class="mark-box" style="left:6.8%;top:74.5%;width:18.9%;height:5.9%" title="スキップ"><span class="mark">2</span></span><span class="mark-box" style="left:26.6%;top:74.5%;width:20.0%;height:5.9%" title="保存"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>保存して次へ</b><br><small>アプリに戻り、この通話の結果を選び、必要ならメモを書いて、保存して次へをタップします。</small></span></li><li><span class="mark-n">2</span><span><b>スキップ</b><br><small>順番は、期日が来た折り返しと約束不履行が先で、その後は金額の大きい順です。スキップで記録せずに次へ進めます。発信禁止や無効な番号の番号には発信しません。</small></span></li><li><span class="mark-n">3</span><span><b>保存</b><br><small>先にこのお客様の対応(タスク、WhatsApp)をしたいときは、保存をタップします。通話が記録され、次へをタップするまで画面に残ります。</small></span></li></ol></figure></article>
+<article id="log_result" class="article card static has-shot"><div class="art-text"><h3>通話の結果を記録する</h3><p>通話が終わったら、<strong>この通話の結果</strong>から結果を1つ選びます:</p>
+<ul><li><strong>折り返し</strong>:日付を選ぶと、折り返しのタスクが作られます:<a href="#callbacks">折り返し</a></li><li><strong>支払約束</strong>:約束された金額と日付を入力します:<a href="#record_promise">支払約束を記録する</a></li><li><strong>一部入金</strong> / <strong>全額入金</strong>:入金が記録されます:<a href="#record_payment">入金を記録する</a></li><li><strong>番号違い</strong>:その番号がすべての場所で<strong>無効な番号</strong>になります。</li><li>独自の結果:<a href="#custom_results">独自の通話結果</a></li></ul>
+<p>話した内容をメモ欄に書き、<strong>保存して次へ</strong>をタップします。結果、メモ、時刻は連絡先の<strong>通話履歴</strong>に残ります。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer.webp" alt="通話の結果を記録する" loading="lazy"><span class="mark-box" style="left:6.8%;top:61.2%;width:20.9%;height:4.5%" title="折り返し"><span class="mark">1</span></span><span class="mark-box" style="left:6.8%;top:56.5%;width:30.0%;height:4.5%" title="支払約束"><span class="mark">2</span></span><span class="mark-box" style="left:60.9%;top:56.5%;width:31.1%;height:4.5%" title="一部入金"><span class="mark">3</span></span><span class="mark-box" style="left:37.3%;top:56.5%;width:23.2%;height:4.5%" title="全額入金"><span class="mark">4</span></span><span class="mark-box" style="left:47.5%;top:74.5%;width:45.9%;height:5.9%" title="保存して次へ"><span class="mark">5</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>折り返し</b><br><small>折り返し:日付を選ぶと、折り返しのタスクが作られます:折り返し</small></span></li><li><span class="mark-n">2</span><span><b>支払約束</b><br><small>支払約束:約束された金額と日付を入力します:支払約束を記録する</small></span></li><li><span class="mark-n">3</span><span><b>一部入金</b><br><small>一部入金 / 全額入金:入金が記録されます:入金を記録する</small></span></li><li><span class="mark-n">4</span><span><b>全額入金</b><br><small>一部入金 / 全額入金:入金が記録されます:入金を記録する</small></span></li><li><span class="mark-n">5</span><span><b>保存して次へ</b><br><small>話した内容をメモ欄に書き、保存して次へをタップします。結果、メモ、時刻は連絡先の通話履歴に残ります。</small></span></li></ol></figure></article>
+<article id="callbacks" class="article card static has-shot"><div class="art-text"><h3>折り返し</h3><p><strong>折り返し</strong>を記録すると、次に電話する日が決まります。当日になると、その連絡先は発信の順番で最初に回り、<strong>ホーム</strong>の<strong>今すぐ対応</strong>に表示され、<strong>折り返し</strong>のタスクにもなります。</p>
+<ul><li>日付の変更や時刻の追加はタスクから行います:<strong>すべてのタスク</strong>を開いて、そのタスクをタップします。</li><li>タスクを完了にすると、折り返しも解除されます。</li><li>次の通話で別の結果を記録した場合も解除されます。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/tasks.webp" alt="折り返し" loading="lazy"></div></div></figure></article>
+<article id="skip_contact" class="article card static has-shot"><div class="art-text"><h3>連絡先をスキップする</h3><p>発信画面で<strong>スキップ</strong>をタップすると、何も記録せずに次の連絡先に進みます。スキップした連絡先は順番に残り、次回また表示されます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer.webp" alt="連絡先をスキップする" loading="lazy"><span class="mark-box" style="left:6.8%;top:74.5%;width:18.9%;height:5.9%" title="スキップ"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>スキップ</b><br><small>発信画面でスキップをタップすると、何も記録せずに次の連絡先に進みます。スキップした連絡先は順番に残り、次回また表示されます。</small></span></li></ol></figure></article>
+<article id="phone_tags" class="article card static has-shot"><div class="art-text"><h3>番号に印をつける:OK・無効・発信禁止</h3><ol><li>連絡先を開き、電話番号をタップします。</li><li><strong>OK</strong>、<strong>無効な番号</strong>、<strong>発信禁止</strong>のいずれかを選びます。</li></ol>
+<p>発信画面では、発信ボタンの下にある<strong>この番号に印をつける</strong>でも同じことができます。</p>
+<ul><li>印がついた番号には発信しません。ほかに番号があれば、そちらを使います。</li><li>発信できる番号がなくなった連絡先は、発信の順番と「残り件数」から外れます。</li><li><strong>発信禁止</strong>の相手にもWhatsAppやメールは送れますが、先に注意が表示されます。</li><li>印はすべてのキャンペーンのその番号に適用されます:<a href="#blocked_numbers">発信しない番号のリスト</a></li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="番号に印をつける:OK・無効・発信禁止" loading="lazy"></div></div></figure></article>
+<article id="blocked_numbers" class="article card static has-shot"><div class="art-text"><h3>発信しない番号のリスト</h3><p><strong>無効な番号</strong>または<strong>発信禁止</strong>にした番号は、アプリ全体で1つのリストにまとめられます。番号は末尾9桁で照合するため、「012-338 4471」と「+60 12-338 4471」は同じ番号として扱われます。</p>
+<ul><li>あるキャンペーンで印をつけると、すべてのキャンペーンに反映されます。</li><li>取り込み、新しい連絡先、共有されたリードも、最初から印がついた状態で追加されます。取り込みの結果画面に件数が表示されます。</li><li><strong>OK</strong>に戻すと、すべての場所で解除されます。</li></ul>
+<p><strong>番号に印をつけるには</strong></p>
+<ol><li>連絡先を開き、電話番号をタップします。</li><li><strong>発信禁止</strong>または<strong>無効な番号</strong>を選びます(解除するときは<strong>OK</strong>)。</li></ol>
+<p>詳しくはこちら:<a href="#phone_tags">番号に印をつける:OK・無効・発信禁止</a></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="発信しない番号のリスト" loading="lazy"></div></div></figure></article>
+<article id="call_log_android" class="article card static has-shot"><div class="art-text"><h3>端末の通話履歴から通話時間を取得する(Android)</h3><p>Androidでは、端末の通話履歴から各通話の長さを読み取り、記録した通話に自動で追加できます。</p>
+<ol><li><strong>その他</strong> › <strong>通話履歴</strong>を開きます。</li><li><strong>通話時刻と通話時間を自動で記録</strong>をオンにして、アクセスを許可します。</li></ol>
+<p>iPhoneではアプリが通話履歴を読み取れないため、この機能はAndroid専用です。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/calllog.webp" alt="端末の通話履歴から通話時間を取得する(Android)" loading="lazy"><span class="mark-box" style="left:3.0%;top:12.9%;width:94.1%;height:6.5%" title="通話時刻と通話時間を自動で記録"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>通話時刻と通話時間を自動で記録</b><br><small>通話時刻と通話時間を自動で記録をオンにして、アクセスを許可します。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-tasks"><h2 class="serif">タスクと通知</h2>
+<article id="tasks" class="article card static has-shot"><div class="art-text"><h3>タスク</h3><p>タスクはやるべきことです:<strong>折り返し</strong>、<strong>アポイント</strong>、<strong>WhatsApp</strong>、<strong>メール</strong>、<strong>調べもの</strong>、<strong>情報待ち</strong>、<strong>その他</strong>。</p>
+<ul><li>すべてのタスクは<strong>タスク</strong>で確認できます:<strong>期限超過</strong>、<strong>本日期限</strong>、<strong>今後の予定</strong>、<strong>完了</strong>。<strong>ホーム</strong> › <strong>すべてのタスク</strong>から開けます。</li><li>丸をタップするか、タスクを右にスワイプすると完了になります。左にスワイプすると<strong>明日</strong>に移動します。</li><li>タスクをタップすると、1つの画面ですべて対応できます。<strong>今すぐ発信</strong>、<strong>WhatsAppを送る</strong>、<strong>メールを送る</strong>のほか、日付の変更はワンタップ、<strong>更新履歴</strong>の追加もでき、最後に<strong>完了にする</strong>をタップします。変更はすぐに保存されます。</li><li>その連絡先にWhatsAppやメールを送ると、対応する未完了のタスクが完了になります。</li></ul>
+<p>追加するには:<a href="#add_task">タスクを追加する</a></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/tasks.webp" alt="タスク" loading="lazy"><span class="mark-box" style="left:3.0%;top:4.3%;width:97.0%;height:4.9%" title="タスク"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:13.6%;width:46.6%;height:8.4%" title="期限超過"><span class="mark">2</span></span><span class="mark-box" style="left:3.0%;top:22.4%;width:46.6%;height:8.4%" title="今後の予定"><span class="mark">3</span></span><span class="mark-box" style="left:50.5%;top:22.4%;width:46.6%;height:8.4%" title="完了"><span class="mark">4</span></span><span class="mark-box" style="left:6.8%;top:97.9%;width:8.6%;height:2.1%" title="完了にする"><span class="mark">5</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>タスク</b><br><small>すべてのタスクはタスクで確認できます:期限超過、本日期限、今後の予定、完了。ホーム › すべてのタスクから開けます。</small></span></li><li><span class="mark-n">2</span><span><b>期限超過</b><br><small>すべてのタスクはタスクで確認できます:期限超過、本日期限、今後の予定、完了。ホーム › すべてのタスクから開けます。</small></span></li><li><span class="mark-n">3</span><span><b>今後の予定</b><br><small>すべてのタスクはタスクで確認できます:期限超過、本日期限、今後の予定、完了。ホーム › すべてのタスクから開けます。</small></span></li><li><span class="mark-n">4</span><span><b>完了</b><br><small>すべてのタスクはタスクで確認できます:期限超過、本日期限、今後の予定、完了。ホーム › すべてのタスクから開けます。</small></span></li><li><span class="mark-n">5</span><span><b>完了にする</b><br><small>タスクをタップすると、1つの画面ですべて対応できます。今すぐ発信、WhatsAppを送る、メールを送るのほか、日付の変更はワンタップ、更新履歴の追加もでき、最後に完了にするをタップします。変更はすぐに保存されます。</small></span></li></ol></figure></article>
+<article id="add_task" class="article card static has-shot"><div class="art-text"><h3>タスクを追加する</h3><ul><li>連絡先から:<strong>タスク</strong>の欄で<strong>タスクを追加</strong>をタップします。</li><li>発信画面から:メモ欄の下にある<strong>タスクを追加</strong>をタップします。</li><li>単独で:<strong>タスク</strong>で<strong>+</strong>をタップします。</li></ul>
+<p><strong>種類</strong>を選び、やること(または待っていること)を入力します。日付(<strong>今日</strong>、<strong>明日</strong>、<strong>日付を選ぶ</strong>)を選び、必要なら時刻も入れて、<strong>保存</strong>をタップします。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/add_task.webp" alt="タスクを追加する" loading="lazy"><span class="mark-box" style="left:3.0%;top:59.0%;width:94.1%;height:2.2%" title="種類"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:82.1%;width:17.3%;height:4.6%" title="今日"><span class="mark">2</span></span><span class="mark-box" style="left:20.7%;top:82.1%;width:23.2%;height:4.5%" title="明日"><span class="mark">3</span></span><span class="mark-box" style="left:44.3%;top:82.1%;width:23.2%;height:4.5%" title="日付を選ぶ"><span class="mark">4</span></span><span class="mark-box" style="left:3.0%;top:92.8%;width:94.1%;height:5.9%" title="保存"><span class="mark">5</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>種類</b><br><small>種類を選び、やること(または待っていること)を入力します。日付(今日、明日、日付を選ぶ)を選び、必要なら時刻も入れて、保存をタップします。</small></span></li><li><span class="mark-n">2</span><span><b>今日</b><br><small>種類を選び、やること(または待っていること)を入力します。日付(今日、明日、日付を選ぶ)を選び、必要なら時刻も入れて、保存をタップします。</small></span></li><li><span class="mark-n">3</span><span><b>明日</b><br><small>種類を選び、やること(または待っていること)を入力します。日付(今日、明日、日付を選ぶ)を選び、必要なら時刻も入れて、保存をタップします。</small></span></li><li><span class="mark-n">4</span><span><b>日付を選ぶ</b><br><small>種類を選び、やること(または待っていること)を入力します。日付(今日、明日、日付を選ぶ)を選び、必要なら時刻も入れて、保存をタップします。</small></span></li><li><span class="mark-n">5</span><span><b>保存</b><br><small>種類を選び、やること(または待っていること)を入力します。日付(今日、明日、日付を選ぶ)を選び、必要なら時刻も入れて、保存をタップします。</small></span></li></ol></figure></article>
+<article id="alerts" class="article card static has-shot"><div class="art-text"><h3>要確認</h3><p><strong>ホーム</strong>の<strong>要確認</strong>には、遅れているものと今日が期日のものが表示されます:期限超過のタスク、本日期限のタスク、本日が期日の支払約束、約束不履行の債権。各行をタップすると、その一覧が開きます。</p>
+<p><strong>ホーム</strong>の赤い数字は、今日が期日のものと遅れているものの件数です。該当がなくなると消えます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/home.webp" alt="要確認" loading="lazy"><span class="mark-box" style="left:0.0%;top:76.4%;width:100.0%;height:18.3%" title="要確認"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>要確認</b><br><small>ホームの要確認には、遅れているものと今日が期日のものが表示されます:期限超過のタスク、本日期限のタスク、本日が期日の支払約束、約束不履行の債権。各行をタップすると、その一覧が開きます。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-sales"><h2 class="serif">営業</h2>
+<article id="pipeline_stages" class="article card static has-shot"><div class="art-text"><h3>パイプラインのステージ</h3><p>営業のリードは、新規 → 連絡済み → 見込みあり → 提案 → 交渉と進み、最後に受注か失注になります。</p>
+<ul><li>ステージは通話に応じて自動で進みます。初めて電話がつながると新規から連絡済みに、<strong>関心あり</strong>を記録すると見込みありになります。</li><li>手動で変えるときは、連絡先を開いて<strong>ステージ</strong>をタップします。</li><li>全ステージは<strong>営業</strong> › <strong>パイプライン</strong>で確認できます。各ステージに商談がどれくらい留まっているかは「ステージ別の商談の流れ」レポートでわかります:<em>ステージ別の商談の流れ</em></li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/pipeline.webp" alt="パイプラインのステージ" loading="lazy"><span class="mark-box" style="left:3.0%;top:4.3%;width:97.0%;height:4.9%" title="営業"><span class="mark">1</span></span><span class="mark-box" style="left:49.5%;top:10.1%;width:47.0%;height:3.6%" title="パイプライン"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>営業</b><br><small>全ステージは営業 › パイプラインで確認できます。各ステージに商談がどれくらい留まっているかは「ステージ別の商談の流れ」レポートでわかります:ステージ別の商談の流れ</small></span></li><li><span class="mark-n">2</span><span><b>パイプライン</b><br><small>全ステージは営業 › パイプラインで確認できます。各ステージに商談がどれくらい留まっているかは「ステージ別の商談の流れ」レポートでわかります:ステージ別の商談の流れ</small></span></li></ol></figure></article>
+<article id="mark_won_lost" class="article card static has-shot"><div class="art-text"><h3>商談を受注・失注にする</h3><ul><li>通話後に<strong>受注</strong>または<strong>関心なし</strong>を選びます。</li><li>または、連絡先を開いて<strong>ステージ</strong>をタップし、「受注」か「失注」を選びます。</li></ul>
+<p>受注・失注した商談は完了扱いになり、発信の順番から外れます。受注率と「営業実績」レポートに反映されます:<em>営業実績</em></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/pipeline.webp" alt="商談を受注・失注にする" loading="lazy"><span class="mark-box" style="left:55.7%;top:19.5%;width:18.2%;height:4.5%" title="受注"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>受注</b><br><small>通話後に受注または関心なしを選びます。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-collections"><h2 class="serif">債権回収</h2>
+<article id="record_promise" class="article card static has-shot"><div class="art-text"><h3>支払約束を記録する</h3><ol><li>通話が終わったら、<strong>支払約束</strong>を選びます。</li><li><strong>約束した金額</strong>と<strong>支払約束の期日</strong>を確認して保存します。</li></ol>
+<p>約束は、連絡先の<strong>支払約束</strong>、<strong>回収</strong> › <strong>支払約束</strong>、期日当日の<strong>ホーム</strong>に表示されます。期日を過ぎても入金がなければ、約束不履行になります:<a href="#broken_promises">約束不履行</a></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/dialer_promise.webp" alt="支払約束を記録する" loading="lazy"><span class="mark-box" style="left:6.8%;top:4.3%;width:30.2%;height:3.7%" title="支払約束"><span class="mark">1</span></span><span class="mark-box" style="left:10.5%;top:18.5%;width:79.3%;height:6.8%" title="約束した金額"><span class="mark">2</span></span><span class="mark-box" style="left:6.8%;top:13.1%;width:86.6%;height:5.6%" title="支払約束の期日"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>支払約束</b><br><small>通話が終わったら、支払約束を選びます。</small></span></li><li><span class="mark-n">2</span><span><b>約束した金額</b><br><small>約束した金額と支払約束の期日を確認して保存します。</small></span></li><li><span class="mark-n">3</span><span><b>支払約束の期日</b><br><small>約束した金額と支払約束の期日を確認して保存します。</small></span></li></ol></figure></article>
+<article id="record_payment" class="article card static has-shot"><div class="art-text"><h3>入金を記録する</h3><ul><li>通話中:<strong>一部入金</strong>(<strong>入金額</strong>を入力)または<strong>全額入金</strong>を選びます。</li><li>いつでも:連絡先を開いて<strong>入金を記録</strong>をタップします。</li></ul>
+<p>未払い額が減り、条件を満たした支払約束は履行済みになります。入金は<strong>入金履歴</strong>とレポートに表示されます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="入金を記録する" loading="lazy"><span class="mark-box" style="left:50.5%;top:41.5%;width:23.0%;height:8.6%" title="入金を記録"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>入金を記録</b><br><small>いつでも:連絡先を開いて入金を記録をタップします。</small></span></li></ol></figure></article>
+<article id="broken_promises" class="article card static has-shot"><div class="art-text"><h3>約束不履行</h3><p>期日を過ぎても入金がない支払約束は「約束不履行」になります。該当する債権は発信の順番で最初に回り、<strong>ホーム</strong>の<strong>要確認</strong>に表示され、一覧の行にも印がつきます。</p>
+<p>督促するには、<strong>要確認</strong>の約束不履行の行をタップして、上から順に対応します。どの約束が入金されそうかは「回収の見込み」レポートで確認できます:<em>回収の見込み</em></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/promises.webp" alt="約束不履行" loading="lazy"></div></div></figure></article>
+<article id="aging" class="article card static has-shot"><div class="art-text"><h3>延滞期間別の未払い額</h3><p>債権は支払いの遅れ具合で分けて表示されます:期限前、1〜30日、31〜60日、60日超。</p>
+<ul><li><strong>ホーム</strong>に合計が表示されます。棒をタップすると、その区分の相手を確認できます。</li><li><strong>回収</strong> › <strong>債権</strong>では、延滞の長さ順に債権が並びます。</li><li>「延滞期間別の回収状況」レポートでは、区分ごとにどれだけ回収できたかがわかるので、効果の出やすいところから督促できます:<em>延滞期間別の回収状況</em></li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/accounts.webp" alt="延滞期間別の未払い額" loading="lazy"><span class="mark-box" style="left:34.1%;top:10.1%;width:31.6%;height:3.6%" title="債権"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>債権</b><br><small>回収 › 債権では、延滞の長さ順に債権が並びます。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-messages"><h2 class="serif">WhatsAppとメール</h2>
+<article id="whatsapp_template" class="article card static has-shot"><div class="art-text"><h3>テンプレートからWhatsAppを送る</h3><ol><li>連絡先を開きます(発信画面のWhatsAppも使えます)。</li><li><strong>WhatsApp</strong>をタップし、テンプレートを選んで本文を確認し、送信します。</li></ol>
+<p>メッセージが入力された状態でWhatsAppが開くので、そこで送信します。送信したことは連絡先の<strong>送信したWhatsAppとメール</strong>に記録されます。</p>
+<p>テンプレートの作成・変更:<a href="#edit_templates">メッセージテンプレートを作成・変更する</a></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/whatsapp.webp" alt="テンプレートからWhatsAppを送る" loading="lazy"><span class="mark-box" style="left:0.0%;top:88.7%;width:100.0%;height:3.0%" title="WhatsApp"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>WhatsApp</b><br><small>WhatsAppをタップし、テンプレートを選んで本文を確認し、送信します。</small></span></li></ol></figure></article>
+<article id="email_template" class="article card static has-shot"><div class="art-text"><h3>テンプレートからメールを送る</h3><ol><li>連絡先を開き、<strong>メール</strong>をタップします。</li><li>テンプレートを選び、件名と本文を確認して、使うメールアプリを選びます。</li></ol>
+<p>入力済みの状態でメールアプリが開くので、そこで送信します。送信したことは<strong>送信したWhatsAppとメール</strong>に記録されます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/email.webp" alt="テンプレートからメールを送る" loading="lazy"><span class="mark-box" style="left:0.0%;top:13.4%;width:100.0%;height:3.6%" title="メール"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>メール</b><br><small>連絡先を開き、メールをタップします。</small></span></li></ol></figure></article>
+<article id="edit_templates" class="article card static has-shot"><div class="art-text"><h3>メッセージテンプレートを作成・変更する</h3><ol><li><strong>その他</strong> › <strong>メッセージテンプレート</strong>を開きます。</li><li>WhatsAppかメールを選び、新しく作るときは<strong>+</strong>を、変更するときはそのテンプレートをタップします。</li><li>名前と本文を入力します。差し込み項目のボタンをタップすると本文に挿入されます:<a href="#placeholders">メッセージの差し込み項目</a></li></ol>
+<ul><li><strong>AIで作成</strong>:短い説明から下書きを作成します(AIプロバイダーの設定が必要です)。</li><li><strong>別の言語版を作成</strong>:別の言語のコピーを作ります。その言語が設定されている顧客には、こちらが優先して使われます。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/template.webp" alt="メッセージテンプレートを作成・変更する" loading="lazy"></div></div></figure></article>
+<article id="placeholders" class="article card static has-shot"><div class="art-text"><h3>メッセージの差し込み項目</h3><p>差し込み項目は、送信時に連絡先ごとの内容に置き換わります:</p>
+<ul><li><strong>名前</strong>:連絡先の名前</li><li><strong>会社</strong>:相手の会社</li><li><strong>金額</strong>:商談金額または未払い額</li><li><strong>支払期限</strong>:支払期限</li><li><strong>自分の名前</strong> / <strong>自分の会社</strong>:あなたとあなたの会社(<strong>AIアシスタント</strong> › <strong>あなたについて</strong>で設定)</li></ul>
+<p>知らない差し込み項目があると、編集画面に注意が表示されます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/template.webp" alt="メッセージの差し込み項目" loading="lazy"><span class="mark-box" style="left:0.0%;top:4.3%;width:100.0%;height:15.8%" title="名前"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>名前</b><br><small>名前:連絡先の名前</small></span></li></ol></figure></article>
+<article id="ai_templates" class="article card static has-shot"><div class="art-text"><h3>AIにテンプレートを書いてもらう</h3><ol><li><strong>メッセージテンプレート</strong>で<strong>AIで作成</strong>をタップします。</li><li><strong>どんな用途ですか?</strong>の欄に内容を書き(例:「丁寧な督促、請求書が30日延滞」)、言語を選んで<strong>下書きを作成</strong>をタップします。</li><li>下書きを確認して保存します。</li></ol>
+<p>AIプロバイダーに送られるのは、入力した説明と販売している商品・サービスだけです。顧客の情報は送られません。AIプロバイダーの設定が必要です:<a href="#ai_setup">AIアシスタントを設定する</a></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/templates.webp" alt="AIにテンプレートを書いてもらう" loading="lazy"></div></div></figure></article>
+</section>
+<section class="group" id="g-reports"><h2 class="serif">レポート</h2>
+<article id="open_report" class="article card static has-shot"><div class="art-text"><h3>レポート</h3><p><strong>レポート</strong>をタップして、見たいレポートを選びます。各レポートは印刷した紙のように表示され、必要に応じてグラフもつきます。10個のレポートは無料版で使えます。それ以外のレポートと、30日より長い期間はDialbook Proの機能です。</p>
+<p><strong>期間別の集計</strong>(Pro):<a href="#report_salesperf">営業実績レポート</a>、<a href="#report_paymentsperf">入金実績レポート(期間別)</a>、<a href="#report_touches">通話・WhatsApp・メールレポート</a></p>
+<p><strong>通話と活動</strong>:<a href="#report_activity">日別の活動レポート</a>(無料)、<a href="#report_results">通話結果レポート</a>(無料)、<a href="#report_campaigns">キャンペーン別の成果レポート</a>(無料)、<a href="#report_besttime">発信に適した時間帯レポート</a>(Pro)、<a href="#report_weekday">曜日別の発信レポート</a>(Pro)、<a href="#report_whatworks">効果の高い方法レポート</a>(Pro)、<a href="#report_targetpace">目標の達成ペースレポート</a>(Pro)</p>
+<p><strong>営業</strong>:<a href="#report_pipeline">営業パイプラインレポート</a>(無料)、<a href="#report_wonlost">受注・失注した商談レポート</a>(無料)、<a href="#report_attempts">受注までの発信回数レポート</a>(Pro)、<a href="#report_nevercalled">未発信レポート</a>(無料)、<a href="#report_dealflow">ステージ別の商談の流れレポート</a>(Pro)</p>
+<p><strong>回収</strong>:<a href="#report_aging">延滞期間別の未払い額レポート</a>(無料)、<a href="#report_promises">支払約束レポート</a>(無料)、<a href="#report_payments">入金履歴レポート</a>(無料)、<a href="#report_forecast">回収の見込みレポート</a>(Pro)、<a href="#report_recovery">延滞期間別の回収状況レポート</a>(Pro)</p>
+<p><strong>顧客</strong>:<a href="#report_followups">対応が必要な予定レポート</a>(無料)、<a href="#report_statement">顧客別明細レポート</a>(無料)</p>
+<ul><li>期間とグループ分けの変更:<a href="#report_filters">レポートの対象を変える</a>。共有と印刷:<a href="#share_pdf_csv">レポートを共有・印刷する</a></li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/reports.webp" alt="レポート" loading="lazy"><span class="mark-box" style="left:59.3%;top:94.0%;width:21.4%;height:6.0%" title="レポート"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>レポート</b><br><small>レポートをタップして、見たいレポートを選びます。各レポートは印刷した紙のように表示され、必要に応じてグラフもつきます。10個のレポートは無料版で使えます。それ以外のレポートと、30日より長い期間はDialbook Proの機能です。</small></span></li></ol></figure></article>
+<article id="report_salesperf" class="article card static has-shot"><div class="art-text"><h3>営業実績レポート</h3><p><strong>Dialbook Proの機能です。</strong> 営業の成績表です。一定期間にどれだけ営業を行い、何が得られたかがわかります。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>努力(発信数、つながった人数)が成果(受注数、受注額)につながっているか、そして前の期間より良いか悪いかを確認します。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:受注額、受注数、受注率、新規リード、前の期間との差。</li><li>日別、週別、月別の受注額のグラフ。</li><li>期間ごとの表。発信、つながった数、受注、受注額、失注、受注率、新規リードが並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>週ごとにまとめると傾向が見えます。発信が多いのに受注がない週は、話し方に原因があります。発信が少ない週は、行動量に原因があります。</li><li>受注率は、終了した商談(受注と失注の合計)のうち受注になった割合です。発信数が変わらないのに率が下がるときは、パイプラインの後半で失っています。<em>ステージ別の商談の流れ</em>を見てください。</li><li>新規リードは、入口に十分な数が入っているかを示します。足りなければ、パイプラインが空になる前に連絡先を取り込むか追加してください。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 <strong>集計単位</strong>を使うと、<strong>日</strong>、<strong>週</strong>、<strong>月</strong>ごとに数字を合計できます。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>営業実績</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_salesperf.webp" alt="営業実績レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="集計単位"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li><li><span class="mark-n">2</span><span><b>集計単位</b><br><small>集計単位を使うと、日、週、月ごとに数字を合計できます。</small></span></li></ol></figure></article>
+<article id="report_paymentsperf" class="article card static has-shot"><div class="art-text"><h3>入金実績レポート(期間別)</h3><p><strong>Dialbook Proの機能です。</strong> 回収の成績表です。一定期間に入金されたお金と、取り付けた約束がわかります。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>いくら回収できたか、何人の顧客から回収できたか、必要なペースで約束を取れているかを、前の期間と比べて確認します。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:回収額、入金件数、1日あたりの平均、取り付けた約束、前の期間との差。</li><li>日別、週別、月別の回収額のグラフ。</li><li>期間ごとの表。入金件数、回収額、入金した顧客数、取り付けた約束、約束の金額が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>週ごとにまとめます。約束の金額が大きいのに回収額が小さい週は、あとで督促が必要になる約束が多い週です。<em>支払約束</em>を見てください。</li><li>1日あたりの平均に残りの営業日数を掛けると、月の見込みがすぐにわかります。<em>目標の達成ペース</em>と比べてください。</li><li>少数の顧客から多くの入金がある場合は、同じ人ばかりが支払っています。残りの顧客にも電話が必要です。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 <strong>集計単位</strong>を使うと、<strong>日</strong>、<strong>週</strong>、<strong>月</strong>ごとに数字を合計できます。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>入金実績</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_paymentsperf.webp" alt="入金実績レポート(期間別)" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="集計単位"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li><li><span class="mark-n">2</span><span><b>集計単位</b><br><small>集計単位を使うと、日、週、月ごとに数字を合計できます。</small></span></li></ol></figure></article>
+<article id="report_touches" class="article card static has-shot"><div class="art-text"><h3>通話・WhatsApp・メールレポート</h3><p><strong>Dialbook Proの機能です。</strong> 顧客に連絡したすべての方法と、実際につながった人数がわかります。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>活動量を正しく測ります。フォローの半分がWhatsAppやメールなら、通話だけでは仕事量が少なく見えます。また、誰も出なかった通話は連絡できたことになりません。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:通話、つながった人数、WhatsApp、メール、前の期間との差。</li><li>日別、週別、月別の通話、WhatsApp、メールのグラフ。</li><li>期間ごとの表。通話、つながった数、つながる率、WhatsApp、メール、合計が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>つながる率は、通話のうち人が出た割合です。半分を下回るときは、別の時間帯を試してください:<em>発信に適した時間帯</em></li><li>通話が減ってメッセージが増えているときは、メッセージのあとに成果が出ているか確認してください:<em>効果の高い方法</em></li><li>1つのリストをチームで共有している場合は、1日または1週間の活動目標に使えます。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 <strong>集計単位</strong>を使うと、<strong>日</strong>、<strong>週</strong>、<strong>月</strong>ごとに数字を合計できます。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>通話・WhatsApp・メール</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_touches.webp" alt="通話・WhatsApp・メールレポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="集計単位"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li><li><span class="mark-n">2</span><span><b>集計単位</b><br><small>集計単位を使うと、日、週、月ごとに数字を合計できます。</small></span></li></ol></figure></article>
+<article id="report_targetpace" class="article card static has-shot"><div class="art-text"><h3>目標の達成ペースレポート</h3><p><strong>Dialbook Proの機能です。</strong> 今月の目標まであとどれくらいか、残りの1日ごとに何が必要かがわかります。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>月の目標を1日あたりの数字に直します。まだ手を打てるうちに確認できます。目標の設定が必要です:<a href="#monthly_targets">月間目標</a></p>
+<p><strong>表示される内容</strong></p>
+<ul><li>今月の残り日数。</li><li>業務の種類(営業、回収)ごとの行。目標、現在までの実績、達成率、1日あたりの必要額、このペースで月末にどうなるか(「このペースでの着地」)が並びます。</li><li>目標と現在までの実績のグラフ。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>「1日あたりの必要額」は、毎朝確認する数字です。増え続けているなら、月の達成が遅れています。</li><li>残り1週間で「このペースでの着地」が目標を下回っているなら、来週ではなく今日の動き方を変える必要があります。</li><li>営業と回収の両方を行う場合は、受注額と回収額の両方に目標を設定してください。</li></ul>
+<p>常に今月が対象です。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>目標の達成ペース</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_targetpace.webp" alt="目標の達成ペースレポート" loading="lazy"></div></div></figure></article>
+<article id="report_forecast" class="article card static has-shot"><div class="art-text"><h3>回収の見込みレポート</h3><p><strong>Dialbook Proの機能です。</strong> これから入金予定の支払約束を、顧客ごとの約束の守り方で重みづけして表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>約束された合計額ではなく、今後数週間で実際に入金されそうな金額を把握します。約束を3回破った顧客は、毎回守った顧客より低く見積もられます。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:今後7日間の約束額、今後30日間の約束額、入金されそうな金額。</li><li>週ごとの約束額と見込み額のグラフ。</li><li>未払いの約束ごとの表。期日、連絡先、約束の金額、その顧客が約束を守る割合、見込み額が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>「約束を守る割合」が低く、金額が大きい約束から先に督促してください。見込み額への影響が最も大きいからです。</li><li>履歴のない顧客には、全員の約束の平均の割合を使います。</li><li>見込み額を<em>目標の達成ペース</em>の目標と比べてください。その差が、新しい約束で埋める分です。</li></ul>
+<p>今日から先を見るレポートです。期間の設定は使いません。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>回収の見込み</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_forecast.webp" alt="回収の見込みレポート" loading="lazy"></div></div></figure></article>
+<article id="report_recovery" class="article card static has-shot"><div class="art-text"><h3>延滞期間別の回収状況レポート</h3><p><strong>Dialbook Proの機能です。</strong> 期間の初めに未払いだった金額のうち、どれだけ入金されたかを、延滞の長さ別に表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>どこで督促の効果が出るかを確認します。延滞30日未満の債権は、たいてい回収できます。60日を超えた分の回収率を見れば、古い債権に電話をかける価値があるか、別の対応が必要かがわかります。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:全体の回収率と回収額。</li><li>延滞期間別の回収率のグラフ:期日前、1~30日、31~60日、60日超。</li><li>グループごとの表。債権の件数、期間の初めの未払い額、期間中の回収額、回収率が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>31~60日のグループが60日超よりずっと高く回収できているなら、早めに電話するのがコツです。勝負は2か月目です。</li><li>「期日前」の回収率が低いのは普通です。1~30日の回収率が低いのは問題で、リマインドが送られていない可能性があります。<a href="#whatsapp_template">テンプレートからWhatsAppを送る</a>を見てください。</li><li>月ごとにきれいに比べるには、<strong>先月</strong>を使います。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>延滞期間別の回収状況</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_recovery.webp" alt="延滞期間別の回収状況レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_dealflow" class="article card static has-shot"><div class="art-text"><h3>ステージ別の商談の流れレポート</h3><p><strong>Dialbook Proの機能です。</strong> 商談がパイプラインをどう進むかを表示します。各ステージに入った数、留まる日数、止まっている数がわかります。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>商談が遅くなる、または失われるステージを見つけます。パイプラインの合計だけでは見えませんが、流れを見るとわかります。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:期間中の受注数と失注数。</li><li>各ステージに入った商談数のグラフ。</li><li>ステージごとの表。現在の件数、期間中に入った数、次へ進んだ数、ステージ内の平均日数、14日以上止まっている数が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>入った数が多く、次へ進んだ数が少ないステージがボトルネックです。よくあるのは提案で、見積を送ったまま追わなくなっています。</li><li>「14日以上停滞」は、そのまま発信リストになります。<strong>営業</strong> › <strong>パイプライン</strong>を開き、そのステージをタップして、順に対応してください。</li><li>ステージ内の平均日数を合計すると、実際の営業サイクルになります。見込みを立てるときに使ってください。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>ステージ別の商談の流れ</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_dealflow.webp" alt="ステージ別の商談の流れレポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_whatworks" class="article card static has-shot"><div class="art-text"><h3>効果の高い方法レポート</h3><p><strong>Dialbook Proの機能です。</strong> どの連絡手段と、どのメッセージのテンプレートのあとに、7日以内に成果が出たかを表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>どのメッセージを送ればよいか、迷わないようにします。成果とは、メッセージの後7日以内にあった入金、支払約束、パイプラインの前進、または良い結果で終わった通話のことです。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:期間中の通話、WhatsApp、メール。</li><li>連絡手段ごとの成果率のグラフ。</li><li>送信したすべてのテンプレートの表。連絡手段、テンプレート、送信回数、7日以内の成果、成果率が並びます。手入力のメッセージは1行にまとめて表示されます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>送信回数が5回未満のテンプレートは、判断するには少なすぎます。もう少し送ってから判断してください。</li><li>リマインドの成果率が低いときは、文面を変えるか、請求書をPDFで添付してください:<a href="#edit_templates">メッセージテンプレートを作成・変更する</a></li><li>同じ目的でWhatsAppとメールを比べ、効果の高いほうを先に使ってください。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>効果の高い方法</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_whatworks.webp" alt="効果の高い方法レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_activity" class="article card static has-shot"><div class="art-text"><h3>日別の活動レポート</h3><p><strong>無料版に含まれています。</strong> 期間中のすべての通話を1行ずつ、結果とメモつきで表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>記録として使います。その日の仕事の確認、同僚へのリストの引き継ぎ、「先週この顧客に何と伝えたか」の確認に役立ちます。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:通話数、つながった人数、連絡先の件数。</li><li>日付、時刻、連絡先、キャンペーン、結果の表。メモは行の下に表示されます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>1日の終わりの確認には今日を、1か月分の記録をCSVで書き出すには<strong>先月</strong>を選びます。</li><li>長い期間は、画面には最初の数行だけが表示されます。すべての行が必要なときはCSVで共有してください。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>日別の活動</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_activity.webp" alt="日別の活動レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_results" class="article card static has-shot"><div class="art-text"><h3>通話結果レポート</h3><p><strong>無料版に含まれています。</strong> 通話が各結果で終わった件数を表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>仕事の全体像を確認します。不在がどれくらいか、折り返しがどれくらいか、約束、入金、受注につながったのがどれくらいかがわかります。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:通話数とつながった人数。</li><li>結果ごとの通話数のグラフ。</li><li>結果ごとの件数と、全通話に占める割合の表。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>「不在」の割合が大きいときは、何を話すかより、いつ電話するかが大事です:<em>発信に適した時間帯</em></li><li>折り返しが多く、約束が少ないときは、2回目の通話で話がまとまっていません。2回目の準備を変えるか、AIにその連絡先の戦略を聞いてみてください。</li><li>自分で作った結果も、つけた名前で集計されます:<a href="#custom_results">独自の通話結果</a></li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>通話結果</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_results.webp" alt="通話結果レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_campaigns" class="article card static has-shot"><div class="art-text"><h3>キャンペーン別の成果レポート</h3><p><strong>無料版に含まれています。</strong> すべてのキャンペーンを並べて比較します。連絡先、発信済み、つながった数、成約数、今日の残りがわかります。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>リストを比べます。展示会のリストと更新のリストでは反応が違います。次の1時間をどちらに使うべきかがわかります。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>キャンペーンごとの成約率のグラフ。</li><li>キャンペーンごとの表。連絡先、発信済み、つながった数、受注または入金、成約率、今日の残りが並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>成約率は、発信した連絡先のうち受注または入金になった割合です。つながる率が高いのに成約率が低いなら、問題は発信ではなく、提案かリストにあります。</li><li>「今日の残り」は発信待ちの数です。待ちが多くて成約率も高いキャンペーンに、その日の時間を使うのがよいでしょう。</li><li>終了したキャンペーンはオフにすると、今日の仕事から外れます:<a href="#delete_campaign">キャンペーンを削除する</a></li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>キャンペーン別の成果</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_campaigns.webp" alt="キャンペーン別の成果レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_besttime" class="article card static has-shot"><div class="art-text"><h3>発信に適した時間帯レポート</h3><p><strong>Dialbook Proの機能です。</strong> 時間帯ごとのつながる率を表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>人が電話に出る時間帯を見つけて、つながりやすい時間に発信できるようにします。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部に最もつながる時間帯。</li><li>時間ごとのつながる率のグラフ。</li><li>時間ごとの表。通話、つながった数、つながる率が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>大事な通話(破られた約束、交渉)は最もつながる時間帯に回し、つながりにくい時間帯はWhatsAppやメールに使ってください。</li><li>通話数がとても少ない時間帯は、まだ信頼できません。率は数週間たつと落ち着きます。</li><li>「つながった」は、内容にかかわらず人が出たことを意味します。不在と番号違いは数えません。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>発信に適した時間帯</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_besttime.webp" alt="発信に適した時間帯レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_weekday" class="article card static has-shot"><div class="art-text"><h3>曜日別の発信レポート</h3><p><strong>Dialbook Proの機能です。</strong> 曜日ごとの通話数とつながる率を表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>1週間の計画に使います。発信に向いている曜日と、事務作業、訪問、メッセージに向いている曜日がわかります。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>曜日ごとのつながる率のグラフ。</li><li>曜日ごとの表。通話、つながった数、つながる率が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>金曜日はつながる人が少なく、月曜日はつながっても成約しにくい傾向があります。クロージングの電話は週の半ばに入れましょう。</li><li><em>発信に適した時間帯</em>と組み合わせると、最適な曜日と時間帯がわかります。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>曜日別の発信</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_weekday.webp" alt="曜日別の発信レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_pipeline" class="article card static has-shot"><div class="art-text"><h3>営業パイプラインレポート</h3><p><strong>無料版に含まれています。</strong> 現時点での各ステージのリード数と金額を表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>進行中の商談の全体像です。新規、連絡済み、見込みあり、提案、交渉の各ステージに、商談が何件、いくら入っているかがわかります。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部に受注額。</li><li>ステージごとの金額のグラフ。</li><li>ステージごとの表。リード数と金額が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>交渉中の金額は成約が近く、新規の金額はまだ期待にすぎません。見込みを立てるときは、重みを変えて考えてください。</li><li>新規が多く、見込みありが少ないパイプラインは、最初の電話がかけられていません:<em>未発信</em></li><li><strong>営業</strong> › <strong>パイプライン</strong>でステージをタップすると、そのステージに対応できます。各ステージの説明は<a href="#pipeline_stages">パイプラインのステージ</a>にあります。</li></ul>
+<p>今日の状態を表示します。期間の設定は使いません。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>営業パイプライン</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_pipeline.webp" alt="営業パイプラインレポート" loading="lazy"></div></div></figure></article>
+<article id="report_wonlost" class="article card static has-shot"><div class="art-text"><h3>受注・失注した商談レポート</h3><p><strong>無料版に含まれています。</strong> 期間中に終了した商談を、それぞれの最後のメモつきで表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>何が決まったのか、その理由は何かを振り返ります。最後のメモには、たいてい理由(価格、時期、競合)が書かれています。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:受注数、受注額、失注数。</li><li>商談ごとの表。連絡先、結果、金額、日付、最後のメモが並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>月に1回、失注のメモをみんなで読みましょう。同じ理由が3回出るなら、営業ではなく、商品か価格の問題です。</li><li>メモのない受注は、学べる機会を逃しています。商談を受注にするときは、メモを残してください:<a href="#mark_won_lost">商談を受注・失注にする</a></li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>受注・失注した商談</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_wonlost.webp" alt="受注・失注した商談レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_attempts" class="article card static has-shot"><div class="art-text"><h3>受注までの発信回数レポート</h3><p><strong>Dialbook Proの機能です。</strong> 商談の受注または債権の入金までに、何回発信したかを表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>電話を続けるべきときと、やめるべきときを知ります。受注の多くが2回目か3回目の電話なら、1回であきらめるのは機会を逃しています。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:商談数と、1件あたりの平均発信回数。</li><li>受注までにかかった発信回数ごとの商談数のグラフ。</li><li>発信回数、商談数、割合の表。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>4回目の発信を過ぎると受注がなくなるなら、5回かけても出ない連絡先には印をつけて、先へ進めます:<a href="#phone_tags">番号に印をつける:OK・無効・発信禁止</a></li><li>平均が上がっているときは、リードが難しくなっているか、最初の電話が弱くなっています。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>受注までの発信回数</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_attempts.webp" alt="受注までの発信回数レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_nevercalled" class="article card static has-shot"><div class="art-text"><h3>未発信レポート</h3><p><strong>無料版に含まれています。</strong> まだ誰も電話していない、未対応の連絡先を表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>漏れているリードや債権を見つけます。取り込んだまま忘れられたものや、同僚が追加したまま誰も手をつけていないものです。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部に連絡先の件数。</li><li>連絡先、キャンペーン、金額の表。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>CSVで金額順に並べ替えて、上から先に電話してください。</li><li>キャンペーン全体がここに出ているなら、そのキャンペーンを開いて<strong>発信を開始</strong>をタップします:<a href="#start_dialing">キャンペーンに順に電話をかける</a></li></ul>
+<p>今日の状態を表示します。期間の設定は使いません。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>未発信</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_nevercalled.webp" alt="未発信レポート" loading="lazy"></div></div></figure></article>
+<article id="report_aging" class="article card static has-shot"><div class="art-text"><h3>延滞期間別の未払い額レポート</h3><p><strong>無料版に含まれています。</strong> 顧客ごとの未払い額と、延滞の長さを表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>定番の延滞一覧です。誰がいくら払っていないかを、期日前、1~30日、31~60日、60日超の延滞に分けて表示します。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部に債権の件数。</li><li>延滞期間別の未払い額のグラフ。</li><li>顧客ごとの表。未払い額、延滞日数、グループが並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>31~60日の分は、60日を超える前に督促してください。督促の効果が出る場所は<em>延滞期間別の回収状況</em>でわかります。</li><li>毎週の確認にはPDFで、経理にはCSVで共有してください。</li><li>同じグループが<strong>ホーム</strong>にも表示されます。そこでバーをタップすると、そのグループに発信できます:<a href="#aging">延滞期間別の未払い額</a></li></ul>
+<p>今日の状態を表示します。期間の設定は使いません。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>延滞期間別の未払い額</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_aging.webp" alt="延滞期間別の未払い額レポート" loading="lazy"></div></div></figure></article>
+<article id="report_promises" class="article card static has-shot"><div class="art-text"><h3>支払約束レポート</h3><p><strong>無料版に含まれています。</strong> 期間中に期日が来た約束を、未払い、履行、不履行に分けて表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>顧客に約束を守ってもらうために使います。期日までに入金があれば約束は履行、入金がないまま期日を過ぎれば不履行です。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:結果が出た約束のうち履行された割合、未払いの数、不履行の数。</li><li>状態別の約束のグラフ。</li><li>約束ごとの表。連絡先、金額、約束した日、期日、状態、その顧客がこれまでに行った約束の数が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>約束不履行は発信の順番で最初に回ります。何件になるかはこのレポートでわかります:<a href="#broken_promises">約束不履行</a></li><li>未払いの約束がいくつも重なっている顧客には、新しい日付ではなく、今日の一部入金をお願いしてください。</li><li>履行率が半分を下回るなら、約束を簡単に受け入れすぎています。日付、金額、支払い方法を聞いてください。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>支払約束</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_promises.webp" alt="支払約束レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_payments" class="article card static has-shot"><div class="art-text"><h3>入金履歴レポート</h3><p><strong>無料版に含まれています。</strong> 期間中のすべての入金を、日別、顧客別に表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>入金の記録です。いつ、誰から、いくら入ったかがわかります。銀行との照合や、顧客の「もう払いました」への確認に使います。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:回収額、入金件数、顧客数。</li><li>日別の回収額のグラフ。</li><li>入金ごとの表。日付、連絡先、金額が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>月末に経理向けにCSVで共有してください。</li><li>1人の顧客の全履歴は<em>顧客別明細</em>で確認できます。</li><li>前の期間と比べた週ごと、月ごとの合計は<em>入金実績</em>で確認できます。</li></ul>
+<p>上部の<strong>期間</strong>を選びます。今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>から選べます(長い期間はDialbook Proの機能です)。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>入金履歴</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_payments.webp" alt="入金履歴レポート" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>上部の期間を選びます。今日、7日間、30日間、今月、先月、全期間から選べます(長い期間はDialbook Proの機能です)。</small></span></li></ol></figure></article>
+<article id="report_followups" class="article card static has-shot"><div class="art-text"><h3>対応が必要な予定レポート</h3><p><strong>無料版に含まれています。</strong> 期限切れ、今日が期限、今後7日間が期限の折り返しと約束を表示します。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>これからの1週間が1ページでわかります。顧客に伝えたこと、顧客が伝えてきたことのうち、日付があるものがすべて並びます。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部の数字:期限切れ、今日が期限、今後7日間。</li><li>項目ごとの表。連絡先、種類(折り返しまたは約束)、期日、時刻、約束の場合は金額が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>月曜日に印刷するか、あなたのリストを代わりに担当する同僚に共有してください。</li><li>期限切れの折り返しは、その日の最初の電話です。期限切れの約束は、約束不履行です:<a href="#broken_promises">約束不履行</a></li><li>同じ項目が<strong>ホーム</strong>の<strong>要確認</strong>にも表示されます:<a href="#alerts">要確認</a></li></ul>
+<p>今日から先を見るレポートです。期間の設定は使いません。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>対応が必要な予定</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_followups.webp" alt="対応が必要な予定レポート" loading="lazy"></div></div></figure></article>
+<article id="report_statement" class="article card static has-shot"><div class="art-text"><h3>顧客別明細レポート</h3><p><strong>Dialbook Proの機能です。</strong> 1人の顧客との通話、約束、入金を、共有できる明細にまとめます。</p>
+<p><strong>このレポートの目的</strong></p>
+<p>取り決めた内容と支払い状況をわかりやすく顧客に伝えたり、訪問の前に同僚に状況を伝えたりするために使います。</p>
+<p><strong>表示される内容</strong></p>
+<ul><li>上部にこの顧客からの回収額。</li><li>日付順の表。結果つきの通話、期日と状態つきの約束、入金が並びます。</li></ul>
+<p><strong>使い方</strong></p>
+<ul><li>連絡先から<strong>顧客別明細</strong>で開き、PDFを選んで、WhatsAppかメールで送ります:<a href="#customer_statement">顧客別明細</a></li><li><strong>レポート</strong>から開くときは、<strong>連絡先を選択</strong>をタップして顧客を選びます。</li></ul>
+<p>全期間の履歴を表示します。期間の設定は使いません。 右上のボタンで共有または印刷できます:<a href="#share_pdf_csv">レポートを共有・印刷する</a></p>
+<p>開く:<strong>レポート</strong> › <strong>顧客別明細</strong></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report_statement.webp" alt="顧客別明細レポート" loading="lazy"></div></div></figure></article>
+<article id="report_filters" class="article card static has-shot"><div class="art-text"><h3>レポートの対象を変える</h3><p>レポートの上部で次の項目を変えられます:</p>
+<ul><li><strong>期間</strong>:今日、7日間、30日間、<strong>今月</strong>、<strong>先月</strong>、<strong>全期間</strong>。</li><li><strong>集計単位</strong>:<strong>日</strong>、<strong>週</strong>、<strong>月</strong>(まとめのレポートで使えます)。</li><li><strong>対象</strong>:すべて、営業のみ、回収のみ(両方の業務を使っている場合)。</li></ul>
+<p>数字、グラフ、表はすべて選んだ条件に合わせて変わります。AIの回答から開いたレポートは、その回答と同じ条件で開きます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report.webp" alt="レポートの対象を変える" loading="lazy"><span class="mark-box" style="left:4.3%;top:6.2%;width:30.2%;height:3.7%" title="期間"><span class="mark">1</span></span><span class="mark-box" style="left:34.5%;top:6.2%;width:28.4%;height:3.7%" title="集計単位"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>期間</b><br><small>期間:今日、7日間、30日間、今月、先月、全期間。</small></span></li><li><span class="mark-n">2</span><span><b>集計単位</b><br><small>集計単位:日、週、月(まとめのレポートで使えます)。</small></span></li></ol></figure></article>
+<article id="share_pdf_csv" class="article card static has-shot"><div class="art-text"><h3>レポートを共有・印刷する</h3><ol><li>レポートを開きます。</li><li>右上の共有ボタンをタップします。</li><li><strong>PDFで共有</strong>、<strong>CSV(Excel)で共有</strong>、<strong>印刷</strong>のいずれかを選びます。</li></ol>
+<p>長いレポートで画面に先頭部分しか表示されていなくても、CSVには全行が入ります。CSVはExcelで開けます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/report.webp" alt="レポートを共有・印刷する" loading="lazy"></div></div></figure></article>
+<article id="customer_statement" class="article card static has-shot"><div class="art-text"><h3>顧客別明細</h3><ol><li>連絡先を開きます。</li><li><strong>顧客別明細</strong>(<strong>通話・支払約束・入金をPDFにして共有</strong>)をタップします。</li><li>PDFをWhatsAppやメールで送ります。</li></ol></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/contact.webp" alt="顧客別明細" loading="lazy"><span class="mark-box" style="left:0.0%;top:89.1%;width:100.0%;height:8.4%" title="顧客別明細"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>顧客別明細</b><br><small>顧客別明細(通話・支払約束・入金をPDFにして共有)をタップします。</small></span></li></ol></figure></article>
+<article id="monthly_targets" class="article card static has-shot"><div class="art-text"><h3>月間目標</h3><ol><li><strong>その他</strong> › <strong>月間目標</strong>を開きます。</li><li><strong>毎月の受注目標額</strong>と<strong>毎月の回収目標額</strong>の一方または両方を入力します。</li></ol>
+<p>「目標の達成ペース」レポートで、今どこまで来ているか、1日あたりあといくら必要か、このペースだと月末にどうなるかを確認できます:<em>目標の達成ペース</em></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/targets.webp" alt="月間目標" loading="lazy"><span class="mark-box" style="left:3.0%;top:6.0%;width:94.1%;height:8.3%" title="毎月の受注目標額"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:13.6%;width:94.1%;height:8.3%" title="毎月の回収目標額"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>毎月の受注目標額</b><br><small>毎月の受注目標額と毎月の回収目標額の一方または両方を入力します。</small></span></li><li><span class="mark-n">2</span><span><b>毎月の回収目標額</b><br><small>毎月の受注目標額と毎月の回収目標額の一方または両方を入力します。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-ai"><h2 class="serif">AIアシスタント</h2>
+<article id="ai_setup" class="article card static has-shot"><div class="art-text"><h3>AIアシスタントを設定する</h3><ol><li><strong>その他</strong> › <strong>AIアシスタント</strong>を開きます。</li><li><strong>プロバイダー</strong>を選び(OpenAI、Anthropic、Gemini、DeepSeekなど。自分のパソコンで動かすモデルも使えます)、<strong>APIキー(この端末にのみ保存)</strong>を入力してモデルを選びます。</li><li>データに関する注意事項を読み、<strong>オンにする</strong>をタップします。</li></ol>
+<p>キーはこの端末にだけ保存されます。オンにするまで何も送信されません。プライバシーについて:<a href="#ai_privacy_masking">AIに渡る情報</a></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="AIアシスタントを設定する" loading="lazy"></div></div></figure></article>
+<article id="ai_privacy_masking" class="article card static has-shot"><div class="art-text"><h3>AIに渡る情報</h3><p>アシスタントは必要な情報をこの端末内で調べ、その結果だけをAIプロバイダーに送ります。データベース全体が送られることはありません。</p>
+<p><strong>AIアシスタント</strong>で<strong>送信前に名前と電話番号を除く</strong>をオンにすると、送信前に名前・会社名・メールアドレス・電話番号が取り除かれます。AIには連絡先が番号でしか伝わらず、チャット画面にはアプリが実際の名前を表示します。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="AIに渡る情報" loading="lazy"><span class="mark-box" style="left:0.0%;top:97.5%;width:100.0%;height:2.5%" title="送信前に名前と電話番号を除く"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>送信前に名前と電話番号を除く</b><br><small>AIアシスタントで送信前に名前と電話番号を除くをオンにすると、送信前に名前・会社名・メールアドレス・電話番号が取り除かれます。AIには連絡先が番号でしか伝わらず、チャット画面にはアプリが実際の名前を表示します。</small></span></li></ol></figure></article>
+<article id="ai_chat_history" class="article card static has-shot"><div class="art-text"><h3>AIとのチャットと履歴</h3><ul><li><strong>新しいチャット</strong>(右上の鉛筆)で新しいチャットを始めます。今のチャットは残ります。</li><li><strong>チャットを削除</strong>（上部の赤いゴミ箱）で、表示中のチャットを確認のうえ削除します。</li><li><strong>履歴</strong>(時計)で過去のチャットを一覧できます。タップすると読み返したり続きを話したりでき、左にスワイプすると削除できます。</li><li>質問のたびに送られるのはチャットの直近の部分だけで、1つのチャットで質問できるのは20回までです。費用を抑えるためなので、話題が変わったら新しいチャットを始めてください。</li><li>回答の上の「参照したデータ:…」は、どのデータを使ったかを示します。「データとの照合なし」と表示された回答は、データを確認せずに数字を答えています。もう一度質問してください。</li></ul></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai_chat.webp" alt="AIとのチャットと履歴" loading="lazy"></div></div></figure></article>
+<article id="ai_show_hide" class="article card static has-shot"><div class="art-text"><h3>AIを表示する/隠す</h3><p><strong>その他</strong> › <strong>AIアシスタント</strong>で<strong>アプリ内でAIを表示</strong>をオンまたはオフにします。オフにすると、<strong>ホーム</strong>の<strong>仕事についてAIに質問</strong>と連絡先画面のAIボタンが表示されなくなります。設定やチャットはそのまま残ります。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="AIを表示する/隠す" loading="lazy"><span class="mark-box" style="left:0.0%;top:4.3%;width:100.0%;height:12.4%" title="アプリ内でAIを表示"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>アプリ内でAIを表示</b><br><small>その他 › AIアシスタントでアプリ内でAIを表示をオンまたはオフにします。オフにすると、ホームの仕事についてAIに質問と連絡先画面のAIボタンが表示されなくなります。設定やチャットはそのまま残ります。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-data"><h2 class="serif">バックアップとデータ</h2>
+<article id="backup_file" class="article card static has-shot"><div class="art-text"><h3>バックアップを作成する</h3><ol><li><strong>その他</strong> › <strong>バックアップと復元</strong>を開きます。</li><li><strong>バックアップのパスワード</strong>を設定します(忘れないように保管してください。パスワードがないとバックアップを開けません)。</li><li><strong>バックアップを作成して共有</strong>をタップし、Google Drive、メール、パソコンなどにファイルを保存します。</li></ol>
+<p>ファイルは暗号化されます。<strong>バックアップを通知する</strong>の設定で、<strong>ホーム</strong>に通知を出す間隔を決められます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="バックアップを作成する" loading="lazy"><span class="mark-box" style="left:3.0%;top:46.9%;width:94.1%;height:8.8%" title="バックアップのパスワード"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:71.5%;width:94.1%;height:5.9%" title="バックアップを作成して共有"><span class="mark">2</span></span><span class="mark-box" style="left:3.0%;top:56.7%;width:94.1%;height:7.2%" title="バックアップを通知する"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>バックアップのパスワード</b><br><small>バックアップのパスワードを設定します(忘れないように保管してください。パスワードがないとバックアップを開けません)。</small></span></li><li><span class="mark-n">2</span><span><b>バックアップを作成して共有</b><br><small>バックアップを作成して共有をタップし、Google Drive、メール、パソコンなどにファイルを保存します。</small></span></li><li><span class="mark-n">3</span><span><b>バックアップを通知する</b><br><small>ファイルは暗号化されます。バックアップを通知するの設定で、ホームに通知を出す間隔を決められます。</small></span></li></ol></figure></article>
+<article id="restore" class="article card static has-shot"><div class="art-text"><h3>バックアップを復元する</h3><ol><li><strong>その他</strong> › <strong>バックアップと復元</strong>を開きます。</li><li><strong>バックアップファイルから復元</strong>をタップし、ファイルを選んでパスワードを入力します。</li><li><strong>置き換えて復元</strong>で確定します。</li></ol>
+<p>この端末のデータは、すべてバックアップの内容に置き換わります。パスワードが違う場合やファイルが壊れている場合は、何も変更されません。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="バックアップを復元する" loading="lazy"><span class="mark-box" style="left:3.0%;top:77.8%;width:94.1%;height:5.9%" title="バックアップファイルから復元"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>バックアップファイルから復元</b><br><small>バックアップファイルから復元をタップし、ファイルを選んでパスワードを入力します。</small></span></li></ol></figure></article>
+<article id="automatic_backup" class="article card static has-shot"><div class="art-text"><h3>端末の自動バックアップ</h3><p>端末自体のバックアップ(iPhoneならiCloud、AndroidならGoogle)は、バックアップファイルとは別のものです。AndroidではGoogleの上限が25 MBのため、大きなデータベースは含まれません。念のためバックアップファイルも作成してください:<a href="#backup_file">バックアップを作成する</a></p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="端末の自動バックアップ" loading="lazy"></div></div></figure></article>
+<article id="new_phone" class="article card static has-shot"><div class="art-text"><h3>新しい端末に移行する</h3><ol><li>古い端末でバックアップファイルを作成します:<a href="#backup_file">バックアップを作成する</a></li><li>新しい端末にDialbookをインストールし、初期設定を済ませます。</li><li>新しい端末でファイルを復元します:<a href="#restore">バックアップを復元する</a></li></ol>
+<p>Androidでは、端末の標準機能でケーブルやWi-Fiを使ってアプリを移行すると、データも一緒に移ります。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/backup.webp" alt="新しい端末に移行する" loading="lazy"></div></div></figure></article>
+<article id="erase" class="article card static has-shot"><div class="art-text"><h3>すべてのデータを消去する</h3><p><strong>その他</strong> › <strong>プライバシーとデータ</strong> › <strong>この端末のデータをすべて消去</strong>の順に進みます。すべてのキャンペーン、連絡先、通話、タスク、設定がこの端末から削除されます。あとで必要になりそうなら、先にバックアップを作成してください。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/privacy.webp" alt="すべてのデータを消去する" loading="lazy"><span class="mark-box" style="left:3.0%;top:21.9%;width:94.1%;height:5.9%" title="この端末のデータをすべて消去"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>この端末のデータをすべて消去</b><br><small>その他 › プライバシーとデータ › この端末のデータをすべて消去の順に進みます。すべてのキャンペーン、連絡先、通話、タスク、設定がこの端末から削除されます。あとで必要になりそうなら、先にバックアップを作成してください。</small></span></li></ol></figure></article>
+</section>
+<section class="group" id="g-settings"><h2 class="serif">設定</h2>
+<article id="language" class="article card static has-shot"><div class="art-text"><h3>言語</h3><p><strong>その他</strong> › <strong>言語</strong>を開きます。<strong>端末の設定に合わせる</strong>を選ぶと、端末の言語に合わせます。日付や数字の表示、AIの回答も、選んだ言語になります。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/language.webp" alt="言語" loading="lazy"><span class="mark-box" style="left:0.0%;top:5.5%;width:100.0%;height:6.5%" title="端末の設定に合わせる"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>端末の設定に合わせる</b><br><small>その他 › 言語を開きます。端末の設定に合わせるを選ぶと、端末の言語に合わせます。日付や数字の表示、AIの回答も、選んだ言語になります。</small></span></li></ol></figure></article>
+<article id="currency" class="article card static has-shot"><div class="art-text"><h3>通貨</h3><p><strong>その他</strong> › <strong>通貨</strong>を開きます。変わるのは金額の表示だけで、金額が換算されるわけではありません。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/currency.webp" alt="通貨" loading="lazy"></div></div></figure></article>
+<article id="dark_mode" class="article card static has-shot"><div class="art-text"><h3>ダークモード</h3><p><strong>その他</strong> › <strong>外観</strong>で、<strong>端末の設定に合わせる</strong>、<strong>ライト</strong>、<strong>ダーク</strong>のいずれかを選びます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/appearance.webp" alt="ダークモード" loading="lazy"><span class="mark-box" style="left:3.0%;top:7.2%;width:30.5%;height:21.7%" title="端末の設定に合わせる"><span class="mark">1</span></span><span class="mark-box" style="left:34.8%;top:7.2%;width:30.5%;height:21.7%" title="ライト"><span class="mark">2</span></span><span class="mark-box" style="left:66.6%;top:7.2%;width:30.5%;height:21.7%" title="ダーク"><span class="mark">3</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>端末の設定に合わせる</b><br><small>その他 › 外観で、端末の設定に合わせる、ライト、ダークのいずれかを選びます。</small></span></li><li><span class="mark-n">2</span><span><b>ライト</b><br><small>その他 › 外観で、端末の設定に合わせる、ライト、ダークのいずれかを選びます。</small></span></li><li><span class="mark-n">3</span><span><b>ダーク</b><br><small>その他 › 外観で、端末の設定に合わせる、ライト、ダークのいずれかを選びます。</small></span></li></ol></figure></article>
+<article id="my_profile" class="article card static has-shot"><div class="art-text"><h3>あなたの名前と販売している商品</h3><p><strong>その他</strong> › <strong>AIアシスタント</strong> › <strong>あなたについて</strong>を開き、<strong>お名前</strong>、<strong>会社</strong>、<strong>販売している商品・サービス</strong>を入力します。メッセージの<strong>自分の名前</strong>と<strong>自分の会社</strong>にこの内容が入り、AIはトーク作成に販売内容を使います。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/ai.webp" alt="あなたの名前と販売している商品" loading="lazy"><span class="mark-box" style="left:6.8%;top:79.6%;width:87.5%;height:8.9%" title="販売している商品・サービス"><span class="mark">1</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>販売している商品・サービス</b><br><small>その他 › AIアシスタント › あなたについてを開き、お名前、会社、販売している商品・サービスを入力します。メッセージの自分の名前と自分の会社にこの内容が入り、AIはトーク作成に販売内容を使います。</small></span></li></ol></figure></article>
+<article id="custom_results" class="article card static has-shot"><div class="art-text"><h3>独自の通話結果</h3><ol><li><strong>その他</strong> › <strong>通話結果</strong>を開きます。</li><li><strong>自分で追加</strong>をタップして名前(例:「見積書を送付」)を入力し、<strong>扱い</strong>を選びます。これでレポートで正しく集計されます。</li></ol>
+<p>名前や扱いを変えると、過去の通話にも反映されます。</p></div><figure class="shot kind-phone" dir="ltr"><div class="phone phone-sm"><div class="shot-img"><img src="img/phone/outcomes.webp" alt="独自の通話結果" loading="lazy"><span class="mark-box" style="left:0.0%;top:44.1%;width:100.0%;height:5.2%" title="自分で追加"><span class="mark">1</span></span><span class="mark-box" style="left:3.0%;top:64.0%;width:94.1%;height:12.3%" title="扱い"><span class="mark">2</span></span></div></div><ol class="legend" dir="auto"><li><span class="mark-n">1</span><span><b>自分で追加</b><br><small>自分で追加をタップして名前(例:「見積書を送付」)を入力し、扱いを選びます。これでレポートで正しく集計されます。</small></span></li><li><span class="mark-n">2</span><span><b>扱い</b><br><small>自分で追加をタップして名前(例:「見積書を送付」)を入力し、扱いを選びます。これでレポートで正しく集計されます。</small></span></li></ol></figure></article>
+<article id="tablet_layout" class="article card static has-shot"><div class="art-text"><h3>iPadやタブレットで使う</h3><ul><li>メニューは左側にあります。上部の矢印で幅を広げると名前も表示され、狭めるとアイコンだけになって画面を広く使えます。</li><li>一覧の項目は横に開きます。キャンペーンや顧客をタップすると、右側に表示されます。</li><li>タブレットを横向きにすると、ホーム、連絡先の画面、発信画面が2列で表示されます。</li></ul></div><figure class="shot kind-ipad" dir="ltr"><div class="tablet"><div class="shot-img"><img src="img/ipad/home.webp" alt="iPadやタブレットで使う" loading="lazy"></div></div></figure></article>
+</section>
+      <div class="card-dark support">
+        <div>
+          <div class="serif" style="font-size:1.9rem">解決しませんか？</div>
+          <p class="mute">お使いの機種と操作内容をお知らせください。2営業日以内に返信します。</p>
+        </div>
+        <a class="btn btn-light" href="mailto:kuanmeng.see@gmail.com?subject=Dialbook%20support">サポートにメール</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap bottom">
+    <div>© <span id="year">2026</span> SKM Studio. Dialbook は SKM Studio の製品です。</div>
+    <div><a href="index.html">Dialbook</a> &nbsp;·&nbsp; <a href="privacy.html">プライバシー</a> &nbsp;·&nbsp; <a href="../../">SKM Studio</a></div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const MATCH = "「{q}」の結果：{n}件";
+  document.getElementById('lang').addEventListener('change', function () {
+    var code = this.options[this.selectedIndex].getAttribute('data-lang');
+    try { localStorage.setItem('skm-help-lang', code); } catch (e) {}
+    location.href = this.value + location.hash;
+  });
+  const q = document.getElementById('q'), count = document.getElementById('count');
+  const articles = Array.from(document.querySelectorAll('.article'));
+  const groups = Array.from(document.querySelectorAll('.group'));
+  function filter() {
+    const t = q.value.trim().toLowerCase();
+    let shown = 0;
+    articles.forEach(a => { const hit = !t || a.querySelector('.art-text').textContent.toLowerCase().includes(t); a.classList.toggle('hidden', !hit); if (hit) shown++; });
+    groups.forEach(g => g.classList.toggle('hidden', !g.querySelector('.article:not(.hidden)')));
+    document.getElementById('toc').style.display = t ? 'none' : '';
+    count.textContent = t ? MATCH.replace('{n}', shown).replace('{q}', q.value.trim()) : '';
+  }
+  q.addEventListener('input', filter);
+</script>
+</body>
+</html>
