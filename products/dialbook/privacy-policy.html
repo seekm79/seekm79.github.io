@@ -37,14 +37,14 @@
 <body>
 <main>
   <h1>Dialbook Privacy Policy</h1>
-  <div class="meta">Effective 21 November 2026 · Applies to the Dialbook app for iPhone, iPad and Android, published by SKM Studio.</div>
+  <div class="meta">Effective 24 November 2026 · Applies to the Dialbook app for iPhone, iPad and Android, published by SKM Studio.</div>
 
   <div class="summary">
     <strong>In short</strong>
     <ul>
       <li>Everything you enter is stored on your device. There is no account and no server, and we never receive your data.</li>
       <li>The app contains no advertising, tracking or analytics software.</li>
-      <li>Data leaves the phone only when you create a backup file or turn on your own AI provider.</li>
+      <li>Data leaves the phone only when you do something that sends it, such as sharing a backup file or asking your own AI provider. Section 3 lists every case.</li>
       <li>One tap in Settings erases everything from the phone.</li>
     </ul>
   </div>
@@ -69,17 +69,18 @@
       <table>
         <tr><th>Action</th><th>What is sent</th><th>To whom</th></tr>
         <tr><td>Creating a backup file</td><td>Your whole database, compressed and encrypted with your password (AES-256).</td><td>Whatever app you choose in the share sheet: Google Drive, email, WhatsApp, your computer. Dialbook itself uploads nothing.</td></tr>
-        <tr><td>Using the AI assistant</td><td>See section 4. Off by default.</td><td>The AI provider you chose and whose API key you entered, or a model on your own computer.</td></tr>
+        <tr><td>Using the AI assistant</td><td>See section 4. Off by default.</td><td>The AI provider you chose and whose API key you entered.</td></tr>
         <tr><td>Calling, WhatsApp, SMS, email</td><td>The phone number, the message you composed from a template, and any pictures or files on that template.</td><td>Your phone's dialer, WhatsApp, Messages, or your email app. You press call or send there.</td></tr>
         <tr><td>Sharing a report or statement</td><td>The PDF or CSV you chose to share.</td><td>The app you pick in the share sheet.</td></tr>
         <tr><td>Sharing a lead by QR code</td><td>That one contact's details, shown as a QR code on your screen.</td><td>The teammate who scans it with their phone. Nothing goes through the internet.</td></tr>
-        <tr><td>Showing the day's visits on a map</td><td>The address of a task, to find its position on the map, and the map tiles requested.</td><td>OpenStreetMap's Nominatim geocoding and tile servers, under the <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">OpenStreetMap Foundation privacy policy</a>.</td></tr>
+        <tr><td>Searching for an address in a task</td><td>The words you type in the address search.</td><td>OpenStreetMap's Nominatim search service, under the <a href="https://osmfoundation.org/wiki/Privacy_Policy" rel="noopener">OpenStreetMap Foundation privacy policy</a>.</td></tr>
+        <tr><td>Showing the day's visits on a map</td><td>Requests for the map pictures of the area on screen. Like any web request, they show roughly which area you are looking at and your internet address.</td><td>OpenStreetMap's map servers, under the same policy.</td></tr>
         <tr><td>Buying Dialbook Pro</td><td>See section 6.</td><td>Apple or Google.</td></tr>
       </table>
-      <p>Your phone's own backup (iCloud on iPhone, Google backup on Android) may include the app's data under Apple's or Google's own terms, as it does for any app. Your AI key and backup password are excluded from it.</p>
+      <p>Your phone's own backup: on iPhone, iCloud and computer backups may include the app's data under Apple's terms, as for any app. On Android, Google's cloud backup leaves the app's data out; moving to a new phone with Android's own phone-to-phone transfer can bring the data across. On both, your AI key and backup password are kept on this phone only: no phone backup or transfer moves them to another phone.</p>
 
       <h2 id="ai">4. The AI assistant</h2>
-      <p>The AI assistant is off by default. To use it you connect your own account with an AI provider, such as OpenAI, Anthropic, Google Gemini, DeepSeek, or a model running on your own computer, and enter that provider's API key. We provide no AI service and see none of your requests, your key, or the replies.</p>
+      <p>The AI assistant is off by default. To use it you connect your own account with an AI provider, such as OpenAI, Anthropic, Google Gemini or DeepSeek, or another service that works the same way, and enter that provider's API key. We provide no AI service and see none of your requests, your key, or the replies.</p>
       <p>When the assistant is on, each question you ask, and each strategy or message draft you request, sends the details it needs to that provider over the internet. The assistant looks up what it needs on your phone and sends only those answers, never your whole database. The provider handles what it receives under its own privacy policy and data-retention settings, which you should read before you start.</p>
       <p><strong>Masking.</strong> With masking on, names, companies, email addresses and phone numbers are removed before anything is sent. Contacts are then known to the AI by number only, and the app shows the real names in the chat. Amounts, dates and your notes are still sent.</p>
       <p>Before the assistant can be turned on, the app shows a data notice and asks you to accept responsibility for the data you send. It records the date you accepted. You can turn the assistant off, hide it, or delete your chats at any time in Settings.</p>
@@ -88,9 +89,10 @@
       <h2 id="permissions">5. Permissions</h2>
       <ul>
         <li><strong>Camera</strong>: only to scan a teammate's lead QR code. Asked when you first open Receive a lead. No photos are taken or stored.</li>
-        <li><strong>Photos and files</strong>: only when you attach a picture or PDF to a message template, or pick a spreadsheet or backup file to import. The file you choose is copied into the app; nothing else is read.</li>
-        <li><strong>Internet</strong>: only for the AI assistant, the day map, and purchases. Everything else works offline.</li>
-        <li><strong>Phone call log (Android only, optional)</strong>: if you turn on "attach call length" in Settings, the app reads the duration of calls you made from the app and attaches it to the logged call. It is off by default, asks for permission only when you turn it on, and the data never leaves the phone. iPhones do not allow apps to read the call log.</li>
+        <li><strong>Photos and files</strong>: only when you attach a picture or PDF to a message template, or pick a spreadsheet or backup file to import. The app receives only the file you choose and copies it in; it cannot see your other photos or files.</li>
+        <li><strong>Saving to Photos</strong>: if you share a chart or picture and choose Save Image, it is added to your photos. The phone asks you first, and this permission can only add pictures, not read them.</li>
+        <li><strong>Internet</strong>: only for the AI assistant, the map and address search, and purchases. Everything else works offline.</li>
+        <li><strong>Phone call log (Android only, optional, not in every version)</strong>: where the app has it and you turn on "Attach call time and length automatically" in Settings, the app reads the time and length of calls you made from the app and saves them with the logged call. It is off by default, asks for permission only when you turn it on, and the data never leaves the phone. The Google Play version may leave this feature out, and does not then ask for the call log permission. iPhones do not allow apps to read the call log.</li>
         <li><strong>Phone calls</strong>: Dialbook does not make calls itself. It opens your phone's dialer with the number filled in and you press call.</li>
       </ul>
 
@@ -106,7 +108,7 @@
       </ul>
 
       <h2 id="retention">8. Retention and deletion</h2>
-      <p>Your data stays on your device for as long as you keep it. You can delete a single contact or campaign, erase everything in Settings › Privacy and data, or uninstall the app, which removes the database. Because we hold no copy, there is nothing for us to delete on our side. Backup files you saved elsewhere, and data held by your AI provider, are under your and their control.</p>
+      <p>Your data stays on your device for as long as you keep it. You can delete a single contact or campaign, erase everything in Settings › Privacy and data, or uninstall the app, which removes the database. Erasing everything also deletes your backup password, your AI key and the files the app prepared for sharing, and replaces the database file with a new, empty one, so erased entries cannot be recovered from it. It keeps one thing: the date your free trial started, so that erasing does not start a new trial. On iPhone, the system can keep these secure-storage items after the app is uninstalled, so erase everything first if you want the key and password gone too. Because we hold no copy, there is nothing for us to delete on our side. Backup files you saved elsewhere, and data held by your AI provider, are under your and their control.</p>
 
       <h2 id="yourdata">9. Your customers' data</h2>
       <p>The people in your call lists are your customers, prospects or debtors. Under the Personal Data Protection Act 2010 (Malaysia), the GDPR, or the law in your market, you are the one responsible for that data: for having a lawful reason to hold it, for honouring do-not-call requests, and for deciding whether it may be sent to an AI provider. Dialbook gives you tools for this, such as the do-not-call mark that stops a number being dialled in every campaign, but the decisions are yours.</p>
